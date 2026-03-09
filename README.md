@@ -36,7 +36,14 @@ PGDATABASE=BoroughBooks_test
 PGDATABASE=BoroughBooks_dev
 ```
 
-Once this is done please ensure you have .env.\* in your .gitignore
+Once this is done please ensure you have the following in your .gitignore
+
+```
+node_modules/
+.env.development
+.env.test
+.env.*
+```
 
 To check if this is working console.log the ENV variable in connection.js in jest test and in development environment to see it toggle from test to development.
 const ENV = process.env.NODE_ENV || 'development'
@@ -45,6 +52,32 @@ const ENV = process.env.NODE_ENV || 'development'
 
 To create Databases navigate to the db folder and run:
 
-<!-- ```
+```
 psql -f setup-dbs.sql
-``` -->
+```
+
+### Seeding the Database:
+
+To seed the Database use the commands:
+
+```
+npm run test-seed
+```
+
+```
+npm run seed-dev
+```
+
+## Local development
+
+After creating databases and seeding please run
+
+```
+npm start
+```
+
+Note: Server will be running on [http://localhost:9000/api](http://localhost:9000/api)
+
+## Endpoints
+
+Example endpoints:
