@@ -32,8 +32,8 @@ To start please create your own .env files in root directory:
 In these files please connect to the connection.js by placing the following their respective .env.test and env.development files:
 
 ```
-PGDATABASE = BoroughBooks_test
-PGDATABASE = BoroughBooks_dev
+PGDATABASE=BoroughBooks_test
+PGDATABASE=BoroughBooks_dev
 ```
 
 Once this is done please ensure you have .env.\* in your .gitignore
