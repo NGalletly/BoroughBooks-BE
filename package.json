@@ -1,0 +1,33 @@
+{
+  "name": "boroughbooks-be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NGalletly/BoroughBooks-BE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NGalletly/BoroughBooks-BE/issues"
+  },
+  "homepage": "https://github.com/NGalletly/BoroughBooks-BE#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "pg": "^8.20.0",
+    "pg-format": "^1.0.4"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "jest-sorted": "^1.0.15",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.2.2"
+  }
+}
