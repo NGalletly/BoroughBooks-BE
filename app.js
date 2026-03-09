@@ -5,6 +5,8 @@ const cors = require("cors");
 app.use(express.json());
 app.use(cors());
 
+const hello = "Hello World";
+
 app.use("/api", express.static("public"));
 
 module.exports = app;
