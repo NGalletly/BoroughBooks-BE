@@ -12,17 +12,17 @@ Please check `package.json` for dependencies and run
 npm install
 ```
 
-Dependencies Installed (manual commands if needed)< br / >
-Node: npm install< br / >
-Jest: npm install --save-dev jest< br / >
-JestSorted: npm install --save-dev jest-sorted< br / >
-Express: npm install express< br / >
-Cors: npm install cors< br / >
-SuperTest: npm install supertest --save-dev< br / >
-Dotenv: npm install dotenv --save< br / >
-Nodemon: npm install --save-dev nodemon< br / >
-PostGres: npm install pg< br / >
-PostGres Format: npm install pg-format< br / >
+Dependencies Installed (manual commands if needed)<br/>
+Node: npm install<br/>
+Jest: npm install --save-dev jest<br/>
+JestSorted: npm install --save-dev jest-sorted<br/>
+Express: npm install express<br/>
+Cors: npm install cors<br/>
+SuperTest: npm install supertest --save-dev<br/>
+Dotenv: npm install dotenv --save<br/>
+Nodemon: npm install --save-dev nodemon<br/>
+PostGres: npm install pg<br/>
+PostGres Format: npm install pg-format<br/>
 
 To start please create your own .env files in root directory:
 
