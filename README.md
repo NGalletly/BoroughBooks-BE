@@ -32,7 +32,7 @@ To start please create your own .env files in root directory:
 In these files please connect to the connection.js by placing the following their respective .env.test and env.development files:
 
 ```
-PGDATABASE=borough_books_dev
+PGDATABASE=borough_books
 PGDATABASE=borough_books_test
 ```
 
