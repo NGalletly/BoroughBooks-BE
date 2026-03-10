@@ -49,34 +49,34 @@ module.exports = [
   },
   {
     isbn: "9780441569595",
-    username: nomi,
+    username: "nomi",
   },
   {
     isbn: "9780140154511",
-    username: nomi,
+    username: "nomi",
   },
   {
     isbn: "9780441627400",
-    username: nomi,
+    username: "nomi",
   },
   {
     isbn: "9780618640157",
-    username: nomi,
+    username: "nomi",
   },
   {
     isbn: "9780441569595",
-    username: elenaS,
+    username: "ESerebrianik",
   },
   {
     isbn: "9781567923384",
-    username: elenaS,
+    username: "ESerebrianik",
   },
   {
     isbn: "9780441627400",
-    username: elenaS,
+    username: "ESerebrianik",
   },
   {
     isbn: "9781911547860",
-    username: elenaS,
+    username: "ESerebrianik",
   },
 ];
