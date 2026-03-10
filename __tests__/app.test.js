@@ -4,9 +4,9 @@ const db = require("../db/connection");
 const seed = require("../db/seeds/seed");
 const data = require("../db/data/test-data");
 
-// beforeEach(() => seed());
+beforeEach(() => seed(data));
 
-// afterAll(() => db.end());
+afterAll(() => db.end());
 
 describe("test", () => {
   test("test", () => {
