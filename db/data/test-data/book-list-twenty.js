@@ -1,4 +1,4 @@
-[
+module.exports = [
   {
     isbn: "9780679723394",
     title: "Speak, Memory",
