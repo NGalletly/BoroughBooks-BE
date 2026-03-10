@@ -1,7 +1,7 @@
 const db = require("../connection");
 const format = require("pg-format");
 
-const seed = async function (data) {
+const seed = async function (bookData) {
   await db.query(`DROP TABLE IF EXISTS user_relationship`);
   await db.query(`DROP TABLE IF EXISTS wishlist`);
   await db.query(`DROP TABLE IF EXISTS loans`);
@@ -51,8 +51,26 @@ const seed = async function (data) {
       user_relationship_id SERIAL PRIMARY KEY,
       origin_username VARCHAR(100) REFERENCES users(username),
       relating_username VARCHAR(100) REFERENCES  users(username),
-      friend_stats VARCHAR(100)
+      friend_status VARCHAR(100)
       )`);
-};
 
+  const formatBooks = bookData.map((book) => {
+    return [
+      book.isbn,
+      book.title,
+      book.authors,
+      book.publisher,
+      book.published_date,
+      book.description,
+      book.imagelinks,
+    ];
+  });
+
+  await db.query(
+    format(
+      `INSERT INTO books (isbn,title,authors,publisher,published_date,description,imageLinks) VALUES %L`,
+      formatBooks,
+    ),
+  );
+};
 module.exports = seed;
