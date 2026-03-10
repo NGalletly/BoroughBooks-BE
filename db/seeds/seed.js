@@ -49,8 +49,8 @@ const seed = async function (data) {
 
   await db.query(`CREATE TABLE user_relationship(
       user_relationship_id SERIAL PRIMARY KEY,
-      origin_username REFERENCES users(username),
-      relating_username REFERENCES  users(username),
+      origin_username VARCHAR(100) REFERENCES users(username),
+      relating_username VARCHAR(100) REFERENCES  users(username),
       friend_stats VARCHAR(100)
       )`);
 };
