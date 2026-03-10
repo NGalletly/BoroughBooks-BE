@@ -2,6 +2,7 @@ const db = require("../connection");
 const format = require("pg-format");
 
 const seed = async function (data) {
+  await db.query(`DROP TABLE IF EXISTS user_relationship`);
   await db.query(`DROP TABLE IF EXISTS wishlist`);
   await db.query(`DROP TABLE IF EXISTS loans`);
   await db.query(`DROP TABLE IF EXISTS users_books`);
@@ -44,8 +45,13 @@ const seed = async function (data) {
       wish_list_id SERIAL PRIMARY KEY,
       username VARCHAR(100) REFERENCES users(username),
       isbn VARCHAR(20) REFERENCES books(isbn)
+      )`);
 
-
+  await db.query(`CREATE TABLE user_relationship(
+      user_relationship_id SERIAL PRIMARY KEY,
+      origin_username REFERENCES users(username),
+      relating_username REFERENCES  users(username),
+      friend_stats VARCHAR(100)
       )`);
 };
 
