@@ -1,7 +1,7 @@
 const db = require("../connection");
 const format = require("pg-format");
 
-const seed = async function (bookData) {
+const seed = async function ({ booksData }) {
   await db.query(`DROP TABLE IF EXISTS user_relationship`);
   await db.query(`DROP TABLE IF EXISTS wishlist`);
   await db.query(`DROP TABLE IF EXISTS loans`);
@@ -54,7 +54,7 @@ const seed = async function (bookData) {
       friend_status VARCHAR(100)
       )`);
 
-  const formatBooks = bookData.map((book) => {
+  const formatBooks = booksData.map((book) => {
     return [
       book.isbn,
       book.title,
