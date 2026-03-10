@@ -21,7 +21,7 @@ const seed = async function ({ booksData }) {
     publisher VARCHAR(40),
     published_date DATE,
     description VARCHAR(500),
-    imagelinks VARCHAR(250)
+    imagelinks VARCHAR(1000)
 
     )`);
 
