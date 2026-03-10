@@ -237,7 +237,7 @@ module.exports = [
   {
     isbn: "9780316787536",
     title:
-      "This Band Could Be Your Life: Scenes from the American Indie Underground 1981–1991",
+      "This Band Could Be Your Life: Scenes from the American Indie Underground 1981-1991",
     authors: ["Michael Azerrad"],
     publisher: "Back Bay Books",
     published_date: "2002-08-06",
