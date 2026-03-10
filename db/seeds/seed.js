@@ -1,7 +1,7 @@
 const db = require("../connection");
 const format = require("pg-format");
 
-const seed = async function ({ usersData, booksData }) {
+const seed = async function ({ booksData }) {
   // const formatUsers =
 
   const formatBooks = booksData.map((book) => {

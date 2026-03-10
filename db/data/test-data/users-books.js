@@ -1,51 +1,51 @@
 module.exports = [
   {
     isbn: "9780679723394",
-    username: jovaScript,
+    username: "jovaScript",
   },
   {
     isbn: "9781608464456",
-    username: jovaScript,
+    username: "jovaScript",
   },
   {
     isbn: "9781784870911",
-    username: jovaScript,
+    username: "jovaScript",
   },
   {
     isbn: "9780441569595",
-    username: jovaScript,
+    username: "jovaScript",
   },
   {
     isbn: "9780140154511",
-    username: gavinHousley,
+    username: "gavinHousley",
   },
   {
     isbn: "9780441627400",
-    username: gavinHousley,
+    username: "gavinHousley",
   },
   {
     isbn: "9780374530068",
-    username: gavinHousley,
+    username: "gavinHousley",
   },
   {
     isbn: "9780393312836",
-    username: gavinHousley,
+    username: "gavinHousley",
   },
   {
     isbn: "9780393312836",
-    username: coolSurferDude,
+    username: "coolSurferDude",
   },
   {
     isbn: "9780307887443",
-    username: coolSurferDude,
+    username: "coolSurferDude",
   },
   {
     isbn: "9780618640157",
-    username: coolSurferDude,
+    username: "coolSurferDude",
   },
   {
     isbn: "9780393312836",
-    username: coolSurferDude,
+    username: "coolSurferDude",
   },
   {
     isbn: "9780441569595",
