@@ -78,6 +78,12 @@ npm start
 
 Note: Server will be running on [http://localhost:9000/api](http://localhost:9000/api)
 
+## Display tables
+
+To see scema and display tables in output.txt, write the following command in terminal. Note, ensure you npm run seed-dev before doing this.
+
+psql borough_books -c "\dt" -c "SELECT _ FROM users;" -c "SELECT _ FROM books;" -c "SELECT _ FROM users_books;" -c "SELECT _ FROM loans;" -c "SELECT _ FROM wishlist;" -c "SELECT _ FROM user_relationship;" > output.txt && cat output.txt
+
 ## Endpoints
 
 Example endpoints:

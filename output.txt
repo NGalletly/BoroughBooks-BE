@@ -1,0 +1,112 @@
+                  List of relations
+ Schema |       Name        | Type  |      Owner      
+--------+-------------------+-------+-----------------
+ public | books             | table | nevillegalletly
+ public | loans             | table | nevillegalletly
+ public | user_relationship | table | nevillegalletly
+ public | users             | table | nevillegalletly
+ public | users_books       | table | nevillegalletly
+ public | wishlist          | table | nevillegalletly
+(6 rows)
+
+    username    | profile_pic_url 
+----------------+-----------------
+ gavinHousley   | 
+ jovaScript     | 
+ coolSurferDude | 
+ nomi           | 
+ ESerebrianik   | 
+(5 rows)
+
+     isbn      |                                         title                                          |        authors         |         publisher         | published_date |                                                                                                                  description                                                                                                                  |                                          imagelinks                                           
+---------------+----------------------------------------------------------------------------------------+------------------------+---------------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------
+ 9780679723394 | Speak, Memory                                                                          | Vladimir Nabokov       | Vintage International     | 1989-07-12     | A memoir of Nabokov's privileged childhood in pre-revolutionary Russia and his years of European emigration, widely considered one of the finest autobiographies of the twentieth century.                                                    | https://books.google.com/books/content?vid=ISBN9780679723394&printsec=frontcover&img=1&zoom=1
+ 9781608464456 | Freedom Is a Constant Struggle: Ferguson, Palestine, and the Foundations of a Movement | Angela Y. Davis        | Haymarket Books           | 2016-02-01     | Angela Davis examines the connections between struggles against state violence and oppression throughout history and around the world, arguing that we must build on legacies of resistance to forge a new, more expansive vision of freedom. | https://books.google.com/books/content?vid=ISBN9781608464456&printsec=frontcover&img=1&zoom=1
+ 9780374529529 | Memoirs of Hadrian                                                                     | Marguerite Yourcenar   | Farrar, Straus and Giroux | 2005-04-01     | A fictional memoir of the Roman Emperor Hadrian, written in the form of a letter to his adopted grandson Marcus Aurelius, meditating on power, love, and the nature of the self.                                                              | https://books.google.com/books/content?vid=ISBN9780374529529&printsec=frontcover&img=1&zoom=1
+ 9781784870911 | Life and Fate                                                                          | Vasily Grossman        | Vintage Classics          | 2006-06-01     | Set during the Battle of Stalingrad, this epic novel draws parallels between Nazi and Stalinist totalitarianism and follows the Shaposhnikov family through the brutal crucible of the Second World War.                                      | https://books.google.com/books/content?vid=ISBN9781784870911&printsec=frontcover&img=1&zoom=1
+ 9780141189383 | Alone in Berlin                                                                        | Hans Fallada           | Penguin Modern Classics   | 2009-08-27     | Based on a true story, this novel follows a working-class Berlin couple who begin a secret campaign of resistance against the Nazi regime after the death of their son in the war.                                                            | https://books.google.com/books/content?vid=ISBN9780141189383&printsec=frontcover&img=1&zoom=1
+ 9780743273565 | The Great Gatsby                                                                       | F. Scott Fitzgerald    | Scribner                  | 2004-09-30     | Set in the Jazz Age on Long Island, the novel depicts narrator Nick Carraway's interactions with the mysterious millionaire Jay Gatsby and Gatsby's obsession with the beautiful Daisy Buchanan.                                              | https://books.google.com/books/content?vid=ISBN9780743273565&printsec=frontcover&img=1&zoom=1
+ 9780807014295 | Man's Search for Meaning                                                               | Viktor E. Frankl       | Beacon Press              | 2006-06-01     | A psychiatrist and Holocaust survivor describes his psychotherapeutic method of finding meaning in all forms of existence, even the most sordid ones, and thus a reason to continue living.                                                   | https://books.google.com/books/content?vid=ISBN9780807014295&printsec=frontcover&img=1&zoom=1
+ 9780140157239 | Love in the Time of Cholera                                                            | Gabriel García Márquez | Penguin Books             | 1989-04-01     | In their youth, Florentino Ariza and Fermina Daza fall passionately in love. When Fermina eventually chooses to marry a wealthy doctor, Florentino vows to win her back, waiting more than fifty years for his chance.                        | https://books.google.com/books/content?vid=ISBN9780140157239&printsec=frontcover&img=1&zoom=1
+ 9780441569595 | Neuromancer                                                                            | William Gibson         | Ace Books                 | 2000-07-01     | Case is a washed-up computer criminal hired by a mysterious employer to pull off the ultimate hack. A seminal cyberpunk novel that coined the term 'cyberspace' and shaped modern science fiction.                                            | https://books.google.com/books/content?vid=ISBN9780441569595&printsec=frontcover&img=1&zoom=1
+ 9780307887443 | Ready Player One                                                                       | Ernest Cline           | Broadway Books            | 2012-08-14     | In a dystopian 2045, teenager Wade Watts escapes into the OASIS virtual reality world and competes in a high-stakes treasure hunt that could save the virtual universe.                                                                       | https://books.google.com/books/content?vid=ISBN9780307887443&printsec=frontcover&img=1&zoom=1
+ 9780140154511 | The Earthsea Quartet                                                                   | Ursula K. Le Guin      | Penguin Books             | 1993-01-01     | Collects the first four books of Le Guin's landmark fantasy series: A Wizard of Earthsea, The Tombs of Atuan, The Farthest Shore, and Tehanu — following the wizard Ged across a vast archipelago world.                                      | https://books.google.com/books/content?vid=ISBN9780140154511&printsec=frontcover&img=1&zoom=1
+ 9780374530068 | The Dream Songs                                                                        | John Berryman          | Farrar, Straus and Giroux | 2007-04-01     | The complete collection of John Berryman's Pulitzer Prize-winning sequence of 385 poems, featuring the tragicomic alter ego Henry, widely regarded as a landmark of confessional American poetry.                                             | https://books.google.com/books/content?vid=ISBN9780374530068&printsec=frontcover&img=1&zoom=1
+ 9781567923384 | Nox                                                                                    | Anne Carson            | New Directions            | 2010-05-18     | An accordion-fold facsimile of a handmade book, Nox is Anne Carson's elegy for her brother, interweaving a translation of Catullus 101 with photographs, dictionary definitions, and fragments of memory.                                     | https://books.google.com/books/content?vid=ISBN9781567923384&printsec=frontcover&img=1&zoom=1
+ 9780441627400 | The Once and Future King                                                               | T. H. White            | Ace Books                 | 1987-05-01     | A sweeping retelling of the Arthurian legend, from the boyhood education of the Wart by Merlyn to the tragedy of Camelot and the fall of a great king's dream of a just civilization.                                                         | https://books.google.com/books/content?vid=ISBN9780441627400&printsec=frontcover&img=1&zoom=1
+ 9780393312836 | A Clockwork Orange                                                                     | Anthony Burgess        | W. W. Norton & Company    | 2011-03-21     | Alex, a teenage gang leader in a dystopian future Britain, speaks in a slang called Nadsat and revels in ultraviolence before undergoing an experimental government behaviour-modification programme.                                         | https://books.google.com/books/content?vid=ISBN9780393312836&printsec=frontcover&img=1&zoom=1
+ 9780143039945 | Gravity's Rainbow                                                                      | Thomas Pynchon         | Penguin Books             | 2006-05-30     | Set in the final months of World War II, this monumental and labyrinthine novel follows dozens of characters across a paranoid landscape shaped by rocket technology, corporate conspiracy, and occult forces.                                | https://books.google.com/books/content?vid=ISBN9780143039945&printsec=frontcover&img=1&zoom=1
+ 9781911547860 | In Transit                                                                             | Brigid Brophy          | Faber & Faber             | 2002-09-19     | Stranded in an international airport, the narrator finds their sense of gender and identity dissolving, in this witty, formally experimental novel that draws on multiple languages and literary traditions.                                  | https://books.google.com/books/content?vid=ISBN9781911547860&printsec=frontcover&img=1&zoom=1
+ 9780618640157 | The Lord of the Rings                                                                  | J. R. R. Tolkien       | Mariner Books             | 2005-09-21     | The complete single-volume edition of Tolkien's epic fantasy trilogy, following hobbit Frodo Baggins and the Fellowship of the Ring on their quest to destroy the One Ring and defeat the Dark Lord Sauron.                                   | https://books.google.com/books/content?vid=ISBN9780618640157&printsec=frontcover&img=1&zoom=1
+ 9780316787536 | This Band Could Be Your Life: Scenes from the American Indie Underground 1981-1991     | Michael Azerrad        | Back Bay Books            | 2002-08-06     | An oral and reported history of the American indie underground, profiling thirteen bands including Black Flag, Sonic Youth, and Fugazi who forged a new way of making and distributing music outside the mainstream.                          | https://books.google.com/books/content?vid=ISBN9780316787536&printsec=frontcover&img=1&zoom=1
+ 9781585421466 | The Artist's Way: A Spiritual Path to Higher Creativity                                | Julia Cameron          | TarcherPerigee            | 2002-03-04     | A twelve-week programme for recovering and discovering creativity, built around the practices of morning pages and the artist date, now considered a foundational self-help text for creative unblocking.                                     | https://books.google.com/books/content?vid=ISBN9781585421466&printsec=frontcover&img=1&zoom=1
+(20 rows)
+
+ users_book_id |     isbn      |    username    
+---------------+---------------+----------------
+             1 | 9780679723394 | jovaScript
+             2 | 9781608464456 | jovaScript
+             3 | 9781784870911 | jovaScript
+             4 | 9780441569595 | jovaScript
+             5 | 9780140154511 | gavinHousley
+             6 | 9780441627400 | gavinHousley
+             7 | 9780374530068 | gavinHousley
+             8 | 9780393312836 | gavinHousley
+             9 | 9780393312836 | coolSurferDude
+            10 | 9780307887443 | coolSurferDude
+            11 | 9780618640157 | coolSurferDude
+            12 | 9780393312836 | coolSurferDude
+            13 | 9780441569595 | nomi
+            14 | 9780140154511 | nomi
+            15 | 9780441627400 | nomi
+            16 | 9780618640157 | nomi
+            17 | 9780441569595 | ESerebrianik
+            18 | 9781567923384 | ESerebrianik
+            19 | 9780441627400 | ESerebrianik
+            20 | 9781911547860 | ESerebrianik
+(20 rows)
+
+ loan_id | users_book_id |  borrower_id   | borrow_date |  due_date  | return_date 
+---------+---------------+----------------+-------------+------------+-------------
+       1 |             4 | nomi           | 2025-01-15  | 2025-02-15 | 
+       2 |             5 | coolSurferDude | 2024-11-01  | 2024-12-01 | 2024-11-28
+       3 |             6 | ESerebrianik   | 2025-02-01  | 2025-03-01 | 
+       4 |             8 | jovaScript     | 2024-10-10  | 2024-11-10 | 2024-11-05
+       5 |            10 | gavinHousley   | 2024-12-01  | 2025-01-01 | 2024-12-20
+       6 |            11 | jovaScript     | 2024-12-15  | 2025-01-15 | 
+       7 |            13 | gavinHousley   | 2024-09-01  | 2024-10-01 | 2024-09-25
+       8 |            18 | coolSurferDude | 2025-02-10  | 2025-03-10 | 
+       9 |            20 | nomi           | 2024-08-01  | 2024-09-01 | 2024-08-29
+(9 rows)
+
+ wish_list_id |    username    |     isbn      
+--------------+----------------+---------------
+            1 | jovaScript     | 9780374529529
+            2 | jovaScript     | 9780143039945
+            3 | jovaScript     | 9780441627400
+            4 | gavinHousley   | 9780679723394
+            5 | gavinHousley   | 9781608464456
+            6 | gavinHousley   | 9780807014295
+            7 | coolSurferDude | 9780441569595
+            8 | coolSurferDude | 9780143039945
+            9 | coolSurferDude | 9781567923384
+           10 | nomi           | 9780374529529
+           11 | nomi           | 9780316787536
+           12 | nomi           | 9780143039945
+           13 | ESerebrianik   | 9780679723394
+           14 | ESerebrianik   | 9781784870911
+           15 | ESerebrianik   | 9780374530068
+(15 rows)
+
+ user_relationship_id | origin_username | relating_username | friend_status 
+----------------------+-----------------+-------------------+---------------
+                    1 | jovaScript      | gavinHousley      | accepted
+                    2 | jovaScript      | nomi              | accepted
+                    3 | gavinHousley    | ESerebrianik      | accepted
+                    4 | coolSurferDude  | nomi              | accepted
+                    5 | ESerebrianik    | nomi              | accepted
+                    6 | coolSurferDude  | jovaScript        | pending
+                    7 | gavinHousley    | coolSurferDude    | pending
+                    8 | jovaScript      | ESerebrianik      | blocked
+(8 rows)
+

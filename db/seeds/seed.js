@@ -1,8 +1,17 @@
 const db = require("../connection");
 const format = require("pg-format");
 
-const seed = async function ({ booksData }) {
-  // const formatUsers =
+const seed = async function ({
+  usersData,
+  booksData,
+  usersBooksData,
+  loansData,
+  wishlistData,
+  friendsData,
+}) {
+  const formatUsers = usersData.map((user) => {
+    return [user.username, user.profile_pic_url];
+  });
 
   const formatBooks = booksData.map((book) => {
     return [
@@ -12,9 +21,36 @@ const seed = async function ({ booksData }) {
       book.publisher,
       book.published_date,
       book.description,
-      book.imagelinks,
+      book.imagelinks.thumbnail,
     ];
   });
+
+  const formatUsersBooks = usersBooksData.map((usersbook) => {
+    return [usersbook.isbn, usersbook.username];
+  });
+
+  const formatLoans = loansData.map((loan) => {
+    return [
+      loan.user_book_id,
+      loan.borrower_id,
+      loan.borrow_date,
+      loan.due_date,
+      loan.return_date,
+    ];
+  });
+
+  const formatWishlist = wishlistData.map((item) => {
+    return [item.username, item.isbn];
+  });
+
+  const formatFriends = friendsData.map((person) => {
+    return [
+      person.origin_user_id,
+      person.relating_user_id,
+      person.friend_status,
+    ];
+  });
+
   await db.query(`DROP TABLE IF EXISTS user_relationship`);
   await db.query(`DROP TABLE IF EXISTS wishlist`);
   await db.query(`DROP TABLE IF EXISTS loans`);
@@ -29,11 +65,11 @@ const seed = async function ({ booksData }) {
 
   await db.query(`CREATE TABLE books(
     isbn VARCHAR(20) PRIMARY KEY,
-    title VARCHAR(100),
-    authors VARCHAR(50),
+    title VARCHAR(200),
+    authors VARCHAR(100),
     publisher VARCHAR(40),
     published_date DATE,
-    description VARCHAR(500),
+    description VARCHAR(1000),
     imagelinks VARCHAR(1000)
 
     )`);
@@ -69,8 +105,53 @@ const seed = async function ({ booksData }) {
 
   await db.query(
     format(
-      `INSERT INTO books (isbn,title,authors,publisher,published_date,description,imageLinks) VALUES %L`,
+      `INSERT INTO users (username, profile_pic_url) VALUES %L`,
+      formatUsers,
+    ),
+  );
+
+  await db.query(
+    format(
+      `INSERT INTO books (isbn,title,authors,publisher,published_date,description,imagelinks) VALUES %L`,
       formatBooks,
+    ),
+  );
+
+  await db.query(
+    format(
+      `INSERT INTO users_books(
+    isbn, username) VALUES %L`,
+      formatUsersBooks,
+    ),
+  );
+
+  await db.query(
+    format(
+      `INSERT INTO loans( 
+      users_book_id, 
+    borrower_id,
+    borrow_date,
+    due_date ,
+    return_date) VALUES %L`,
+      formatLoans,
+    ),
+  );
+
+  await db.query(
+    format(
+      `INSERT INTO wishlist(
+   username,isbn) VALUES %L`,
+      formatWishlist,
+    ),
+  );
+  await db.query(
+    format(
+      `INSERT INTO user_relationship(
+   origin_username,
+      relating_username,
+      friend_status
+      ) VALUES %L`,
+      formatFriends,
     ),
   );
 };
