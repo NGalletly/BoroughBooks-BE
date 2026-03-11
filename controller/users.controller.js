@@ -1,4 +1,16 @@
-const { serviceGetBooksByUsername } = require("../service/users.service");
+const {
+  serviceGetUsers,
+  serviceGetBooksByUsername,
+} = require("../service/users.service");
+
+exports.controllerGetUsers = async (request, response, next) => {
+  try {
+    const users = await serviceGetUsers();
+    response.status(200).send({ users });
+  } catch (err) {
+    next(err);
+  }
+};
 
 exports.controllerGetBooksByUsername = async (request, response, next) => {
   console.log("Request received for username:", request.params.username);
