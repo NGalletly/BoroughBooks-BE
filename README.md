@@ -82,7 +82,17 @@ Note: Server will be running on [http://localhost:9000/api](http://localhost:900
 
 To see scema and display tables in output.txt, write the following command in terminal. Note, ensure you npm run seed-dev before doing this.
 
-psql borough_books -c "\dt" -c "SELECT _ FROM users;" -c "SELECT _ FROM books;" -c "SELECT _ FROM users_books;" -c "SELECT _ FROM loans;" -c "SELECT _ FROM wishlist;" -c "SELECT _ FROM user_relationship;" > output.txt && cat output.txt
+psql borough*books -c "\dt" -c "SELECT * FROM users;" -c "SELECT _ FROM books;" -c "SELECT _ FROM users*books;" -c "SELECT * FROM loans;" -c "SELECT _ FROM wishlist;" -c "SELECT _ FROM user_relationship;" > output.txt && cat output.txt
+
+## Production ( Supabase )
+
+1. Request the `.env.production` connection string from a team member — **never commit this to GitHub**
+2. Create a `.env.production` file in the root with:
+
+```
+DATABASE_URL=your_supabase_transaction_pooler_url
+SSL=true
+```
 
 ## Endpoints
 
