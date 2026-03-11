@@ -1,5 +1,10 @@
 const db = require("../db/connection");
 
+exports.modelGetUsers = async () => {
+  const { rows } = await db.query(`SELECT * FROM users`);
+  return rows;
+};
+
 exports.modelGetBooksByUsername = async (username) => {
   const { rows } = await db.query(
     `SELECT books.* FROM books

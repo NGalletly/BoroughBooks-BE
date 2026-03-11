@@ -1,5 +1,12 @@
-const { modelGetBooksByUsername } = require("../model/users.model");
+const {
+  modelGetUsers,
+  modelGetBooksByUsername,
+} = require("../model/users.model");
 
-exports.serviceGetBooksByUsername = (username) => {
-  return modelGetBooksByUsername(username);
+exports.serviceGetUsers = async () => {
+  return await modelGetUsers();
+};
+
+exports.serviceGetBooksByUsername = async (username) => {
+  return await modelGetBooksByUsername(username);
 };
