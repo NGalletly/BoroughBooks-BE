@@ -2,11 +2,12 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
+const usersbooksRouter = require("./routes/usersbooksRouter");
+
 app.use(express.json());
 app.use(cors());
 
-const hello = "Hello World";
-
+app.use("/api/users", usersbooksRouter);
 app.use("/api", express.static("public"));
 
 module.exports = app;
