@@ -1,4 +1,4 @@
-const { serviceGetBooksByUsername } = require("../service/usersbooks.service");
+const { serviceGetBooksByUsername } = require("../service/users.service");
 
 exports.controllerGetBooksByUsername = async (request, response, next) => {
   console.log("Request received for username:", request.params.username);
