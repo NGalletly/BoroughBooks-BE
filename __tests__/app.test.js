@@ -13,6 +13,7 @@ describe("test", () => {
     expect(1).toBe(1);
   });
 });
+
 describe("/api/users/jovaScript/friends", () => {
   test("GET:200 - returns an object with a single key-value pair where the value is an array", async () => {
     const res = await request(app).get("/api/users/jovaScript/friends");
@@ -51,6 +52,17 @@ describe("/api/users/jovaScript/friends", () => {
     console.log(res.body);
     for (const friend of res.body.usersFriends) {
       expect(friend.friend_status).toBe("accepted");
+    }
+  });
+});
+
+describe("/users/:username", () => {
+  test("GET:200 - uses :username=coolSurferDudeto return an object that contains columns username and profile_pic_url", async () => {
+    const res = await request(app).get("/api/users/coolSurferDude");
+    console.log(res.body);
+    for (const friend of res.body.user) {
+      expect(friend).toHaveProperty("username");
+      expect(friend).toHaveProperty("profile_pic_url");
     }
   });
 });

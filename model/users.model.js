@@ -14,6 +14,14 @@ exports.modelGetBooksByUsername = async (username) => {
   );
   return rows;
 };
+exports.modelGetUserByUsername = async (username) => {
+  const { rows } = await db.query(
+    `SELECT * FROM users
+     WHERE users.username = $1`,
+    [username],
+  );
+  return rows;
+};
 
 exports.modelGetFriendsByUsername = async (username) => {
   const { rows } = await db.query(
