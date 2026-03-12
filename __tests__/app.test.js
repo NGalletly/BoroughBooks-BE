@@ -52,7 +52,6 @@ describe("/api/users/jovaScript/friends", () => {
   });
 });
 
-  
 describe("/api/users/:username/wish-list", () => {
   test("GET:200 - returns an object with a single key-value pair where the value is an array", async () => {
     const res = await request(app).get("/api/users/jovaScript/wish-list");
@@ -106,5 +105,29 @@ describe("Invalid Endpoint", () => {
     const res = await request(app).get("/api/bananas");
     expect(res.statusCode).toBe(404);
     expect(res.body.msg).toBe("Path not found");
+  });
+});
+
+describe("GET /api/users/:username/borrowed", () => {
+  test("200: returns an array of loaned books for a valid user", async () => {
+    const res = await request(app).get("/api/users/coolSurferDude/borrowed");
+    console.log("Status:", res.status);
+    console.log("Response body:", JSON.stringify(res.body, null, 2));
+
+    expect(res.status).toBe(200);
+    expect(res.body.books).toBeInstanceOf(Array);
+    expect(res.body.books.length).toBeGreaterThan(0);
+  });
+});
+
+describe("GET /api/users/:username/loaned", () => {
+  test("200: returns an array of loaned books for a valid user", async () => {
+    const res = await request(app).get("/api/users/jovaScript/loaned");
+    console.log("Status:", res.status);
+    console.log("Response body:", JSON.stringify(res.body, null, 2));
+
+    expect(res.status).toBe(200);
+    expect(res.body.books).toBeInstanceOf(Array);
+    expect(res.body.books.length).toBeGreaterThan(0);
   });
 });
