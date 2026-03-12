@@ -1,6 +1,7 @@
 const {
   modelGetUsers,
   modelGetUserByUsername,
+  modelGetLoanedBooksByUsername,
   modelGetBooksByUsername,
   modelGetFriendsByUsername,
 } = require("../model/users.model");
@@ -12,6 +13,11 @@ exports.serviceGetUsers = async () => {
 exports.serviceGetUserByUsername = async (username) => {
   return await modelGetUserByUsername(username);
 };
+
+exports.serviceGetLoanedBooksByUsername = async (username) => {
+  return await modelGetLoanedBooksByUsername(username);
+};
+
 exports.serviceGetBooksByUsername = async (username) => {
   return await modelGetBooksByUsername(username);
 };

@@ -15,6 +15,11 @@ module.exports = [
     due_date: "2024-12-01",
     return_date: "2024-11-28",
   },
+
+   we want book info for that loaned book 
+   we also want borrowers information(users table username)
+   we want the loans data
+
   {
     // ESerebrianik borrowed gavinHousley's Once and Future King — currently out
     user_book_id: 6,
