@@ -1,5 +1,6 @@
 const {
   modelGetUsers,
+  modelGetUserByUsername,
   modelGetBooksByUsername,
   modelGetFriendsByUsername,
   modelGetWishListByUsername,
@@ -9,6 +10,9 @@ exports.serviceGetUsers = async () => {
   return await modelGetUsers();
 };
 
+exports.serviceGetUserByUsername = async (username) => {
+  return await modelGetUserByUsername(username);
+};
 exports.serviceGetBooksByUsername = async (username) => {
   return await modelGetBooksByUsername(username);
 };

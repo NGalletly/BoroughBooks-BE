@@ -13,6 +13,7 @@ describe("test", () => {
     expect(1).toBe(1);
   });
 });
+
 describe("/api/users/jovaScript/friends", () => {
   test("GET:200 - returns an object with a single key-value pair where the value is an array", async () => {
     const res = await request(app).get("/api/users/jovaScript/friends");
