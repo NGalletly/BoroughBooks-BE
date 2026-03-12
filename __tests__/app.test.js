@@ -61,7 +61,7 @@ describe("/users/:username", () => {
   });
 });
 
-describe("GET /api/loans/:username", () => {
+describe("GET /api/users/:username/borrowed", () => {
   test("200: returns an array of loaned books for a valid user", async () => {
     const res = await request(app).get("/api/users/coolSurferDude/borrowed");
     console.log("Status:", res.status);
@@ -73,7 +73,7 @@ describe("GET /api/loans/:username", () => {
   });
 });
 
-describe("GET /api/loans/:username", () => {
+describe("GET /api/users/:username/loaned", () => {
   test("200: returns an array of loaned books for a valid user", async () => {
     const res = await request(app).get("/api/users/jovaScript/loaned");
     console.log("Status:", res.status);
