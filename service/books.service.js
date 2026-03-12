@@ -1,5 +1,5 @@
 const { modelGetBooks } = require("../model/books.model");
 
-exports.serviceGetUsers = async () => {
+exports.serviceGetBooks = async () => {
   return await modelGetBooks();
 };

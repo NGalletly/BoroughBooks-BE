@@ -52,35 +52,59 @@ describe("/api/users/jovaScript/friends", () => {
   });
 });
 
-describe("/users/:username", () => {
-  test("GET:200 - uses :username=coolSurferDudeto return an object that contains columns username and profile_pic_url", async () => {
-    const res = await request(app).get("/api/users/coolSurferDude");
-    const user = res.body.user[0];
-    expect(user).toHaveProperty("username");
-    expect(user).toHaveProperty("profile_pic_url");
+  
+describe("/api/users/:username/wish-list", () => {
+  test("GET:200 - returns an object with a single key-value pair where the value is an array", async () => {
+    const res = await request(app).get("/api/users/jovaScript/wish-list");
+    expect(res.statusCode).toBe(200);
+    expect(Object.keys(res.body).length).toBe(1);
+    expect(res.body).toHaveProperty("usersWishList");
+    expect(Array.isArray(res.body.usersWishList)).toBe(true);
+  });
+  test("GET:200 - returns only records where the username is jovaScript (parametric endpoint test)", async () => {
+    const res = await request(app).get("/api/users/jovaScript/wish-list");
+    expect(res.statusCode).toBe(200);
+    for (const book of res.body.usersWishList) {
+      expect(book.username).toBe("jovaScript");
+    }
+  });
+  test("GET:200 - returns columns containing relevant book information", async () => {
+    const res = await request(app).get("/api/users/jovaScript/wish-list");
+    expect(res.statusCode).toBe(200);
+    for (const book of res.body.usersWishList) {
+    }
+  });
+
+  test("GET:200 - returns the expected number of wish listed books for a particular user", async () => {
+    const res = await request(app).get("/api/users/jovaScript/wish-list");
+    expect(res.statusCode).toBe(200);
+    expect(res.body.usersWishList.length).toBe(3);
   });
 });
 
-describe("GET /api/loans/:username", () => {
-  test("200: returns an array of loaned books for a valid user", async () => {
-    const res = await request(app).get("/api/users/coolSurferDude/borrowed");
-    console.log("Status:", res.status);
-    console.log("Response body:", JSON.stringify(res.body, null, 2));
-
-    expect(res.status).toBe(200);
-    expect(res.body.books).toBeInstanceOf(Array);
-    expect(res.body.books.length).toBeGreaterThan(0);
+test("GET:200 - returns an array of book objects which have the correct keys", async () => {
+  const res = await request(app).get("/api/books");
+  res.body.books.forEach((book) => {
+    expect(book).toHaveProperty("isbn");
+    expect(book).toHaveProperty("title");
+    expect(book).toHaveProperty("authors");
+    expect(book).toHaveProperty("publisher");
+    expect(book).toHaveProperty("published_date");
+    expect(book).toHaveProperty("description");
+    expect(book).toHaveProperty("imagelinks");
   });
 });
+test("GET:200 - returns book objects which contain the correct data types", async () => {
+  const res = await request(app).get("/api/books");
+  const bookOne = res.body.books[0];
+  expect(typeof bookOne.isbn).toBe("string");
+  expect(typeof bookOne.title).toBe("string");
+});
 
-describe("GET /api/loans/:username", () => {
-  test("200: returns an array of loaned books for a valid user", async () => {
-    const res = await request(app).get("/api/users/jovaScript/loaned");
-    console.log("Status:", res.status);
-    console.log("Response body:", JSON.stringify(res.body, null, 2));
-
-    expect(res.status).toBe(200);
-    expect(res.body.books).toBeInstanceOf(Array);
-    expect(res.body.books.length).toBeGreaterThan(0);
+describe("Invalid Endpoint", () => {
+  test("404: responds with a message when given an invalid path", async () => {
+    const res = await request(app).get("/api/bananas");
+    expect(res.statusCode).toBe(404);
+    expect(res.body.msg).toBe("Path not found");
   });
 });

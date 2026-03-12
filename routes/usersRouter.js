@@ -7,6 +7,7 @@ const {
   controllerGetLoanedBooksByUsername,
   controllerGetBooksByUsername,
   controllerGetFriendsByUsername,
+  controllerGetWishListByUsername,
 } = require("../controller/users.controller");
 
 usersbooksRouter.get("/", controllerGetUsers);
@@ -19,5 +20,6 @@ usersbooksRouter.get(
 usersbooksRouter.get("/:username/loaned", controllerGetLoanedBooksByUsername);
 usersbooksRouter.get("/:username/my-library", controllerGetBooksByUsername);
 usersbooksRouter.get("/:username/friends", controllerGetFriendsByUsername);
+usersbooksRouter.get("/:username/wish-list", controllerGetWishListByUsername);
 
 module.exports = usersbooksRouter;
