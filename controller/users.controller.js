@@ -1,7 +1,10 @@
 const {
   serviceGetUsers,
+  serviceGetUserByUsername,
+  serviceGetLoanedBooksByUsername,
   serviceGetBooksByUsername,
   serviceGetFriendsByUsername,
+  serviceGetWishListByUsername,
 } = require("../service/users.service");
 
 exports.controllerGetUsers = async (request, response, next) => {
@@ -13,8 +16,30 @@ exports.controllerGetUsers = async (request, response, next) => {
   }
 };
 
+exports.controllerGetUserByUsername = async (request, response, next) => {
+  try {
+    const { username } = request.params;
+    const user = await serviceGetUserByUsername(username);
+    response.status(200).send({ user });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.controllerGetLoanedBooksByUsername = async (
+  request,
+  response,
+  next,
+) => {
+  try {
+    const { username } = request.params;
+    const books = await serviceGetLoanedBooksByUsername(username);
+    response.status(200).send({ books });
+  } catch (err) {
+    next(err);
+  }
+};
 exports.controllerGetBooksByUsername = async (request, response, next) => {
-  console.log("Request received for username:", request.params.username);
   try {
     const { username } = request.params;
     const books = await serviceGetBooksByUsername(username);
@@ -29,6 +54,16 @@ exports.controllerGetFriendsByUsername = async (request, response, next) => {
     const { username } = request.params;
     const usersFriends = await serviceGetFriendsByUsername(username);
     response.status(200).send({ usersFriends });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.controllerGetWishListByUsername = async (request, response, next) => {
+  try {
+    const { username } = request.params;
+    const usersWishList = await serviceGetWishListByUsername(username);
+    response.status(200).send({ usersWishList });
   } catch (err) {
     next(err);
   }

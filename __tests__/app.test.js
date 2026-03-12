@@ -13,6 +13,7 @@ describe("test", () => {
     expect(1).toBe(1);
   });
 });
+
 describe("/api/users/jovaScript/friends", () => {
   test("GET:200 - returns an object with a single key-value pair where the value is an array", async () => {
     const res = await request(app).get("/api/users/jovaScript/friends");
@@ -65,6 +66,25 @@ describe("/api/books", () => {
   test("GET:200 - returns an array of book objects which have the correct keys", async () => {
     const res = await request(app).get("/api/books");
     res.body.books.forEach((book) => {
+describe("/api/users/:username/wish-list", () => {
+  test("GET:200 - returns an object with a single key-value pair where the value is an array", async () => {
+    const res = await request(app).get("/api/users/jovaScript/wish-list");
+    expect(res.statusCode).toBe(200);
+    expect(Object.keys(res.body).length).toBe(1);
+    expect(res.body).toHaveProperty("usersWishList");
+    expect(Array.isArray(res.body.usersWishList)).toBe(true);
+  });
+  test("GET:200 - returns only records where the username is jovaScript (parametric endpoint test)", async () => {
+    const res = await request(app).get("/api/users/jovaScript/wish-list");
+    expect(res.statusCode).toBe(200);
+    for (const book of res.body.usersWishList) {
+      expect(book.username).toBe("jovaScript");
+    }
+  });
+  test("GET:200 - returns columns containing relevant book information", async () => {
+    const res = await request(app).get("/api/users/jovaScript/wish-list");
+    expect(res.statusCode).toBe(200);
+    for (const book of res.body.usersWishList) {
       expect(book).toHaveProperty("isbn");
       expect(book).toHaveProperty("title");
       expect(book).toHaveProperty("authors");
@@ -87,5 +107,11 @@ describe("Invalid Endpoint", () => {
     const res = await request(app).get("/api/bananas");
     expect(res.statusCode).toBe(404);
     expect(res.body.msg).toBe("Path not found");
+    }
+  });
+  test("GET:200 - returns the expected number of wish listed books for a particular user", async () => {
+    const res = await request(app).get("/api/users/jovaScript/wish-list");
+    expect(res.statusCode).toBe(200);
+    expect(res.body.usersWishList.length).toBe(3);
   });
 });
