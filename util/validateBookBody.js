@@ -8,7 +8,7 @@ exports.validateBookBody = (req, res, next) => {
     );
   }
 
-  if (isbn && isbn.length < 10) {
+  if (isbn && isbn.length < 9) {
     errors.push("ISBN must be at least 10 characters.");
   }
 

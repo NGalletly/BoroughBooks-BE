@@ -132,6 +132,8 @@ describe("GET /api/users/:username/loaned", () => {
   });
 });
 
+// POST BOOKS TESTING
+
 describe("POST /api/books", () => {
   test("201: adds a new book and returns the newly added book", async () => {
     const newBook = {
@@ -147,8 +149,6 @@ describe("POST /api/books", () => {
     };
 
     const res = await request(app).post("/api/books").send(newBook);
-    console.log("Status:", res.status);
-    console.log("Response body:", JSON.stringify(res.body, null, 2));
 
     expect(res.status).toBe(201);
     expect(res.body.newBook).toMatchObject({
@@ -176,10 +176,21 @@ describe("POST /api/books", () => {
     await request(app).post("/api/books").send(existingBook);
 
     const res = await request(app).post("/api/books").send(existingBook);
-    console.log("409 Status:", res.status);
-    console.log("409 Response body:", JSON.stringify(res.body, null, 2));
 
     expect(res.status).toBe(409);
     expect(res.body.msg).toBe("Book already exists.");
   });
+});
+
+test("400: returns error when required fields are missing", async () => {
+  const invalidBook = {
+    isbn: "123",
+    title: "The Incomplete Book",
+  };
+
+  const res = await request(app).post("/api/books").send(invalidBook);
+
+  expect(res.status).toBe(400);
+  expect(res.body.msg).toContain("Missing required fields");
+  expect(res.body.msg).toContain("ISBN must be at least 10 characters");
 });
