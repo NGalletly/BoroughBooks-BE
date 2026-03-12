@@ -1,6 +1,7 @@
 const {
   serviceGetUsers,
   serviceGetBooksByUsername,
+  serviceGetFriendsByUsername,
 } = require("../service/users.service");
 
 exports.controllerGetUsers = async (request, response, next) => {
@@ -18,6 +19,16 @@ exports.controllerGetBooksByUsername = async (request, response, next) => {
     const { username } = request.params;
     const books = await serviceGetBooksByUsername(username);
     response.status(200).send({ books });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.controllerGetFriendsByUsername = async (request, response, next) => {
+  try {
+    const { username } = request.params;
+    const usersFriends = await serviceGetFriendsByUsername(username);
+    response.status(200).send({ usersFriends });
   } catch (err) {
     next(err);
   }

@@ -14,3 +14,11 @@ exports.modelGetBooksByUsername = async (username) => {
   );
   return rows;
 };
+
+exports.modelGetFriendsByUsername = async (username) => {
+  const { rows } = await db.query(
+    `SELECT user_relationship.*, users.profile_pic_url FROM user_relationship JOIN users on user_relationship.origin_username = users.username WHERE user_relationship.origin_username = $1 AND user_relationship.friend_status = 'accepted'`,
+    [username],
+  );
+  return rows;
+};
