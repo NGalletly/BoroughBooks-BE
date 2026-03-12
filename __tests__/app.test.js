@@ -131,3 +131,55 @@ describe("GET /api/users/:username/loaned", () => {
     expect(res.body.books.length).toBeGreaterThan(0);
   });
 });
+
+describe("POST /api/books", () => {
+  test("201: adds a new book and returns the newly added book", async () => {
+    const newBook = {
+      isbn: "9780062316097",
+      title: "Sapiens: A Brief History of Humankind",
+      authors: "Yuval Noah Harari",
+      publisher: "Harper Perennial",
+      published_date: "2015-02-10",
+      description:
+        "A sweeping narrative of humanitys creation and evolution, exploring how biology and history have defined us.",
+      imagelinks:
+        "https://books.google.com/books/content?vid=ISBN9780062316097&printsec=frontcover&img=1&zoom=1",
+    };
+
+    const res = await request(app).post("/api/books").send(newBook);
+    console.log("Status:", res.status);
+    console.log("Response body:", JSON.stringify(res.body, null, 2));
+
+    expect(res.status).toBe(201);
+    expect(res.body.newBook).toMatchObject({
+      isbn: "9780062316097",
+      title: "Sapiens: A Brief History of Humankind",
+      authors: "Yuval Noah Harari",
+      publisher: "Harper Perennial",
+      description: expect.any(String),
+      imagelinks: expect.any(String),
+    });
+  });
+
+  test("409: returns error when book already exists", async () => {
+    const existingBook = {
+      isbn: "9780062316097",
+      title: "Sapiens: A Brief History of Humankind",
+      authors: "Yuval Noah Harari",
+      publisher: "Harper Perennial",
+      published_date: "2015-02-10",
+      description: "A sweeping narrative of humanitys creation and evolution.",
+      imagelinks:
+        "https://books.google.com/books/content?vid=ISBN9780062316097&printsec=frontcover&img=1&zoom=1",
+    };
+
+    await request(app).post("/api/books").send(existingBook);
+
+    const res = await request(app).post("/api/books").send(existingBook);
+    console.log("409 Status:", res.status);
+    console.log("409 Response body:", JSON.stringify(res.body, null, 2));
+
+    expect(res.status).toBe(409);
+    expect(res.body.msg).toBe("Book already exists.");
+  });
+});
