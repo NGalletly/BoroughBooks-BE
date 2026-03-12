@@ -6,6 +6,7 @@ const {
   modelGetBooksByUsername,
   modelGetFriendsByUsername,
   modelGetWishListByUsername,
+  modelPostLoanByUserBookId,
 } = require("../model/users.model");
 
 exports.serviceGetUsers = async () => {
@@ -34,4 +35,8 @@ exports.serviceGetFriendsByUsername = async (username) => {
 
 exports.serviceGetWishListByUsername = async (username) => {
   return await modelGetWishListByUsername(username);
+};
+
+exports.servicePostLoanByUserBookId = async (users_book_id, borrower_id) => {
+  return await modelPostLoanByUserBookId(users_book_id, borrower_id);
 };
