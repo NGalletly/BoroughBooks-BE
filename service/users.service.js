@@ -3,6 +3,7 @@ const {
   modelGetUserByUsername,
   modelGetBooksByUsername,
   modelGetFriendsByUsername,
+  modelGetWishListByUsername,
 } = require("../model/users.model");
 
 exports.serviceGetUsers = async () => {
@@ -18,4 +19,8 @@ exports.serviceGetBooksByUsername = async (username) => {
 
 exports.serviceGetFriendsByUsername = async (username) => {
   return await modelGetFriendsByUsername(username);
+};
+
+exports.serviceGetWishListByUsername = async (username) => {
+  return await modelGetWishListByUsername(username);
 };
