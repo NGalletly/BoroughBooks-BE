@@ -1,4 +1,7 @@
-const { serviceGetBooks } = require("../service/books.service");
+const {
+  serviceGetBooks,
+  servicePostBook,
+} = require("../service/books.service");
 
 exports.controllerGetBooks = async (request, response, next) => {
   try {

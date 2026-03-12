@@ -97,3 +97,21 @@ SSL=true
 ## Endpoints
 
 Example endpoints:
+
+## Testing Post Book:
+
+Send POST request to api/books
+with following JSON:
+
+```json
+{
+"isbn": "9780062316097",
+"title": "Sapiens: A Brief History of Humankind",
+"authors": "Yuval Noah Harari",
+"publisher": "Harper Perennial",
+"published_date": "2015-02-10",
+"description": "A sweeping narrative of humanitys creation and evolution.",
+"imagelinks": "https://books.google.com/books/content?vid=ISBN9780062316097&printsec=frontcover&img=1&zoom=1"
+}
+'''
+```
