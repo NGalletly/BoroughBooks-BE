@@ -17,7 +17,6 @@ describe("test", () => {
 describe("/api/users/jovaScript/friends", () => {
   test("GET:200 - returns an object with a single key-value pair where the value is an array", async () => {
     const res = await request(app).get("/api/users/jovaScript/friends");
-    console.log(res.body);
     expect(res.statusCode).toBe(200);
     expect(Object.keys(res.body).length).toBe(1);
     expect(res.body).toHaveProperty("usersFriends");
@@ -25,7 +24,6 @@ describe("/api/users/jovaScript/friends", () => {
   });
   test("GET:200 - **rename** returns an object with the correct column", async () => {
     const res = await request(app).get("/api/users/jovaScript/friends");
-    console.log(res.body);
     expect(res.statusCode).toBe(200);
     for (const friend of res.body.usersFriends) {
       expect(friend).toHaveProperty("relating_username");
@@ -41,7 +39,6 @@ describe("/api/users/jovaScript/friends", () => {
   test("GET:200 - returns only records where the origin_username is jovaScript (parametric endpoint test)", async () => {
     const res = await request(app).get("/api/users/jovaScript/friends");
     expect(res.statusCode).toBe(200);
-    console.log(res.body);
     for (const friend of res.body.usersFriends) {
       expect(friend.origin_username).toBe("jovaScript");
     }
@@ -49,7 +46,6 @@ describe("/api/users/jovaScript/friends", () => {
   test("GET:200 - returns records where friend_status on the user_relationships is accepted", async () => {
     const res = await request(app).get("/api/users/jovaScript/friends");
     expect(res.statusCode).toBe(200);
-    console.log(res.body);
     for (const friend of res.body.usersFriends) {
       expect(friend.friend_status).toBe("accepted");
     }

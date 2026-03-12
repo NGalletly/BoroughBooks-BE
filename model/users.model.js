@@ -5,13 +5,25 @@ exports.modelGetUsers = async () => {
   return rows;
 };
 
-exports.modelGetLoanedBooksByUsername = async (username) => {
+exports.modelGetBorrowedBooksByUsername = async (username) => {
   const { rows } = await db.query(
     `SELECT books.* 
      FROM books
      JOIN users_books ON books.isbn = users_books.isbn
     JOIN loans ON users_books.users_book_id = loans.users_book_id
     WHERE loans.borrower_id = $1`,
+    [username],
+  );
+  return rows;
+};
+
+exports.modelGetLoanedBooksByUsername = async (username) => {
+  const { rows } = await db.query(
+    `SELECT books.* 
+     FROM books
+     JOIN users_books ON books.isbn = users_books.isbn
+     JOIN loans ON users_books.users_book_id = loans.users_book_id
+     WHERE users_books.username = $1`,
     [username],
   );
   return rows;

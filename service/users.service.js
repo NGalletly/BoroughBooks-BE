@@ -1,6 +1,7 @@
 const {
   modelGetUsers,
   modelGetUserByUsername,
+  modelGetBorrowedBooksByUsername,
   modelGetLoanedBooksByUsername,
   modelGetBooksByUsername,
   modelGetFriendsByUsername,
@@ -13,6 +14,10 @@ exports.serviceGetUsers = async () => {
 
 exports.serviceGetUserByUsername = async (username) => {
   return await modelGetUserByUsername(username);
+};
+
+exports.serviceGetBorrowedBooksByUsername = async (username) => {
+  return await modelGetBorrowedBooksByUsername(username);
 };
 
 exports.serviceGetLoanedBooksByUsername = async (username) => {
