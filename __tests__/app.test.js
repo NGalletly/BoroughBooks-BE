@@ -59,10 +59,20 @@ describe("/api/users/jovaScript/friends", () => {
 describe("/users/:username", () => {
   test("GET:200 - uses :username=coolSurferDudeto return an object that contains columns username and profile_pic_url", async () => {
     const res = await request(app).get("/api/users/coolSurferDude");
-    console.log(res.body);
-    for (const friend of res.body.user) {
-      expect(friend).toHaveProperty("username");
-      expect(friend).toHaveProperty("profile_pic_url");
-    }
+    const user = res.body.user[0];
+    expect(user).toHaveProperty("username");
+    expect(user).toHaveProperty("profile_pic_url");
+  });
+});
+
+describe("GET /api/loans/:username", () => {
+  test("200: returns an array of loaned books for a valid user", async () => {
+    const res = await request(app).get("/api/users/coolSurferDude/loans");
+    console.log("Status:", res.status);
+    console.log("Response body:", JSON.stringify(res.body, null, 2));
+
+    expect(res.status).toBe(200);
+    expect(res.body.books).toBeInstanceOf(Array);
+    expect(res.body.books.length).toBeGreaterThan(0);
   });
 });

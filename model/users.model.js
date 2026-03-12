@@ -7,9 +7,11 @@ exports.modelGetUsers = async () => {
 
 exports.modelGetLoanedBooksByUsername = async (username) => {
   const { rows } = await db.query(
-    `SELECT books.* FROM books
+    `SELECT books.* 
+     FROM books
      JOIN users_books ON books.isbn = users_books.isbn
-     WHERE users_books.username = $1`,
+    JOIN loans ON users_books.users_book_id = loans.users_book_id
+    WHERE loans.borrower_id = $1`,
     [username],
   );
   return rows;
