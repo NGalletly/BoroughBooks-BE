@@ -55,6 +55,17 @@ describe("/api/users/jovaScript/friends", () => {
     }
   });
 });
+
+describe("/api/books", () => {
+  test("GET:200 - returns an array with the book objects contained within", async () => {
+    const res = await request(app).get("/api/books");
+    expect(res.statusCode).toBe(200);
+    expect(Object.keys(res.body).length).toBeGreaterThan(0);
+    expect(Array.isArray(res.body.books)).toBe(true);
+  });
+  test("GET:200 - returns an array of book objects which have the correct keys", async () => {
+    const res = await request(app).get("/api/books");
+    res.body.books.forEach((book) => {
 describe("/api/users/:username/wish-list", () => {
   test("GET:200 - returns an object with a single key-value pair where the value is an array", async () => {
     const res = await request(app).get("/api/users/jovaScript/wish-list");
@@ -81,6 +92,21 @@ describe("/api/users/:username/wish-list", () => {
       expect(book).toHaveProperty("published_date");
       expect(book).toHaveProperty("description");
       expect(book).toHaveProperty("imagelinks");
+    });
+  });
+  test("GET:200 - returns book objects which contain the correct data types", async () => {
+    const res = await request(app).get("/api/books");
+    const bookOne = res.body.books[0];
+    expect(typeof bookOne.isbn).toBe("string");
+    expect(typeof bookOne.title).toBe("string");
+  });
+});
+
+describe("Invalid Endpoint", () => {
+  test("404: responds with a message when given an invalid path", async () => {
+    const res = await request(app).get("/api/bananas");
+    expect(res.statusCode).toBe(404);
+    expect(res.body.msg).toBe("Path not found");
     }
   });
   test("GET:200 - returns the expected number of wish listed books for a particular user", async () => {
