@@ -10,6 +10,8 @@ app.use(cors());
 
 app.use("/api/users", usersbooksRouter);
 app.use("/api/books", booksRouter);
-app.use("/api", express.static("public"));
+app.use((req, res) => {
+  res.status(404).send({ msg: "Path not found" });
+});
 
 module.exports = app;
