@@ -56,6 +56,7 @@ describe("/api/users/jovaScript/friends", () => {
   });
 });
 
+  
 describe("/api/users/:username/wish-list", () => {
   test("GET:200 - returns an object with a single key-value pair where the value is an array", async () => {
     const res = await request(app).get("/api/users/jovaScript/wish-list");
