@@ -3,6 +3,7 @@ const usersbooksRouter = express.Router({ mergeParams: true });
 const {
   controllerGetUsers,
   controllerGetUserByUsername,
+  controllerGetLoanedBooksByUsername,
   controllerGetBooksByUsername,
   controllerGetFriendsByUsername,
   controllerGetWishListByUsername,
@@ -10,6 +11,7 @@ const {
 
 usersbooksRouter.get("/", controllerGetUsers);
 usersbooksRouter.get("/:username", controllerGetUserByUsername);
+usersbooksRouter.get("/:username/loans", controllerGetLoanedBooksByUsername);
 usersbooksRouter.get("/:username/my-library", controllerGetBooksByUsername);
 usersbooksRouter.get("/:username/friends", controllerGetFriendsByUsername);
 usersbooksRouter.get("/:username/wish-list", controllerGetWishListByUsername);

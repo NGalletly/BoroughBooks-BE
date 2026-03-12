@@ -1,6 +1,7 @@
 const {
   serviceGetUsers,
   serviceGetUserByUsername,
+  serviceGetLoanedBooksByUsername,
   serviceGetBooksByUsername,
   serviceGetFriendsByUsername,
   serviceGetWishListByUsername,
@@ -25,8 +26,20 @@ exports.controllerGetUserByUsername = async (request, response, next) => {
   }
 };
 
+exports.controllerGetLoanedBooksByUsername = async (
+  request,
+  response,
+  next,
+) => {
+  try {
+    const { username } = request.params;
+    const books = await serviceGetLoanedBooksByUsername(username);
+    response.status(200).send({ books });
+  } catch (err) {
+    next(err);
+  }
+};
 exports.controllerGetBooksByUsername = async (request, response, next) => {
-  console.log("Request received for username:", request.params.username);
   try {
     const { username } = request.params;
     const books = await serviceGetBooksByUsername(username);
