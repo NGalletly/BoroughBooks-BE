@@ -9,3 +9,14 @@ exports.controllerGetBooks = async (request, response, next) => {
     next(err);
   }
 };
+
+exports.controllerPostBook = async (request, response, next) => {
+  try {
+    const postBook = request.body;
+    const newBook = await servicePostBook(postBook);
+    response.status(201).send({ newBook });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+};
