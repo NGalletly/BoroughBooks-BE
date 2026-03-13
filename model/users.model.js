@@ -63,12 +63,12 @@ exports.modelGetWishListByUsername = async (username) => {
   return rows;
 };
 
-// need to reference what is coming back somehow?
-
-exports.modelPostLoanByUserBookId = async (user_book_id, borrower_id) => {
+exports.modelPostLoanByUserBookId = async (users_book_id, borrower_id) => {
   const { rows } = await db.query(
-    `INSERT INTO loans (user_book_id, borrower_id)
-      VALUES($1, $2)
-      RETURNING *`[(user_book_id, borrower_id)],
+    `INSERT INTO loans (users_book_id, borrower_id, due_date)
+      VALUES($1, $2, CURRENT_DATE + 21)
+      RETURNING *`,
+    [users_book_id, borrower_id],
   );
+  return rows;
 };

@@ -88,12 +88,12 @@ exports.controllerGetWishListByUsername = async (request, response, next) => {
 
 exports.controllerPostLoanByUserBookId = async (request, response, next) => {
   try {
-    const { user_book_id } = request.params;
+    const { users_book_id, borrower_id } = request.body;
     const newLoan = await servicePostLoanByUserBookId(
-      user_book_id,
+      users_book_id,
       borrower_id,
     );
-    response.status.send({ loan: createdLoan });
+    response.status(201).send({ newLoan });
   } catch (err) {
     next(err);
   }
