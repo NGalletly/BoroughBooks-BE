@@ -6,6 +6,7 @@ const {
   modelGetBooksByUsername,
   modelGetFriendsByUsername,
   modelGetWishListByUsername,
+  modelDeleteBookByisbn,
 } = require("../model/users.model");
 
 exports.serviceGetUsers = async () => {
@@ -34,4 +35,14 @@ exports.serviceGetFriendsByUsername = async (username) => {
 
 exports.serviceGetWishListByUsername = async (username) => {
   return await modelGetWishListByUsername(username);
+};
+
+exports.serviceDeleteBookByisbn = async (username, isbn) => {
+  const result = await modelDeleteBookByisbn(username, isbn);
+  if (result.rowCount === 0) {
+    const err = new Error("Book not found in user library");
+    err.status = 404;
+    throw err;
+  }
+  return result;
 };

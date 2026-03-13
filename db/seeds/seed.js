@@ -82,7 +82,7 @@ const seed = async function ({
 
   await db.query(`CREATE TABLE loans(
     loan_id SERIAL PRIMARY KEY,
-    users_book_id INT REFERENCES users_books(users_book_id),
+    users_book_id INT REFERENCES users_books(users_book_id) ON DELETE CASCADE,
     borrower_id VARCHAR(100) REFERENCES users(username),
     borrow_date DATE,
     due_date DATE,

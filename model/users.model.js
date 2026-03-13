@@ -62,3 +62,11 @@ exports.modelGetWishListByUsername = async (username) => {
   );
   return rows;
 };
+
+exports.modelDeleteBookByisbn = async (username, isbn) => {
+  const query = await db.query(
+    `DELETE FROM users_books WHERE isbn = $1 AND username = $2`,
+    [isbn, username],
+  );
+  return query;
+};

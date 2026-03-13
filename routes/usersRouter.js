@@ -8,6 +8,7 @@ const {
   controllerGetBooksByUsername,
   controllerGetFriendsByUsername,
   controllerGetWishListByUsername,
+  controllerDeleteBookByisbn,
 } = require("../controller/users.controller");
 
 usersbooksRouter.get("/", controllerGetUsers);
@@ -22,5 +23,11 @@ usersbooksRouter.get("/:username/my-library", controllerGetBooksByUsername);
 usersbooksRouter.get("/:username/friends", controllerGetFriendsByUsername);
 usersbooksRouter.get("/:username/wish-list", controllerGetWishListByUsername);
 
+//Delete
+//http://localhost:9000/api/users/gavinHousley/my-library/9780140154511
+usersbooksRouter.delete(
+  "/:username/my-library/:isbn",
+  controllerDeleteBookByisbn,
+);
 
 module.exports = usersbooksRouter;

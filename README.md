@@ -98,7 +98,7 @@ SSL=true
 
 Example endpoints:
 
-## Testing Post Book:
+## Post Book:
 
 Send POST request to api/books
 with following JSON:
@@ -115,3 +115,9 @@ with following JSON:
 }
 '''
 ```
+
+## Delete Book Book:
+
+Send delete request with following examnple
+
+http://localhost:9000/api/users/gavinHousley/my-library/9780140154511
