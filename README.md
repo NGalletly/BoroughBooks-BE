@@ -98,26 +98,441 @@ SSL=true
 
 Example endpoints:
 
-## Post Book:
+### GET Requests
 
-Send POST request to api/books
-with following JSON:
+- <b>/api/books</b></br>
+  Retrieve an object containing an array of all books, where each book is an object</br>
+  Example response:</br>
 
-```json
-{
-"isbn": "9780062316097",
-"title": "Sapiens: A Brief History of Humankind",
-"authors": "Yuval Noah Harari",
-"publisher": "Harper Perennial",
-"published_date": "2015-02-10",
-"description": "A sweeping narrative of humanitys creation and evolution.",
-"imagelinks": "https://books.google.com/books/content?vid=ISBN9780062316097&printsec=frontcover&img=1&zoom=1"
-}
-'''
-```
+  ```json
+  {
+    "books": [
+      {
+        "isbn": "9780679723394",
+        "title": "Speak, Memory",
+        "authors": "Vladimir Nabokov",
+        "publisher": "Vintage International",
+        "published_date": "1989-07-11T23:00:00.000Z",
+        "description": "A memoir of Nabokov's privileged childhood in pre-revolutionary Russia and his years of European emigration, widely considered one of the finest autobiographies of the twentieth century.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780679723394&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9781608464456",
+        "title": "Freedom Is a Constant Struggle: Ferguson, Palestine, and the Foundations of a Movement",
+        "authors": "Angela Y. Davis",
+        "publisher": "Haymarket Books",
+        "published_date": "2016-02-01T00:00:00.000Z",
+        "description": "Angela Davis examines the connections between struggles against state violence and oppression throughout history and around the world, arguing that we must build on legacies of resistance to forge a new, more expansive vision of freedom.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9781608464456&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780374529529",
+        "title": "Memoirs of Hadrian",
+        "authors": "Marguerite Yourcenar",
+        "publisher": "Farrar, Straus and Giroux",
+        "published_date": "2005-03-31T23:00:00.000Z",
+        "description": "A fictional memoir of the Roman Emperor Hadrian, written in the form of a letter to his adopted grandson Marcus Aurelius, meditating on power, love, and the nature of the self.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780374529529&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9781784870911",
+        "title": "Life and Fate",
+        "authors": "Vasily Grossman",
+        "publisher": "Vintage Classics",
+        "published_date": "2006-05-31T23:00:00.000Z",
+        "description": "Set during the Battle of Stalingrad, this epic novel draws parallels between Nazi and Stalinist totalitarianism and follows the Shaposhnikov family through the brutal crucible of the Second World War.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9781784870911&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780141189383",
+        "title": "Alone in Berlin",
+        "authors": "Hans Fallada",
+        "publisher": "Penguin Modern Classics",
+        "published_date": "2009-08-26T23:00:00.000Z",
+        "description": "Based on a true story, this novel follows a working-class Berlin couple who begin a secret campaign of resistance against the Nazi regime after the death of their son in the war.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780141189383&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780743273565",
+        "title": "The Great Gatsby",
+        "authors": "F. Scott Fitzgerald",
+        "publisher": "Scribner",
+        "published_date": "2004-09-29T23:00:00.000Z",
+        "description": "Set in the Jazz Age on Long Island, the novel depicts narrator Nick Carraway's interactions with the mysterious millionaire Jay Gatsby and Gatsby's obsession with the beautiful Daisy Buchanan.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780743273565&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780807014295",
+        "title": "Man's Search for Meaning",
+        "authors": "Viktor E. Frankl",
+        "publisher": "Beacon Press",
+        "published_date": "2006-05-31T23:00:00.000Z",
+        "description": "A psychiatrist and Holocaust survivor describes his psychotherapeutic method of finding meaning in all forms of existence, even the most sordid ones, and thus a reason to continue living.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780807014295&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780140157239",
+        "title": "Love in the Time of Cholera",
+        "authors": "Gabriel García Márquez",
+        "publisher": "Penguin Books",
+        "published_date": "1989-03-31T23:00:00.000Z",
+        "description": "In their youth, Florentino Ariza and Fermina Daza fall passionately in love. When Fermina eventually chooses to marry a wealthy doctor, Florentino vows to win her back, waiting more than fifty years for his chance.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780140157239&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780441569595",
+        "title": "Neuromancer",
+        "authors": "William Gibson",
+        "publisher": "Ace Books",
+        "published_date": "2000-06-30T23:00:00.000Z",
+        "description": "Case is a washed-up computer criminal hired by a mysterious employer to pull off the ultimate hack. A seminal cyberpunk novel that coined the term 'cyberspace' and shaped modern science fiction.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780441569595&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780307887443",
+        "title": "Ready Player One",
+        "authors": "Ernest Cline",
+        "publisher": "Broadway Books",
+        "published_date": "2012-08-13T23:00:00.000Z",
+        "description": "In a dystopian 2045, teenager Wade Watts escapes into the OASIS virtual reality world and competes in a high-stakes treasure hunt that could save the virtual universe.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780307887443&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780140154511",
+        "title": "The Earthsea Quartet",
+        "authors": "Ursula K. Le Guin",
+        "publisher": "Penguin Books",
+        "published_date": "1993-01-01T00:00:00.000Z",
+        "description": "Collects the first four books of Le Guin's landmark fantasy series: A Wizard of Earthsea, The Tombs of Atuan, The Farthest Shore, and Tehanu — following the wizard Ged across a vast archipelago world.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780140154511&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780374530068",
+        "title": "The Dream Songs",
+        "authors": "John Berryman",
+        "publisher": "Farrar, Straus and Giroux",
+        "published_date": "2007-03-31T23:00:00.000Z",
+        "description": "The complete collection of John Berryman's Pulitzer Prize-winning sequence of 385 poems, featuring the tragicomic alter ego Henry, widely regarded as a landmark of confessional American poetry.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780374530068&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9781567923384",
+        "title": "Nox",
+        "authors": "Anne Carson",
+        "publisher": "New Directions",
+        "published_date": "2010-05-17T23:00:00.000Z",
+        "description": "An accordion-fold facsimile of a handmade book, Nox is Anne Carson's elegy for her brother, interweaving a translation of Catullus 101 with photographs, dictionary definitions, and fragments of memory.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9781567923384&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780441627400",
+        "title": "The Once and Future King",
+        "authors": "T. H. White",
+        "publisher": "Ace Books",
+        "published_date": "1987-04-30T23:00:00.000Z",
+        "description": "A sweeping retelling of the Arthurian legend, from the boyhood education of the Wart by Merlyn to the tragedy of Camelot and the fall of a great king's dream of a just civilization.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780441627400&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780393312836",
+        "title": "A Clockwork Orange",
+        "authors": "Anthony Burgess",
+        "publisher": "W. W. Norton & Company",
+        "published_date": "2011-03-21T00:00:00.000Z",
+        "description": "Alex, a teenage gang leader in a dystopian future Britain, speaks in a slang called Nadsat and revels in ultraviolence before undergoing an experimental government behaviour-modification programme.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780393312836&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780143039945",
+        "title": "Gravity's Rainbow",
+        "authors": "Thomas Pynchon",
+        "publisher": "Penguin Books",
+        "published_date": "2006-05-29T23:00:00.000Z",
+        "description": "Set in the final months of World War II, this monumental and labyrinthine novel follows dozens of characters across a paranoid landscape shaped by rocket technology, corporate conspiracy, and occult forces.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780143039945&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9781911547860",
+        "title": "In Transit",
+        "authors": "Brigid Brophy",
+        "publisher": "Faber & Faber",
+        "published_date": "2002-09-18T23:00:00.000Z",
+        "description": "Stranded in an international airport, the narrator finds their sense of gender and identity dissolving, in this witty, formally experimental novel that draws on multiple languages and literary traditions.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9781911547860&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780618640157",
+        "title": "The Lord of the Rings",
+        "authors": "J. R. R. Tolkien",
+        "publisher": "Mariner Books",
+        "published_date": "2005-09-20T23:00:00.000Z",
+        "description": "The complete single-volume edition of Tolkien's epic fantasy trilogy, following hobbit Frodo Baggins and the Fellowship of the Ring on their quest to destroy the One Ring and defeat the Dark Lord Sauron.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780618640157&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780316787536",
+        "title": "This Band Could Be Your Life: Scenes from the American Indie Underground 1981-1991",
+        "authors": "Michael Azerrad",
+        "publisher": "Back Bay Books",
+        "published_date": "2002-08-05T23:00:00.000Z",
+        "description": "An oral and reported history of the American indie underground, profiling thirteen bands including Black Flag, Sonic Youth, and Fugazi who forged a new way of making and distributing music outside the mainstream.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780316787536&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9781585421466",
+        "title": "The Artist's Way: A Spiritual Path to Higher Creativity",
+        "authors": "Julia Cameron",
+        "publisher": "TarcherPerigee",
+        "published_date": "2002-03-04T00:00:00.000Z",
+        "description": "A twelve-week programme for recovering and discovering creativity, built around the practices of morning pages and the artist date, now considered a foundational self-help text for creative unblocking.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9781585421466&printsec=frontcover&img=1&zoom=1"
+      }
+    ]
+  }
+  ```
 
-## Delete Book Book:
+- <b>/api/users</b></br>
+  Retrieve an object containing an array of all users, where each user is an object</br>
+  Example response:</br>
 
-Send delete request with following examnple
+  ```json
+  {
+    "users": [
+      {
+        "username": "gavinHousley",
+        "profile_pic_url": ""
+      },
+      {
+        "username": "jovaScript",
+        "profile_pic_url": ""
+      },
+      {
+        "username": "coolSurferDude",
+        "profile_pic_url": ""
+      },
+      {
+        "username": "nomi",
+        "profile_pic_url": ""
+      },
+      {
+        "username": "ESerebrianik",
+        "profile_pic_url": ""
+      }
+    ]
+  }
+  ```
 
-http://localhost:9000/api/users/gavinHousley/my-library/9780140154511
+- <b>/api/users/:username</b></br>
+  Retrive an object containing an array with a single user object</br>
+  Example response (username = "jovaScript"):
+
+  ```json
+  {
+    "user": [
+      {
+        "username": "jovaScript",
+        "profile_pic_url": ""
+      }
+    ]
+  }
+  ```
+
+- <b>/api/users/:username/my-library</b></br>
+  Retrieve an object containing all books available to borrow in a single user's library</br>
+  Example response (username = "nomi"):
+
+  ```json
+  {
+    "books": [
+      {
+        "isbn": "9780441569595",
+        "title": "Neuromancer",
+        "authors": "William Gibson",
+        "publisher": "Ace Books",
+        "published_date": "2000-06-30T23:00:00.000Z",
+        "description": "Case is a washed-up computer criminal hired by a mysterious employer to pull off the ultimate hack. A seminal cyberpunk novel that coined the term 'cyberspace' and shaped modern science fiction.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780441569595&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780140154511",
+        "title": "The Earthsea Quartet",
+        "authors": "Ursula K. Le Guin",
+        "publisher": "Penguin Books",
+        "published_date": "1993-01-01T00:00:00.000Z",
+        "description": "Collects the first four books of Le Guin's landmark fantasy series: A Wizard of Earthsea, The Tombs of Atuan, The Farthest Shore, and Tehanu — following the wizard Ged across a vast archipelago world.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780140154511&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780441627400",
+        "title": "The Once and Future King",
+        "authors": "T. H. White",
+        "publisher": "Ace Books",
+        "published_date": "1987-04-30T23:00:00.000Z",
+        "description": "A sweeping retelling of the Arthurian legend, from the boyhood education of the Wart by Merlyn to the tragedy of Camelot and the fall of a great king's dream of a just civilization.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780441627400&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780618640157",
+        "title": "The Lord of the Rings",
+        "authors": "J. R. R. Tolkien",
+        "publisher": "Mariner Books",
+        "published_date": "2005-09-20T23:00:00.000Z",
+        "description": "The complete single-volume edition of Tolkien's epic fantasy trilogy, following hobbit Frodo Baggins and the Fellowship of the Ring on their quest to destroy the One Ring and defeat the Dark Lord Sauron.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780618640157&printsec=frontcover&img=1&zoom=1"
+      }
+    ]
+  }
+  ```
+
+- <b>/api/users/:username/friends</b></br>
+  Retrieve an object containing an array of all information about thheir profile's friends</br>
+  Example response (for username = "jovascript"):
+
+  ```json
+  {
+    "usersFriends": [
+      {
+        "user_relationship_id": 1,
+        "origin_username": "jovaScript",
+        "relating_username": "gavinHousley",
+        "friend_status": "accepted",
+        "profile_pic_url": ""
+      },
+      {
+        "user_relationship_id": 2,
+        "origin_username": "jovaScript",
+        "relating_username": "nomi",
+        "friend_status": "accepted",
+        "profile_pic_url": ""
+      }
+    ]
+  }
+  ```
+
+- <b>/api/users/:username/loans</b></br>
+  Retrieve an object containing an array where each element is an object storing information about which books have been loaned out by a single user</br>
+  Example Response (username = "jovaScript"):
+
+  ```json
+  {
+    "books": [
+      {
+        "isbn": "9780441569595",
+        "title": "Neuromancer",
+        "authors": "William Gibson",
+        "publisher": "Ace Books",
+        "published_date": "2000-06-30T23:00:00.000Z",
+        "description": "Case is a washed-up computer criminal hired by a mysterious employer to pull off the ultimate hack. A seminal cyberpunk novel that coined the term 'cyberspace' and shaped modern science fiction.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780441569595&printsec=frontcover&img=1&zoom=1"
+      }
+    ]
+  }
+  ```
+
+- <b>/api/users/:username/borrowing</b></br>
+  Retrieve an object containing an array where each element is an object storing information about which books have been borrowed by a single user</br>
+  Example Response (username = "coolSurferDude"):
+
+  ```json
+  {
+    "books": [
+      {
+        "isbn": "9780140154511",
+        "title": "The Earthsea Quartet",
+        "authors": "Ursula K. Le Guin",
+        "publisher": "Penguin Books",
+        "published_date": "1993-01-01T00:00:00.000Z",
+        "description": "Collects the first four books of Le Guin's landmark fantasy series: A Wizard of Earthsea, The Tombs of Atuan, The Farthest Shore, and Tehanu — following the wizard Ged across a vast archipelago world.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780140154511&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9781567923384",
+        "title": "Nox",
+        "authors": "Anne Carson",
+        "publisher": "New Directions",
+        "published_date": "2010-05-17T23:00:00.000Z",
+        "description": "An accordion-fold facsimile of a handmade book, Nox is Anne Carson's elegy for her brother, interweaving a translation of Catullus 101 with photographs, dictionary definitions, and fragments of memory.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9781567923384&printsec=frontcover&img=1&zoom=1"
+      }
+    ]
+  }
+  ```
+
+- <b>/api/users/:username/wish-list</b></br>
+  Retrieve an object contianing an array of a user's wish-listed books</br>
+  Example Response:
+
+  ```json
+  {
+    "usersWishList": [
+      {
+        "isbn": "9780374529529",
+        "username": "jovaScript",
+        "title": "Memoirs of Hadrian",
+        "authors": "Marguerite Yourcenar",
+        "publisher": "Farrar, Straus and Giroux",
+        "published_date": "2005-03-31T23:00:00.000Z",
+        "description": "A fictional memoir of the Roman Emperor Hadrian, written in the form of a letter to his adopted grandson Marcus Aurelius, meditating on power, love, and the nature of the self.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780374529529&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780143039945",
+        "username": "jovaScript",
+        "title": "Gravity's Rainbow",
+        "authors": "Thomas Pynchon",
+        "publisher": "Penguin Books",
+        "published_date": "2006-05-29T23:00:00.000Z",
+        "description": "Set in the final months of World War II, this monumental and labyrinthine novel follows dozens of characters across a paranoid landscape shaped by rocket technology, corporate conspiracy, and occult forces.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780143039945&printsec=frontcover&img=1&zoom=1"
+      },
+      {
+        "isbn": "9780441627400",
+        "username": "jovaScript",
+        "title": "The Once and Future King",
+        "authors": "T. H. White",
+        "publisher": "Ace Books",
+        "published_date": "1987-04-30T23:00:00.000Z",
+        "description": "A sweeping retelling of the Arthurian legend, from the boyhood education of the Wart by Merlyn to the tragedy of Camelot and the fall of a great king's dream of a just civilization.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780441627400&printsec=frontcover&img=1&zoom=1"
+      }
+    ]
+  }
+  ```
+
+### Post Requests:
+
+- <b>/api/books</b></br>
+  Post a new book to the "books" table.</br>
+  The <i>request</i> body must be of the the following form:
+  ```json
+  {
+    "isbn": "9780062316097",
+    "title": "Sapiens: A Brief History of Humankind",
+    "authors": "Yuval Noah Harari",
+    "publisher": "Harper Perennial",
+    "published_date": "2015-02-10",
+    "description": "A sweeping narrative of humanitys creation and evolution.",
+    "imagelinks": "https://books.google.com/books/content?vid=ISBN9780062316097&printsec=frontcover&img=1&zoom=1"
+  }
+  ```
+  Successful requests give a <i>response</i> with the shape of the following example:
+  ```json
+  {
+    "newBook": [
+      {
+        "isbn": "9780062316097",
+        "title": "Sapiens: A Brief History of Humankind",
+        "authors": "Yuval Noah Harari",
+        "publisher": "Harper Perennial",
+        "published_date": "2015-02-10",
+        "description": "A sweeping narrative of humanitys creation and evolution.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780062316097&printsec=frontcover&img=1&zoom=1"
+      }
+    ]
+  }
+  ```
+
+### DELETE Requests:
+
+- <b>/api/users/:username/:ISBN</b></br>
+  Successful requests will remove a book by its ISBN from a specified user's library. This removes the record associated with that ISBN and the specified username from the users-books table.
