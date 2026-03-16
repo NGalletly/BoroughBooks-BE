@@ -409,7 +409,7 @@ Example endpoints:
   }
   ```
 
-- <b>/api/users/:username/loans</b></br>
+- <b>/api/users/:username/loaned</b></br>
   Retrieve an object containing an array where each element is an object storing information about which books have been loaned out by a single user</br>
   Example Response (username = "jovaScript"):
 
@@ -429,7 +429,7 @@ Example endpoints:
   }
   ```
 
-- <b>/api/users/:username/borrowing</b></br>
+- <b>/api/users/:username/borrowed</b></br>
   Retrieve an object containing an array where each element is an object storing information about which books have been borrowed by a single user</br>
   Example Response (username = "coolSurferDude"):
 
