@@ -113,7 +113,6 @@ describe("GET /api/users/:username/borrowed", () => {
     const res = await request(app).get("/api/users/coolSurferDude/borrowed");
     console.log("Status:", res.status);
     console.log("Response body:", JSON.stringify(res.body, null, 2));
-
     expect(res.status).toBe(200);
     expect(res.body.books).toBeInstanceOf(Array);
     expect(res.body.books.length).toBeGreaterThan(0);
@@ -125,10 +124,34 @@ describe("GET /api/users/:username/loaned", () => {
     const res = await request(app).get("/api/users/jovaScript/loaned");
     console.log("Status:", res.status);
     console.log("Response body:", JSON.stringify(res.body, null, 2));
-
     expect(res.status).toBe(200);
     expect(res.body.books).toBeInstanceOf(Array);
     expect(res.body.books.length).toBeGreaterThan(0);
+  });
+});
+
+describe("POST /api/users/:username/my-library", () => {
+  test("POST:201: returns an object with the correct columns from the users_books table", async () => {
+    const res = await request(app)
+      .post("/api/users/jovaScript/my-library")
+      .send({
+        isbn: "9780140154511",
+      });
+    expect(res.status).toBe(201);
+    expect(res.body.users_book_id).toBeNumber;
+    expect(res.body.username).toBeString;
+    expect(res.body.isbn).toBeString;
+  });
+  test("POST:201: returns an object with the correct information sent with the post body and parametric endpoint", async () => {
+    const res = await request(app)
+      .post("/api/users/jovaScript/my-library")
+      .send({
+        isbn: "9780140154511",
+      });
+    console.log(res.body);
+    expect(res.status).toBe(201);
+    expect(res.body.postedBookToLibrary[0].username).toBe("jovaScript");
+    expect(res.body.postedBookToLibrary[0].isbn).toBe("9780140154511");
   });
 });
 
