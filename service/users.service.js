@@ -4,6 +4,7 @@ const {
   modelGetBorrowedBooksByUsername,
   modelGetLoanedBooksByUsername,
   modelGetBooksByUsername,
+  modelPostBooksByUsername,
   modelGetFriendsByUsername,
   modelGetWishListByUsername,
   modelDeleteBookByisbn,
@@ -27,6 +28,10 @@ exports.serviceGetLoanedBooksByUsername = async (username) => {
 
 exports.serviceGetBooksByUsername = async (username) => {
   return await modelGetBooksByUsername(username);
+};
+
+exports.servicePostBooksByUsername = async (username, isbn) => {
+  return await modelPostBooksByUsername(username, isbn);
 };
 
 exports.serviceGetFriendsByUsername = async (username) => {
