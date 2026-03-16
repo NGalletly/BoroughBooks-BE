@@ -101,6 +101,38 @@ test("GET:200 - returns book objects which contain the correct data types", asyn
   expect(typeof bookOne.title).toBe("string");
 });
 
+describe("GET /api/books/:isbn", () => {
+  test("GET:200 - returns a single key-value pair object where the value is an array of length 1", async () => {
+    const res = await request(app).get("/api/books/9780140154511");
+    expect(Object.keys(res.body).length).toBe(1);
+    expect(res.body.book.length).toBe(1);
+  });
+  test("GET:200 - returns the correct keys for the book object", async () => {
+    const res = await request(app).get("/api/books/9780140154511");
+    expect(res.body.book[0].isbn).toBeString;
+    expect(res.body.book[0].title).toBeString;
+    expect(res.body.book[0].authors).toBeString;
+    expect(res.body.book[0].publisher).toBeString;
+    expect(res.body.book[0].published_date).toBeString;
+    expect(res.body.book[0].description).toBeString;
+    expect(res.body.book[0].imagelinks).toBeString;
+  });
+  test.only("GET:200 - returns the correct keys for the book object", async () => {
+    const res = await request(app).get("/api/books/9780140154511");
+    expect(res.body.book[0].isbn).toBe("9780140154511");
+    expect(res.body.book[0].title).toBe("The Earthsea Quartet");
+    expect(res.body.book[0].authors).toBe("Ursula K. Le Guin");
+    expect(res.body.book[0].publisher).toBe("Penguin Books");
+    expect(res.body.book[0].published_date).toBe("1993-01-01T00:00:00.000Z");
+    expect(res.body.book[0].description).toBe(
+      "Collects the first four books of Le Guin's landmark fantasy series: A Wizard of Earthsea, The Tombs of Atuan, The Farthest Shore, and Tehanu — following the wizard Ged across a vast archipelago world.",
+    );
+    expect(res.body.book[0].imagelinks).toBe(
+      "https://books.google.com/books/content?vid=ISBN9780140154511&printsec=frontcover&img=1&zoom=1",
+    );
+  });
+});
+
 describe("/api/users/loaned - Loans feature testing", () => {
   test("POST 201-Returns an object with the corrected key value pairs", async () => {
     const res = await request(app).post("/api/users/gavinHousley/loaned").send({
