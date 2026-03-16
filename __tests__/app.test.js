@@ -100,8 +100,8 @@ test("GET:200 - returns book objects which contain the correct data types", asyn
   expect(typeof bookOne.title).toBe("string");
 });
 
-describe.only("POST: 201 - /api/users - Loan feature", () => {
-  test("POST - Returns an object with the corrected key value pairs", async () => {
+describe("/api/users/loaned - Loans feature testing", () => {
+  test("POST 201-Returns an object with the corrected key value pairs", async () => {
     const res = await request(app).post("/api/users/gavinHousley/loaned").send({
       users_book_id: 8,
       borrower_id: "coolSurferDude",
@@ -113,13 +113,11 @@ describe.only("POST: 201 - /api/users - Loan feature", () => {
     expect(res.body.newLoan[0]).toHaveProperty("due_date");
     expect(res.body.newLoan[0]).toHaveProperty("return_date");
   });
-  test("POST - loans feature returns completed DB line when passed users_book_id and borrower_id", async () => {
+  test("POST - 201-loans feature returns completed DB line when passed users_book_id and borrower_id", async () => {
     const res = await request(app).post("/api/users/gavinHousley/loaned").send({
       users_book_id: 8,
       borrower_id: "coolSurferDude",
     });
-
-    console.log(res.body);
     const expected = {
       loan_id: 10,
       users_book_id: 8,
@@ -129,6 +127,33 @@ describe.only("POST: 201 - /api/users - Loan feature", () => {
       return_date: null,
     };
     expect(res.body.newLoan[0]).toEqual(expected);
+  });
+  test("PATCH - 204 updates the loaned endpoint with a return date and responds with 204 no content", async () => {
+    const res = await request(app)
+      .patch("/api/users/gavinHousley/loaned")
+      .send({
+        loan_id: 1,
+        return_date: "2026-03-16T23:00:00.000Z",
+      });
+    expect(res.statusCode).toBe(204);
+  });
+  test("PATCH - 400 - returns with an error when not enough content submitted for a loan", async () => {
+    const res = await request(app)
+      .patch("/api/users/gavinHousley/loaned")
+      .send({
+        loan_id: 1,
+        return_date: "",
+      });
+    expect(res.statusCode).toBe(400);
+  });
+  test("PATCH - 404 - loan_id does not exist in the database", async () => {
+    const res = await request(app)
+      .patch("/api/users/gavinHousley/loaned")
+      .send({
+        loan_id: 55,
+        return_date: "2026-03-16T23:00:00.000Z",
+      });
+    expect(res.statusCode).toBe(404);
   });
 });
 
