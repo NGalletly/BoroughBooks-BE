@@ -117,7 +117,7 @@ describe("GET /api/books/:isbn", () => {
     expect(res.body.book[0].description).toBeString;
     expect(res.body.book[0].imagelinks).toBeString;
   });
-  test.only("GET:200 - returns the correct keys for the book object", async () => {
+  test("GET:200 - returns the correct keys for the book object", async () => {
     const res = await request(app).get("/api/books/9780140154511");
     expect(res.body.book[0].isbn).toBe("9780140154511");
     expect(res.body.book[0].title).toBe("The Earthsea Quartet");
