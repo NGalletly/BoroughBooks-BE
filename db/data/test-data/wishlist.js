@@ -15,7 +15,7 @@ module.exports = [
   { username: "nomi", isbn: "9780316787536" }, // This Band Could Be Your Life
   { username: "nomi", isbn: "9780143039945" }, // Gravity's Rainbow
 
-  { username: "ESerebrianik", isbn: "9780679723394" }, // Speak Memory
-  { username: "ESerebrianik", isbn: "9781784870911" }, // Life and Fate
-  { username: "ESerebrianik", isbn: "9780374530068" }, // Dream Songs
+  { username: "groovySkaterGirl", isbn: "9780679723394" }, // Speak Memory
+  { username: "groovySkaterGirl", isbn: "9781784870911" }, // Life and Fate
+  { username: "groovySkaterGirl", isbn: "9780374530068" }, // Dream Songs
 ];
