@@ -186,6 +186,39 @@ describe("POST /api/users/:username/my-library", () => {
   });
 });
 
+describe("POST /api/users/:username/friends", () => {
+  test("POST 201: returns an object with a single key-value pair", async () => {
+    const res = await request(app)
+      .post("/api/users/jovaScript/friends")
+      .send({ relating_username: "gavinHousley" });
+    expect(res.status).toBe(201);
+    expect(Object.keys(res.body).length).toBe(1);
+  });
+  test("POST 201: returns an object with the expected columns in the value array", async () => {
+    const res = await request(app)
+      .post("/api/users/jovaScript/friends")
+      .send({ relating_username: "gavinHousley" });
+    expect(res.status).toBe(201);
+    expect(res.body.usersNewFriendRequest.user_relationship_id).toBeNumber;
+    expect(res.body.usersNewFriendRequest.origin_username).toBeString;
+    expect(res.body.usersNewFriendRequest.relating_username).toBeString;
+    expect(res.body.usersNewFriendRequest.friend_status).toBeString;
+  });
+  test("POST 201: returns an object with the correct posted data in the value array", async () => {
+    const res = await request(app)
+      .post("/api/users/groovySkaterGirl/friends")
+      .send({ relating_username: "coolSurferDude" });
+    expect(res.status).toBe(201);
+    expect(res.body.usersNewFriendRequest[0].origin_username).toBe(
+      "groovySkaterGirl",
+    );
+    expect(res.body.usersNewFriendRequest[0].relating_username).toBe(
+      "coolSurferDude",
+    );
+    expect(res.body.usersNewFriendRequest[0].friend_status).toBe("pending");
+  });
+});
+
 // POST BOOKS TESTING
 
 describe("POST /api/books", () => {
