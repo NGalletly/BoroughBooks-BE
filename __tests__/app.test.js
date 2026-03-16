@@ -100,6 +100,38 @@ test("GET:200 - returns book objects which contain the correct data types", asyn
   expect(typeof bookOne.title).toBe("string");
 });
 
+describe.only("POST: 201 - /api/users - Loan feature", () => {
+  test("POST - Returns an object with the corrected key value pairs", async () => {
+    const res = await request(app).post("/api/users/gavinHousley/loaned").send({
+      users_book_id: 8,
+      borrower_id: "coolSurferDude",
+    });
+    expect(res.body.newLoan[0]).toHaveProperty("loan_id");
+    expect(res.body.newLoan[0]).toHaveProperty("users_book_id");
+    expect(res.body.newLoan[0]).toHaveProperty("borrower_id");
+    expect(res.body.newLoan[0]).toHaveProperty("borrow_date");
+    expect(res.body.newLoan[0]).toHaveProperty("due_date");
+    expect(res.body.newLoan[0]).toHaveProperty("return_date");
+  });
+  test("POST - loans feature returns completed DB line when passed users_book_id and borrower_id", async () => {
+    const res = await request(app).post("/api/users/gavinHousley/loaned").send({
+      users_book_id: 8,
+      borrower_id: "coolSurferDude",
+    });
+
+    console.log(res.body);
+    const expected = {
+      loan_id: 10,
+      users_book_id: 8,
+      borrower_id: "coolSurferDude",
+      borrow_date: "2026-03-13T00:00:00.000Z",
+      due_date: "2026-04-02T23:00:00.000Z",
+      return_date: null,
+    };
+    expect(res.body.newLoan[0]).toEqual(expected);
+  });
+});
+
 describe("Invalid Endpoint", () => {
   test("404: responds with a message when given an invalid path", async () => {
     const res = await request(app).get("/api/bananas");

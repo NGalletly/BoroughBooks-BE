@@ -9,6 +9,7 @@ const {
   controllerPostBooksByUsername,
   controllerGetFriendsByUsername,
   controllerGetWishListByUsername,
+  controllerPostLoanByUserBookId,
   controllerDeleteBookByisbn,
 } = require("../controller/users.controller");
 
@@ -25,6 +26,7 @@ usersbooksRouter.post("/:username/my-library", controllerPostBooksByUsername);
 usersbooksRouter.get("/:username/friends", controllerGetFriendsByUsername);
 usersbooksRouter.get("/:username/wish-list", controllerGetWishListByUsername);
 
+usersbooksRouter.post("/:username/loaned", controllerPostLoanByUserBookId);
 //Delete
 //http://localhost:9000/api/users/gavinHousley/my-library/9780140154511
 usersbooksRouter.delete(

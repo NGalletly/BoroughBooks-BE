@@ -84,7 +84,7 @@ const seed = async function ({
     loan_id SERIAL PRIMARY KEY,
     users_book_id INT REFERENCES users_books(users_book_id) ON DELETE CASCADE,
     borrower_id VARCHAR(100) REFERENCES users(username),
-    borrow_date DATE,
+    borrow_date DATE DEFAULT CURRENT_DATE,
     due_date DATE,
     return_date DATE
     

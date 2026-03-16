@@ -7,6 +7,7 @@ const {
   modelPostBooksByUsername,
   modelGetFriendsByUsername,
   modelGetWishListByUsername,
+  modelPostLoanByUserBookId,
   modelDeleteBookByisbn,
 } = require("../model/users.model");
 
@@ -42,6 +43,9 @@ exports.serviceGetWishListByUsername = async (username) => {
   return await modelGetWishListByUsername(username);
 };
 
+exports.servicePostLoanByUserBookId = async (users_book_id, borrower_id) => {
+  return await modelPostLoanByUserBookId(users_book_id, borrower_id);
+};
 exports.serviceDeleteBookByisbn = async (username, isbn) => {
   const result = await modelDeleteBookByisbn(username, isbn);
   if (result.rowCount === 0) {
