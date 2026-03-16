@@ -4,6 +4,7 @@ const {
   serviceGetBorrowedBooksByUsername,
   serviceGetLoanedBooksByUsername,
   serviceGetBooksByUsername,
+  servicePostBooksByUsername,
   serviceGetFriendsByUsername,
   serviceGetWishListByUsername,
   serviceDeleteBookByisbn,
@@ -61,6 +62,19 @@ exports.controllerGetBooksByUsername = async (request, response, next) => {
     const { username } = request.params;
     const books = await serviceGetBooksByUsername(username);
     response.status(200).send({ books });
+  } catch (err) {
+    next(err);
+  }
+};
+exports.controllerPostBooksByUsername = async (request, response, next) => {
+  try {
+    const { isbn } = request.body;
+    const { username } = request.params;
+    const postedBookToLibrary = await servicePostBooksByUsername(
+      username,
+      isbn,
+    );
+    response.status(201).send({ postedBookToLibrary });
   } catch (err) {
     next(err);
   }
