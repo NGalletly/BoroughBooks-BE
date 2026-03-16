@@ -38,6 +38,14 @@ exports.modelGetBooksByUsername = async (username) => {
   );
   return rows;
 };
+
+exports.modelPostBooksByUsername = async (username, isbn) => {
+  const { rows } = await db.query(
+    `INSERT INTO users_books (isbn, username) VALUES ($1, $2) RETURNING *`,
+    [isbn, username],
+  );
+  return rows;
+};
 exports.modelGetUserByUsername = async (username) => {
   const { rows } = await db.query(
     `SELECT * FROM users
