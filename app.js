@@ -20,7 +20,7 @@ app.use((err, req, res, next) => {
 
   if (err.status === 400) {
     res.status(400).send({ msg: err.message });
-  } else if (err.status === 409) { 
+  } else if (err.status === 409) {
     res.status(409).send({ msg: err.msg });
   } else {
     res.status(500).send({ msg: "Internal server error" });

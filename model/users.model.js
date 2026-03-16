@@ -100,3 +100,14 @@ exports.modelDeleteBookByisbn = async (username, isbn) => {
   );
   return query;
 };
+
+exports.modelUpdateLoanedBookByLoanId = async (loan_id, return_date) => {
+  const { rows } = await db.query(
+    `UPDATE loans
+     SET return_date = $2
+     WHERE loan_id = $1
+     RETURNING *`,
+    [loan_id, return_date],
+  );
+  return rows[0];
+};

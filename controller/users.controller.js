@@ -10,6 +10,7 @@ const {
   serviceGetWishListByUsername,
   servicePostLoanByUserBookId,
   serviceDeleteBookByisbn,
+  serviceUpdateLoanedBookByLoanId,
 } = require("../service/users.service");
 
 exports.controllerGetUsers = async (request, response, next) => {
@@ -135,5 +136,24 @@ exports.controllerDeleteBookByisbn = async (request, response, next) => {
     response.status(204).send();
   } catch (err) {
     next(err);
+  }
+};
+
+exports.controllerUpdateLoanedBookByLoanId = async (
+  request,
+  response,
+  next,
+) => {
+  const { loan_id, return_date } = request.body;
+  if (!loan_id || !return_date) {
+    return response.status(400).send({
+      msg: "One or more fields are missing to perform loan return",
+    });
+  }
+  try {
+    await serviceUpdateLoanedBookByLoanId(loan_id, return_date);
+    response.status(204).send();
+  } catch (err) {
+    response.status(404).send({ msg: "Loan not found" });
   }
 };

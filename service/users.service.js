@@ -10,6 +10,7 @@ const {
   modelGetWishListByUsername,
   modelPostLoanByUserBookId,
   modelDeleteBookByisbn,
+  modelUpdateLoanedBookByLoanId,
 } = require("../model/users.model");
 
 exports.serviceGetUsers = async () => {
@@ -59,4 +60,10 @@ exports.serviceDeleteBookByisbn = async (username, isbn) => {
     throw err;
   }
   return result;
+};
+
+exports.serviceUpdateLoanedBookByLoanId = async (loan_id, return_date) => {
+  const updatedLoan = await modelUpdateLoanedBookByLoanId(loan_id, return_date);
+  if (!updatedLoan) throw new Error("Loan not found");
+  return updatedLoan;
 };
