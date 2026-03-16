@@ -12,9 +12,9 @@ module.exports = [
     friend_status: "accepted",
   },
   {
-    // gavinHousley and ESerebrianik — established friends
+    // gavinHousley and groovySkaterGirl — established friends
     origin_user_id: "gavinHousley",
-    relating_user_id: "ESerebrianik",
+    relating_user_id: "groovySkaterGirl",
     friend_status: "accepted",
   },
   {
@@ -24,8 +24,8 @@ module.exports = [
     friend_status: "accepted",
   },
   {
-    // ESerebrianik and nomi — established friends
-    origin_user_id: "ESerebrianik",
+    // groovySkaterGirl and nomi — established friends
+    origin_user_id: "groovySkaterGirl",
     relating_user_id: "nomi",
     friend_status: "accepted",
   },
@@ -42,9 +42,9 @@ module.exports = [
     friend_status: "pending",
   },
   {
-    // jovaScript blocked ESerebrianik
+    // jovaScript blocked groovySkaterGirl
     origin_user_id: "jovaScript",
-    relating_user_id: "ESerebrianik",
+    relating_user_id: "groovySkaterGirl",
     friend_status: "blocked",
   },
 ];

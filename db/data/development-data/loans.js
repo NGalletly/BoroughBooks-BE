@@ -17,9 +17,9 @@ module.exports = [
   },
 
   {
-    // ESerebrianik borrowed gavinHousley's Once and Future King — currently out
+    // groovySkaterGirl borrowed gavinHousley's Once and Future King — currently out
     user_book_id: 6,
-    borrower_id: "ESerebrianik",
+    borrower_id: "groovySkaterGirl",
     borrow_date: "2025-02-01",
     due_date: "2025-03-01",
     return_date: null,
@@ -57,7 +57,7 @@ module.exports = [
     return_date: "2024-09-25",
   },
   {
-    // coolSurferDude borrowed ESerebrianik's Nox — currently out
+    // coolSurferDude borrowed groovySkaterGirl's Nox — currently out
     user_book_id: 18,
     borrower_id: "coolSurferDude",
     borrow_date: "2025-02-10",
@@ -65,7 +65,7 @@ module.exports = [
     return_date: null,
   },
   {
-    // nomi borrowed ESerebrianik's In Transit — returned
+    // nomi borrowed groovySkaterGirl's In Transit — returned
     user_book_id: 20,
     borrower_id: "nomi",
     borrow_date: "2024-08-01",
