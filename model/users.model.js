@@ -68,6 +68,14 @@ WHERE (user_relationship.origin_username = $1 OR user_relationship.relating_user
   return rows;
 };
 
+exports.modelPostFriendByUsername = async (username, relating_username) => {
+  const { rows } = await db.query(
+    `INSERT INTO user_relationship (origin_username, relating_username, friend_status) VALUES ($1, $2, 'pending') RETURNING *`,
+    [username, relating_username],
+  );
+  return rows;
+};
+
 exports.modelGetWishListByUsername = async (username) => {
   const { rows } = await db.query(
     `SELECT wishlist.isbn, wishlist.username, books.title, books.authors, books.publisher, books.published_date, books.description, books.imagelinks from wishlist JOIN books ON wishlist.isbn = books.isbn WHERE username = $1`,
