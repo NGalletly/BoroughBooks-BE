@@ -38,6 +38,14 @@ exports.modelGetBooksByUsername = async (username) => {
   );
   return rows;
 };
+
+exports.modelPostBooksByUsername = async (username, isbn) => {
+  const { rows } = await db.query(
+    `INSERT INTO users_books (isbn, username) VALUES ($1, $2) RETURNING *`,
+    [isbn, username],
+  );
+  return rows;
+};
 exports.modelGetUserByUsername = async (username) => {
   const { rows } = await db.query(
     `SELECT * FROM users
@@ -71,4 +79,10 @@ exports.modelPostLoanByUserBookId = async (users_book_id, borrower_id) => {
     [users_book_id, borrower_id],
   );
   return rows;
+exports.modelDeleteBookByisbn = async (username, isbn) => {
+  const query = await db.query(
+    `DELETE FROM users_books WHERE isbn = $1 AND username = $2`,
+    [isbn, username],
+  );
+  return query;
 };

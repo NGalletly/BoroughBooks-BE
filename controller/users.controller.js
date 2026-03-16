@@ -4,9 +4,11 @@ const {
   serviceGetBorrowedBooksByUsername,
   serviceGetLoanedBooksByUsername,
   serviceGetBooksByUsername,
+  servicePostBooksByUsername,
   serviceGetFriendsByUsername,
   serviceGetWishListByUsername,
   servicePostLoanByUserBookId,
+  serviceDeleteBookByisbn,
 } = require("../service/users.service");
 
 exports.controllerGetUsers = async (request, response, next) => {
@@ -65,6 +67,19 @@ exports.controllerGetBooksByUsername = async (request, response, next) => {
     next(err);
   }
 };
+exports.controllerPostBooksByUsername = async (request, response, next) => {
+  try {
+    const { isbn } = request.body;
+    const { username } = request.params;
+    const postedBookToLibrary = await servicePostBooksByUsername(
+      username,
+      isbn,
+    );
+    response.status(201).send({ postedBookToLibrary });
+  } catch (err) {
+    next(err);
+  }
+};
 
 exports.controllerGetFriendsByUsername = async (request, response, next) => {
   try {
@@ -94,6 +109,11 @@ exports.controllerPostLoanByUserBookId = async (request, response, next) => {
       borrower_id,
     );
     response.status(201).send({ newLoan });
+exports.controllerDeleteBookByisbn = async (request, response, next) => {
+  try {
+    const { username, isbn } = request.params;
+    await serviceDeleteBookByisbn(username, isbn);
+    response.status(204).send();
   } catch (err) {
     next(err);
   }
