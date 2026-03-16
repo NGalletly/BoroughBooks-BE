@@ -148,7 +148,6 @@ describe("POST /api/users/:username/my-library", () => {
       .send({
         isbn: "9780140154511",
       });
-    console.log(res.body);
     expect(res.status).toBe(201);
     expect(res.body.postedBookToLibrary[0].username).toBe("jovaScript");
     expect(res.body.postedBookToLibrary[0].isbn).toBe("9780140154511");
