@@ -33,7 +33,8 @@ describe("/api/users/jovaScript/friends", () => {
     const res = await request(app).get("/api/users/jovaScript/friends");
     expect(res.statusCode).toBe(200);
     for (const friend of res.body.usersFriends) {
-      expect(friend).toHaveProperty("profile_pic_url");
+      expect(friend).toHaveProperty("origin_profile_pic_url");
+      expect(friend).toHaveProperty("friend_profile_pic_url");
     }
   });
   test("GET:200 - returns only records where the origin_username is jovaScript (parametric endpoint test)", async () => {

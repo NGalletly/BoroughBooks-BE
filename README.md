@@ -531,6 +531,53 @@ Example endpoints:
     ]
   }
   ```
+- <b>/api/users/:username/my-library</b></br>
+  Post a book to the users-books table associated with their username.</br>
+  The <i>request</i> body should be of the following form:
+
+  ```json
+  {
+    "isbn": "9780140154511"
+  }
+  ```
+
+  Successful requests will return a <i>response</i> object with the form:
+
+  ```json
+  {
+    "postedBookToLibrary": [
+      {
+        "users_book_id": 21,
+        "isbn": "9780140154511",
+        "username": "jovaScript"
+      }
+    ]
+  }
+  ```
+
+- <b>/api/users/:username/friends</b></br>
+  Post a pending friendship between two users. These are "friend requests", and are designed to always initially contain a "pending" value for the friend's status</br>
+  The <i>request</i> body should be sent with the following shape:
+
+  ```json
+  { "relating_username": "coolSurferDude" }
+  ```
+
+  where the relating_username is the friend-to-be.</br>
+  Successful requests will return a <i>response</i> body with the following shape
+
+  ```json
+  {
+    "usersNewFriendRequest": [
+      {
+        "user_relationship_id": 9,
+        "origin_username": "groovySkaterGirl",
+        "relating_username": "coolSurferDude",
+        "friend_status": "pending"
+      }
+    ]
+  }
+  ```
 
 ### DELETE Requests:
 
