@@ -109,6 +109,10 @@ exports.controllerPostLoanByUserBookId = async (request, response, next) => {
       borrower_id,
     );
     response.status(201).send({ newLoan });
+  } catch (err) {
+    next(err);
+  }
+};
 exports.controllerDeleteBookByisbn = async (request, response, next) => {
   try {
     const { username, isbn } = request.params;
