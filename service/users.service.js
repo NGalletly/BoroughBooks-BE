@@ -7,6 +7,7 @@ const {
   modelPostBooksByUsername,
   modelGetFriendsByUsername,
   modelPostFriendByUsername,
+  modelPatchFriendByUsername,
   modelGetWishListByUsername,
   modelPostLoanByUserBookId,
   modelDeleteBookByisbn,
@@ -43,6 +44,10 @@ exports.serviceGetFriendsByUsername = async (username) => {
 
 exports.servicePostFriendByUsername = async (username, relating_username) => {
   return await modelPostFriendByUsername(username, relating_username);
+};
+
+exports.servicePatchFriendByUsername = async (user_relationship_id) => {
+  return await modelPatchFriendByUsername(user_relationship_id);
 };
 
 exports.serviceGetWishListByUsername = async (username) => {
