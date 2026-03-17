@@ -409,7 +409,7 @@ Example endpoints:
   }
   ```
 
-- <b>/api/users/:username/loans</b></br>
+- <b>/api/users/:username/loaned</b></br>
   Retrieve an object containing an array where each element is an object storing information about which books have been loaned out by a single user</br>
   Example Response (username = "jovaScript"):
 
@@ -429,7 +429,7 @@ Example endpoints:
   }
   ```
 
-- <b>/api/users/:username/borrowing</b></br>
+- <b>/api/users/:username/borrowed</b></br>
   Retrieve an object containing an array where each element is an object storing information about which books have been borrowed by a single user</br>
   Example Response (username = "coolSurferDude"):
 
@@ -527,6 +527,53 @@ Example endpoints:
         "published_date": "2015-02-10",
         "description": "A sweeping narrative of humanitys creation and evolution.",
         "imagelinks": "https://books.google.com/books/content?vid=ISBN9780062316097&printsec=frontcover&img=1&zoom=1"
+      }
+    ]
+  }
+  ```
+- <b>/api/users/:username/my-library</b></br>
+  Post a book to the users-books table associated with their username.</br>
+  The <i>request</i> body should be of the following form:
+
+  ```json
+  {
+    "isbn": "9780140154511"
+  }
+  ```
+
+  Successful requests will return a <i>response</i> object with the form:
+
+  ```json
+  {
+    "postedBookToLibrary": [
+      {
+        "users_book_id": 21,
+        "isbn": "9780140154511",
+        "username": "jovaScript"
+      }
+    ]
+  }
+  ```
+
+- <b>/api/users/:username/friends</b></br>
+  Post a pending friendship between two users. These are "friend requests", and are designed to always initially contain a "pending" value for the friend's status</br>
+  The <i>request</i> body should be sent with the following shape:
+
+  ```json
+  { "relating_username": "coolSurferDude" }
+  ```
+
+  where the relating_username is the friend-to-be.</br>
+  Successful requests will return a <i>response</i> body with the following shape
+
+  ```json
+  {
+    "usersNewFriendRequest": [
+      {
+        "user_relationship_id": 9,
+        "origin_username": "groovySkaterGirl",
+        "relating_username": "coolSurferDude",
+        "friend_status": "pending"
       }
     ]
   }

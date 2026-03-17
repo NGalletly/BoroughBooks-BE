@@ -8,9 +8,11 @@ const {
   controllerGetBooksByUsername,
   controllerPostBooksByUsername,
   controllerGetFriendsByUsername,
+  controllerPostFriendByUsername,
   controllerGetWishListByUsername,
   controllerPostLoanByUserBookId,
   controllerDeleteBookByisbn,
+  controllerUpdateLoanedBookByLoanId,
 } = require("../controller/users.controller");
 
 usersbooksRouter.get("/", controllerGetUsers);
@@ -24,6 +26,7 @@ usersbooksRouter.get("/:username/loaned", controllerGetLoanedBooksByUsername);
 usersbooksRouter.get("/:username/my-library", controllerGetBooksByUsername);
 usersbooksRouter.post("/:username/my-library", controllerPostBooksByUsername);
 usersbooksRouter.get("/:username/friends", controllerGetFriendsByUsername);
+usersbooksRouter.post("/:username/friends", controllerPostFriendByUsername);
 usersbooksRouter.get("/:username/wish-list", controllerGetWishListByUsername);
 
 usersbooksRouter.post("/:username/loaned", controllerPostLoanByUserBookId);
@@ -33,5 +36,7 @@ usersbooksRouter.delete(
   "/:username/my-library/:isbn",
   controllerDeleteBookByisbn,
 );
+
+usersbooksRouter.patch("/:username/loaned", controllerUpdateLoanedBookByLoanId);
 
 module.exports = usersbooksRouter;

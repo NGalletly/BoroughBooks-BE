@@ -12,6 +12,11 @@ exports.modelGetBooks = async () => {
   return rows;
 };
 
+exports.modelGetBookByIsbn = async (isbn) => {
+  const { rows } = await db.query(`SELECT * FROM books WHERE isbn=$1`, [isbn]);
+  return rows;
+};
+
 exports.modelPostBook = async (postBook) => {
   const {
     isbn,

@@ -1,11 +1,16 @@
 const {
   modelGetBooks,
+  modelGetBookByIsbn,
   modelPostBook,
   modelCheckBookExists,
 } = require("../model/books.model");
 
 exports.serviceGetBooks = async () => {
   return await modelGetBooks();
+};
+
+exports.serviceGetBookByIsbn = async (isbn) => {
+  return await modelGetBookByIsbn(isbn);
 };
 
 exports.servicePostBook = async (postBook) => {

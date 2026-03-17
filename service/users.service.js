@@ -6,9 +6,11 @@ const {
   modelGetBooksByUsername,
   modelPostBooksByUsername,
   modelGetFriendsByUsername,
+  modelPostFriendByUsername,
   modelGetWishListByUsername,
   modelPostLoanByUserBookId,
   modelDeleteBookByisbn,
+  modelUpdateLoanedBookByLoanId,
 } = require("../model/users.model");
 
 exports.serviceGetUsers = async () => {
@@ -39,6 +41,10 @@ exports.serviceGetFriendsByUsername = async (username) => {
   return await modelGetFriendsByUsername(username);
 };
 
+exports.servicePostFriendByUsername = async (username, relating_username) => {
+  return await modelPostFriendByUsername(username, relating_username);
+};
+
 exports.serviceGetWishListByUsername = async (username) => {
   return await modelGetWishListByUsername(username);
 };
@@ -54,4 +60,10 @@ exports.serviceDeleteBookByisbn = async (username, isbn) => {
     throw err;
   }
   return result;
+};
+
+exports.serviceUpdateLoanedBookByLoanId = async (loan_id, return_date) => {
+  const updatedLoan = await modelUpdateLoanedBookByLoanId(loan_id, return_date);
+  if (!updatedLoan) throw new Error("Loan not found");
+  return updatedLoan;
 };

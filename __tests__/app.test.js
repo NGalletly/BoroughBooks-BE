@@ -33,7 +33,8 @@ describe("/api/users/jovaScript/friends", () => {
     const res = await request(app).get("/api/users/jovaScript/friends");
     expect(res.statusCode).toBe(200);
     for (const friend of res.body.usersFriends) {
-      expect(friend).toHaveProperty("profile_pic_url");
+      expect(friend).toHaveProperty("origin_profile_pic_url");
+      expect(friend).toHaveProperty("friend_profile_pic_url");
     }
   });
   test("GET:200 - returns only records where the origin_username is jovaScript (parametric endpoint test)", async () => {
@@ -100,8 +101,40 @@ test("GET:200 - returns book objects which contain the correct data types", asyn
   expect(typeof bookOne.title).toBe("string");
 });
 
-describe.only("POST: 201 - /api/users - Loan feature", () => {
-  test("POST - Returns an object with the corrected key value pairs", async () => {
+describe("GET /api/books/:isbn", () => {
+  test("GET:200 - returns a single key-value pair object where the value is an array of length 1", async () => {
+    const res = await request(app).get("/api/books/9780140154511");
+    expect(Object.keys(res.body).length).toBe(1);
+    expect(res.body.book.length).toBe(1);
+  });
+  test("GET:200 - returns the correct keys for the book object", async () => {
+    const res = await request(app).get("/api/books/9780140154511");
+    expect(res.body.book[0].isbn).toBeString;
+    expect(res.body.book[0].title).toBeString;
+    expect(res.body.book[0].authors).toBeString;
+    expect(res.body.book[0].publisher).toBeString;
+    expect(res.body.book[0].published_date).toBeString;
+    expect(res.body.book[0].description).toBeString;
+    expect(res.body.book[0].imagelinks).toBeString;
+  });
+  test("GET:200 - returns the correct keys for the book object", async () => {
+    const res = await request(app).get("/api/books/9780140154511");
+    expect(res.body.book[0].isbn).toBe("9780140154511");
+    expect(res.body.book[0].title).toBe("The Earthsea Quartet");
+    expect(res.body.book[0].authors).toBe("Ursula K. Le Guin");
+    expect(res.body.book[0].publisher).toBe("Penguin Books");
+    expect(res.body.book[0].published_date).toBe("1993-01-01T00:00:00.000Z");
+    expect(res.body.book[0].description).toBe(
+      "Collects the first four books of Le Guin's landmark fantasy series: A Wizard of Earthsea, The Tombs of Atuan, The Farthest Shore, and Tehanu — following the wizard Ged across a vast archipelago world.",
+    );
+    expect(res.body.book[0].imagelinks).toBe(
+      "https://books.google.com/books/content?vid=ISBN9780140154511&printsec=frontcover&img=1&zoom=1",
+    );
+  });
+});
+
+describe("/api/users/loaned - Loans feature testing", () => {
+  test("POST 201-Returns an object with the corrected key value pairs", async () => {
     const res = await request(app).post("/api/users/gavinHousley/loaned").send({
       users_book_id: 8,
       borrower_id: "coolSurferDude",
@@ -113,13 +146,11 @@ describe.only("POST: 201 - /api/users - Loan feature", () => {
     expect(res.body.newLoan[0]).toHaveProperty("due_date");
     expect(res.body.newLoan[0]).toHaveProperty("return_date");
   });
-  test("POST - loans feature returns completed DB line when passed users_book_id and borrower_id", async () => {
+  test("POST - 201-loans feature returns completed DB line when passed users_book_id and borrower_id", async () => {
     const res = await request(app).post("/api/users/gavinHousley/loaned").send({
       users_book_id: 8,
       borrower_id: "coolSurferDude",
     });
-
-    console.log(res.body);
     const expected = {
       loan_id: 10,
       users_book_id: 8,
@@ -129,6 +160,33 @@ describe.only("POST: 201 - /api/users - Loan feature", () => {
       return_date: null,
     };
     expect(res.body.newLoan[0]).toEqual(expected);
+  });
+  test("PATCH - 204 updates the loaned endpoint with a return date and responds with 204 no content", async () => {
+    const res = await request(app)
+      .patch("/api/users/gavinHousley/loaned")
+      .send({
+        loan_id: 1,
+        return_date: "2026-03-16T23:00:00.000Z",
+      });
+    expect(res.statusCode).toBe(204);
+  });
+  test("PATCH - 400 - returns with an error when not enough content submitted for a loan", async () => {
+    const res = await request(app)
+      .patch("/api/users/gavinHousley/loaned")
+      .send({
+        loan_id: 1,
+        return_date: "",
+      });
+    expect(res.statusCode).toBe(400);
+  });
+  test("PATCH - 404 - loan_id does not exist in the database", async () => {
+    const res = await request(app)
+      .patch("/api/users/gavinHousley/loaned")
+      .send({
+        loan_id: 55,
+        return_date: "2026-03-16T23:00:00.000Z",
+      });
+    expect(res.statusCode).toBe(404);
   });
 });
 
@@ -183,6 +241,39 @@ describe("POST /api/users/:username/my-library", () => {
     expect(res.status).toBe(201);
     expect(res.body.postedBookToLibrary[0].username).toBe("jovaScript");
     expect(res.body.postedBookToLibrary[0].isbn).toBe("9780140154511");
+  });
+});
+
+describe("POST /api/users/:username/friends", () => {
+  test("POST 201: returns an object with a single key-value pair", async () => {
+    const res = await request(app)
+      .post("/api/users/jovaScript/friends")
+      .send({ relating_username: "gavinHousley" });
+    expect(res.status).toBe(201);
+    expect(Object.keys(res.body).length).toBe(1);
+  });
+  test("POST 201: returns an object with the expected columns in the value array", async () => {
+    const res = await request(app)
+      .post("/api/users/jovaScript/friends")
+      .send({ relating_username: "gavinHousley" });
+    expect(res.status).toBe(201);
+    expect(res.body.usersNewFriendRequest.user_relationship_id).toBeNumber;
+    expect(res.body.usersNewFriendRequest.origin_username).toBeString;
+    expect(res.body.usersNewFriendRequest.relating_username).toBeString;
+    expect(res.body.usersNewFriendRequest.friend_status).toBeString;
+  });
+  test("POST 201: returns an object with the correct posted data in the value array", async () => {
+    const res = await request(app)
+      .post("/api/users/groovySkaterGirl/friends")
+      .send({ relating_username: "coolSurferDude" });
+    expect(res.status).toBe(201);
+    expect(res.body.usersNewFriendRequest[0].origin_username).toBe(
+      "groovySkaterGirl",
+    );
+    expect(res.body.usersNewFriendRequest[0].relating_username).toBe(
+      "coolSurferDude",
+    );
+    expect(res.body.usersNewFriendRequest[0].friend_status).toBe("pending");
   });
 });
 

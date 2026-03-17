@@ -57,8 +57,21 @@ exports.modelGetUserByUsername = async (username) => {
 
 exports.modelGetFriendsByUsername = async (username) => {
   const { rows } = await db.query(
-    `SELECT user_relationship.*, users.profile_pic_url FROM user_relationship JOIN users on user_relationship.origin_username = users.username WHERE user_relationship.origin_username = $1 AND user_relationship.friend_status = 'accepted'`,
+    `SELECT user_relationship.*, origin_user.profile_pic_url AS origin_profile_pic_url, friend_user.profile_pic_url AS friend_profile_pic_url
+    FROM user_relationship
+    JOIN users AS origin_user ON user_relationship.origin_username = origin_user.username 
+    JOIN users AS friend_user ON user_relationship.relating_username = friend_user.username
+WHERE (user_relationship.origin_username = $1 OR user_relationship.relating_username = $1)
+    AND user_relationship.friend_status = 'accepted'`,
     [username],
+  );
+  return rows;
+};
+
+exports.modelPostFriendByUsername = async (username, relating_username) => {
+  const { rows } = await db.query(
+    `INSERT INTO user_relationship (origin_username, relating_username, friend_status) VALUES ($1, $2, 'pending') RETURNING *`,
+    [username, relating_username],
   );
   return rows;
 };
@@ -86,4 +99,15 @@ exports.modelDeleteBookByisbn = async (username, isbn) => {
     [isbn, username],
   );
   return query;
+};
+
+exports.modelUpdateLoanedBookByLoanId = async (loan_id, return_date) => {
+  const { rows } = await db.query(
+    `UPDATE loans
+     SET return_date = $2
+     WHERE loan_id = $1
+     RETURNING *`,
+    [loan_id, return_date],
+  );
+  return rows[0];
 };
