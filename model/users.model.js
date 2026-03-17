@@ -111,3 +111,11 @@ exports.modelUpdateLoanedBookByLoanId = async (loan_id, return_date) => {
   );
   return rows[0];
 };
+
+exports.modelDeleteFriendByUserRelatId = async (user_relationship_id) => {
+  const { rows } = await db.query(
+    `DELETE FROM user_relationship WHERE user_relationship_id = $1`,
+    [user_relationship_id],
+  );
+  return;
+};
