@@ -59,6 +59,7 @@ describe("/api/users/jovaScript/friends", () => {
       });
     expect(res.statusCode).toBe(204);
     expect(res.body).toEqual({});
+  });
   test("PATCH:202 - returns an object with a single key value pair where the length of the value array is 1", async () => {
     const res = await request(app)
       .patch("/api/users/jovaScript/friends")
