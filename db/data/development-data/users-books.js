@@ -44,7 +44,7 @@ module.exports = [
     username: "coolSurferDude",
   },
   {
-    isbn: "9780393312836",
+    isbn: "9780316787536",
     username: "coolSurferDude",
   },
   {
