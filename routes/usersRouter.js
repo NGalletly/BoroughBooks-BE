@@ -14,6 +14,7 @@ const {
   controllerPostLoanByUserBookId,
   controllerDeleteBookByisbn,
   controllerUpdateLoanedBookByLoanId,
+  controllerDeleteFriendByUserRelatId,
 } = require("../controller/users.controller");
 
 usersbooksRouter.get("/", controllerGetUsers);
@@ -40,5 +41,10 @@ usersbooksRouter.delete(
 );
 
 usersbooksRouter.patch("/:username/loaned", controllerUpdateLoanedBookByLoanId);
+
+usersbooksRouter.delete(
+  "/:username/friends",
+  controllerDeleteFriendByUserRelatId,
+);
 
 module.exports = usersbooksRouter;

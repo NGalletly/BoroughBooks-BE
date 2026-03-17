@@ -12,6 +12,7 @@ const {
   modelPostLoanByUserBookId,
   modelDeleteBookByisbn,
   modelUpdateLoanedBookByLoanId,
+  modelDeleteFriendByUserRelatId,
 } = require("../model/users.model");
 
 exports.serviceGetUsers = async () => {
@@ -71,4 +72,9 @@ exports.serviceUpdateLoanedBookByLoanId = async (loan_id, return_date) => {
   const updatedLoan = await modelUpdateLoanedBookByLoanId(loan_id, return_date);
   if (!updatedLoan) throw new Error("Loan not found");
   return updatedLoan;
+};
+
+exports.serviceDeleteFriendByUserRelatId = async (user_relationship_id) => {
+  const result = await modelDeleteFriendByUserRelatId(user_relationship_id);
+  return result;
 };

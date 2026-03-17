@@ -51,6 +51,14 @@ describe("/api/users/jovaScript/friends", () => {
       expect(friend.friend_status).toBe("accepted");
     }
   });
+  test("DELETE:204 - deletes friend and returns no content and 204 status", async () => {
+    const res = await request(app)
+      .delete("/api/users/jovascript/friends")
+      .send({
+        user_relationship_id: 1,
+      });
+    expect(res.statusCode).toBe(204);
+    expect(res.body).toEqual({});
   test("PATCH:202 - returns an object with a single key value pair where the length of the value array is 1", async () => {
     const res = await request(app)
       .patch("/api/users/jovaScript/friends")
