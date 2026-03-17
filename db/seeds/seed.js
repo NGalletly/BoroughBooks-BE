@@ -51,6 +51,8 @@ const seed = async function ({
     ];
   });
 
+  await db.query(`DROP TABLE IF EXISTS messages`);
+  await db.query(`DROP TABLE IF EXISTS conversations`);
   await db.query(`DROP TABLE IF EXISTS user_relationship`);
   await db.query(`DROP TABLE IF EXISTS wishlist`);
   await db.query(`DROP TABLE IF EXISTS loans`);
@@ -62,6 +64,22 @@ const seed = async function ({
     username VARCHAR(100) PRIMARY KEY,
     profile_pic_url VARCHAR(250)
     )`);
+
+  await db.query(`CREATE TABLE conversations(
+  conversation_id SERIAL PRIMARY KEY,
+  user1_username VARCHAR(100) REFERENCES users(username),
+  user2_username VARCHAR(100) REFERENCES users(username),
+  created_at TIMESTAMP DEFAULT NOW()
+  )`);
+
+  await db.query(`CREATE TABLE messages(
+  message_id SERIAL PRIMARY KEY,
+  conversation_id INT REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+  sender_username VARCHAR(100) REFERENCES users(username),
+  content TEXT,
+  sent_at TIMESTAMP DEFAULT NOW(),
+  read_at TIMESTAMP
+  )`);
 
   await db.query(`CREATE TABLE books(
     isbn VARCHAR(20) PRIMARY KEY,
