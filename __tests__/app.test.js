@@ -118,6 +118,31 @@ describe("/api/users/:username/wish-list", () => {
     expect(res.body.usersWishList.length).toBe(3);
   });
 });
+describe("/api/users/:username/my-library/:isbn", () => {
+  test("GET:200 - returns an object with a single property where the length of the value array is 1", async () => {
+    const res = await request(app).get(
+      "/api/users/jovaScript/my-library/9780679723394",
+    );
+    expect(res.statusCode).toBe(200);
+    expect(res.body.usersBookByIsbn.length).toBe(1);
+  });
+  test("GET:200 - returns a property with a username and isbn key", async () => {
+    const res = await request(app).get(
+      "/api/users/jovaScript/my-library/9780679723394",
+    );
+    expect(res.statusCode).toBe(200);
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("isbn");
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("username");
+  });
+  test("GET:200 - returns a property with a username and isbn key with the correct values from the endpoint", async () => {
+    const res = await request(app).get(
+      "/api/users/jovaScript/my-library/9780679723394",
+    );
+    expect(res.statusCode).toBe(200);
+    expect(res.body.usersBookByIsbn[0].isbn).toBe("9780679723394");
+    expect(res.body.usersBookByIsbn[0].username).toBe("jovaScript");
+  });
+});
 
 test("GET:200 - returns an array of book objects which have the correct keys", async () => {
   const res = await request(app).get("/api/books");
