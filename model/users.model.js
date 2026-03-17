@@ -7,7 +7,7 @@ exports.modelGetUsers = async () => {
 
 exports.modelGetBorrowedBooksByUsername = async (username) => {
   const { rows } = await db.query(
-    `SELECT books.* 
+    `SELECT books.*, users_books.username
      FROM books
      JOIN users_books ON books.isbn = users_books.isbn
     JOIN loans ON users_books.users_book_id = loans.users_book_id
@@ -19,7 +19,7 @@ exports.modelGetBorrowedBooksByUsername = async (username) => {
 
 exports.modelGetLoanedBooksByUsername = async (username) => {
   const { rows } = await db.query(
-    `SELECT books.* 
+    `SELECT books.*, loans.borrower_id
      FROM books
      JOIN users_books ON books.isbn = users_books.isbn
      JOIN loans ON users_books.users_book_id = loans.users_book_id
@@ -72,6 +72,14 @@ exports.modelPostFriendByUsername = async (username, relating_username) => {
   const { rows } = await db.query(
     `INSERT INTO user_relationship (origin_username, relating_username, friend_status) VALUES ($1, $2, 'pending') RETURNING *`,
     [username, relating_username],
+  );
+  return rows;
+};
+
+exports.modelPatchFriendByUsername = async (user_relationship_id) => {
+  const { rows } = await db.query(
+    `UPDATE user_relationship SET friend_status = 'accepted' WHERE user_relationship_id = $1 RETURNING *`,
+    [user_relationship_id],
   );
   return rows;
 };

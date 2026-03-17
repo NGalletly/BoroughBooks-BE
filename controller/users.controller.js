@@ -7,6 +7,7 @@ const {
   servicePostBooksByUsername,
   serviceGetFriendsByUsername,
   servicePostFriendByUsername,
+  servicePatchFriendByUsername,
   serviceGetWishListByUsername,
   servicePostLoanByUserBookId,
   serviceDeleteBookByisbn,
@@ -103,6 +104,17 @@ exports.controllerPostFriendByUsername = async (request, response, next) => {
       relating_username,
     );
     response.status(201).send({ usersNewFriendRequest });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.controllerPatchFriendByUsername = async (request, response, next) => {
+  try {
+    const { user_relationship_id } = request.body;
+    const usersAcceptedFriendRequest =
+      await servicePatchFriendByUsername(user_relationship_id);
+    response.status(202).send({ usersAcceptedFriendRequest });
   } catch (err) {
     next(err);
   }
