@@ -9,6 +9,7 @@ const {
   controllerPostBooksByUsername,
   controllerGetFriendsByUsername,
   controllerPostFriendByUsername,
+  controllerPatchFriendByUsername,
   controllerGetWishListByUsername,
   controllerPostLoanByUserBookId,
   controllerDeleteBookByisbn,
@@ -27,6 +28,7 @@ usersbooksRouter.get("/:username/my-library", controllerGetBooksByUsername);
 usersbooksRouter.post("/:username/my-library", controllerPostBooksByUsername);
 usersbooksRouter.get("/:username/friends", controllerGetFriendsByUsername);
 usersbooksRouter.post("/:username/friends", controllerPostFriendByUsername);
+usersbooksRouter.patch("/:username/friends", controllerPatchFriendByUsername);
 usersbooksRouter.get("/:username/wish-list", controllerGetWishListByUsername);
 
 usersbooksRouter.post("/:username/loaned", controllerPostLoanByUserBookId);
