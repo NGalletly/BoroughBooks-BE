@@ -76,6 +76,14 @@ exports.modelPostFriendByUsername = async (username, relating_username) => {
   return rows;
 };
 
+exports.modelPatchFriendByUsername = async (user_relationship_id) => {
+  const { rows } = await db.query(
+    `UPDATE user_relationship SET friend_status = 'accepted' WHERE user_relationship_id = $1 RETURNING *`,
+    [user_relationship_id],
+  );
+  return rows;
+};
+
 exports.modelGetWishListByUsername = async (username) => {
   const { rows } = await db.query(
     `SELECT wishlist.isbn, wishlist.username, books.title, books.authors, books.publisher, books.published_date, books.description, books.imagelinks from wishlist JOIN books ON wishlist.isbn = books.isbn WHERE username = $1`,
