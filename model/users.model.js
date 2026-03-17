@@ -19,7 +19,7 @@ exports.modelGetBorrowedBooksByUsername = async (username) => {
 
 exports.modelGetLoanedBooksByUsername = async (username) => {
   const { rows } = await db.query(
-    `SELECT books.* 
+    `SELECT books.*, loans.borrower_id
      FROM books
      JOIN users_books ON books.isbn = users_books.isbn
      JOIN loans ON users_books.users_book_id = loans.users_book_id
