@@ -6,6 +6,7 @@ const {
   controllerGetBorrowedBooksByUsername,
   controllerGetLoanedBooksByUsername,
   controllerGetBooksByUsername,
+  controllerGetUserBookByIsbn,
   controllerPostBooksByUsername,
   controllerGetFriendsByUsername,
   controllerPostFriendByUsername,
@@ -26,6 +27,10 @@ usersbooksRouter.get(
 );
 usersbooksRouter.get("/:username/loaned", controllerGetLoanedBooksByUsername);
 usersbooksRouter.get("/:username/my-library", controllerGetBooksByUsername);
+usersbooksRouter.get(
+  "/:username/my-library/:isbn",
+  controllerGetUserBookByIsbn,
+);
 usersbooksRouter.post("/:username/my-library", controllerPostBooksByUsername);
 usersbooksRouter.get("/:username/friends", controllerGetFriendsByUsername);
 usersbooksRouter.post("/:username/friends", controllerPostFriendByUsername);

@@ -59,6 +59,37 @@ describe("/api/users/jovaScript/friends", () => {
       });
     expect(res.statusCode).toBe(204);
     expect(res.body).toEqual({});
+<<<<<<< HEAD
+=======
+  });
+  test("PATCH:202 - returns an object with a single key value pair where the length of the value array is 1", async () => {
+    const res = await request(app)
+      .patch("/api/users/jovaScript/friends")
+      .send({ user_relationship_id: 6 });
+    expect(res.statusCode).toBe(202);
+    expect(Object.keys(res.body).length).toBe(1);
+  });
+  test("PATCH:202 - returns an object where the friend status has a value equal to 'accepted'", async () => {
+    const res = await request(app)
+      .patch("/api/users/jovaScript/friends")
+      .send({ user_relationship_id: 6 });
+    expect(res.statusCode).toBe(202);
+    expect(res.body.usersAcceptedFriendRequest[0].friend_status).toBe(
+      "accepted",
+    );
+  });
+  test("PATCH:202 - returns an object where the origin_username and relating_username are the expected users", async () => {
+    const res = await request(app)
+      .patch("/api/users/jovaScript/friends")
+      .send({ user_relationship_id: 6 });
+    expect(res.statusCode).toBe(202);
+    expect(res.body.usersAcceptedFriendRequest[0].origin_username).toBe(
+      "coolSurferDude",
+    );
+    expect(res.body.usersAcceptedFriendRequest[0].relating_username).toBe(
+      "jovaScript",
+    );
+>>>>>>> 8576adf5635089da7ab5f1c72efe5713da83ab29
   });
 });
 test("PATCH:202 - returns an object with a single key value pair where the length of the value array is 1", async () => {
@@ -114,6 +145,31 @@ describe("/api/users/:username/wish-list", () => {
     const res = await request(app).get("/api/users/jovaScript/wish-list");
     expect(res.statusCode).toBe(200);
     expect(res.body.usersWishList.length).toBe(3);
+  });
+});
+describe("/api/users/:username/my-library/:isbn", () => {
+  test("GET:200 - returns an object with a single property where the length of the value array is 1", async () => {
+    const res = await request(app).get(
+      "/api/users/jovaScript/my-library/9780679723394",
+    );
+    expect(res.statusCode).toBe(200);
+    expect(res.body.usersBookByIsbn.length).toBe(1);
+  });
+  test("GET:200 - returns a property with a username and isbn key", async () => {
+    const res = await request(app).get(
+      "/api/users/jovaScript/my-library/9780679723394",
+    );
+    expect(res.statusCode).toBe(200);
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("isbn");
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("username");
+  });
+  test("GET:200 - returns a property with a username and isbn key with the correct values from the endpoint", async () => {
+    const res = await request(app).get(
+      "/api/users/jovaScript/my-library/9780679723394",
+    );
+    expect(res.statusCode).toBe(200);
+    expect(res.body.usersBookByIsbn[0].isbn).toBe("9780679723394");
+    expect(res.body.usersBookByIsbn[0].username).toBe("jovaScript");
   });
 });
 
