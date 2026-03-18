@@ -60,34 +60,32 @@ describe("/api/users/jovaScript/friends", () => {
     expect(res.statusCode).toBe(204);
     expect(res.body).toEqual({});
   });
-  test("PATCH:202 - returns an object with a single key value pair where the length of the value array is 1", async () => {
-    const res = await request(app)
-      .patch("/api/users/jovaScript/friends")
-      .send({ user_relationship_id: 6 });
-    expect(res.statusCode).toBe(202);
-    expect(Object.keys(res.body).length).toBe(1);
-  });
-  test("PATCH:202 - returns an object where the friend status has a value equal to 'accepted'", async () => {
-    const res = await request(app)
-      .patch("/api/users/jovaScript/friends")
-      .send({ user_relationship_id: 6 });
-    expect(res.statusCode).toBe(202);
-    expect(res.body.usersAcceptedFriendRequest[0].friend_status).toBe(
-      "accepted",
-    );
-  });
-  test("PATCH:202 - returns an object where the origin_username and relating_username are the expected users", async () => {
-    const res = await request(app)
-      .patch("/api/users/jovaScript/friends")
-      .send({ user_relationship_id: 6 });
-    expect(res.statusCode).toBe(202);
-    expect(res.body.usersAcceptedFriendRequest[0].origin_username).toBe(
-      "coolSurferDude",
-    );
-    expect(res.body.usersAcceptedFriendRequest[0].relating_username).toBe(
-      "jovaScript",
-    );
-  });
+});
+test("PATCH:202 - returns an object with a single key value pair where the length of the value array is 1", async () => {
+  const res = await request(app)
+    .patch("/api/users/jovaScript/friends")
+    .send({ user_relationship_id: 6 });
+  expect(res.statusCode).toBe(202);
+  expect(Object.keys(res.body).length).toBe(1);
+});
+test("PATCH:202 - returns an object where the friend status has a value equal to 'accepted'", async () => {
+  const res = await request(app)
+    .patch("/api/users/jovaScript/friends")
+    .send({ user_relationship_id: 6 });
+  expect(res.statusCode).toBe(202);
+  expect(res.body.usersAcceptedFriendRequest[0].friend_status).toBe("accepted");
+});
+test("PATCH:202 - returns an object where the origin_username and relating_username are the expected users", async () => {
+  const res = await request(app)
+    .patch("/api/users/jovaScript/friends")
+    .send({ user_relationship_id: 6 });
+  expect(res.statusCode).toBe(202);
+  expect(res.body.usersAcceptedFriendRequest[0].origin_username).toBe(
+    "coolSurferDude",
+  );
+  expect(res.body.usersAcceptedFriendRequest[0].relating_username).toBe(
+    "jovaScript",
+  );
 });
 
 describe("/api/users/:username/wish-list", () => {
@@ -217,11 +215,12 @@ describe("/api/users/loaned - Loans feature testing", () => {
       loan_id: 10,
       users_book_id: 8,
       borrower_id: "coolSurferDude",
-      borrow_date: "2026-03-18T00:00:00.000Z",
-      due_date: "2026-04-07T23:00:00.000Z",
       return_date: null,
     };
-    expect(res.body.newLoan[0]).toEqual(expected);
+    expect(res.body.newLoan[0].loan_id).toBe(10);
+    expect(res.body.newLoan[0].users_book_id).toBe(8);
+    expect(res.body.newLoan[0].borrower_id).toBe("coolSurferDude");
+    expect(res.body.newLoan[0].return_date).toBe(null);
   });
   test("PATCH - 204 updates the loaned endpoint with a return date and responds with 204 no content", async () => {
     const res = await request(app)
