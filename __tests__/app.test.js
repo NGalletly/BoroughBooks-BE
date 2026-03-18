@@ -37,18 +37,11 @@ describe("/api/users/jovaScript/friends", () => {
       expect(friend).toHaveProperty("friend_profile_pic_url");
     }
   });
-  test("GET:200 - returns only records where the origin_username is jovaScript (parametric endpoint test)", async () => {
+  test("GET:200 - returns only records where the origin_username or relating_username is jovaScript (parametric endpoint test)", async () => {
     const res = await request(app).get("/api/users/jovaScript/friends");
     expect(res.statusCode).toBe(200);
     for (const friend of res.body.usersFriends) {
-      expect(friend.origin_username).toBe("jovaScript");
-    }
-  });
-  test("GET:200 - returns records where friend_status on the user_relationships is accepted", async () => {
-    const res = await request(app).get("/api/users/jovaScript/friends");
-    expect(res.statusCode).toBe(200);
-    for (const friend of res.body.usersFriends) {
-      expect(friend.friend_status).toBe("accepted");
+      expect(Object.values(friend)).toContain("jovaScript");
     }
   });
   test("DELETE:204 - deletes friend and returns no content and 204 status", async () => {

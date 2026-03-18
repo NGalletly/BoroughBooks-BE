@@ -71,8 +71,7 @@ exports.modelGetFriendsByUsername = async (username) => {
     FROM user_relationship
     JOIN users AS origin_user ON user_relationship.origin_username = origin_user.username 
     JOIN users AS friend_user ON user_relationship.relating_username = friend_user.username
-WHERE (user_relationship.origin_username = $1 OR user_relationship.relating_username = $1)
-    AND user_relationship.friend_status = 'accepted'`,
+WHERE (user_relationship.origin_username = $1 OR user_relationship.relating_username = $1)`,
     [username],
   );
   return rows;
