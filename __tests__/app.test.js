@@ -37,18 +37,11 @@ describe("/api/users/jovaScript/friends", () => {
       expect(friend).toHaveProperty("friend_profile_pic_url");
     }
   });
-  test("GET:200 - returns only records where the origin_username is jovaScript (parametric endpoint test)", async () => {
+  test("GET:200 - returns only records where the origin_username or relating_username is jovaScript (parametric endpoint test)", async () => {
     const res = await request(app).get("/api/users/jovaScript/friends");
     expect(res.statusCode).toBe(200);
     for (const friend of res.body.usersFriends) {
-      expect(friend.origin_username).toBe("jovaScript");
-    }
-  });
-  test("GET:200 - returns records where friend_status on the user_relationships is accepted", async () => {
-    const res = await request(app).get("/api/users/jovaScript/friends");
-    expect(res.statusCode).toBe(200);
-    for (const friend of res.body.usersFriends) {
-      expect(friend.friend_status).toBe("accepted");
+      expect(Object.values(friend)).toContain("jovaScript");
     }
   });
   test("DELETE:204 - deletes friend and returns no content and 204 status", async () => {
@@ -60,34 +53,32 @@ describe("/api/users/jovaScript/friends", () => {
     expect(res.statusCode).toBe(204);
     expect(res.body).toEqual({});
   });
-  test("PATCH:202 - returns an object with a single key value pair where the length of the value array is 1", async () => {
-    const res = await request(app)
-      .patch("/api/users/jovaScript/friends")
-      .send({ user_relationship_id: 6 });
-    expect(res.statusCode).toBe(202);
-    expect(Object.keys(res.body).length).toBe(1);
-  });
-  test("PATCH:202 - returns an object where the friend status has a value equal to 'accepted'", async () => {
-    const res = await request(app)
-      .patch("/api/users/jovaScript/friends")
-      .send({ user_relationship_id: 6 });
-    expect(res.statusCode).toBe(202);
-    expect(res.body.usersAcceptedFriendRequest[0].friend_status).toBe(
-      "accepted",
-    );
-  });
-  test("PATCH:202 - returns an object where the origin_username and relating_username are the expected users", async () => {
-    const res = await request(app)
-      .patch("/api/users/jovaScript/friends")
-      .send({ user_relationship_id: 6 });
-    expect(res.statusCode).toBe(202);
-    expect(res.body.usersAcceptedFriendRequest[0].origin_username).toBe(
-      "coolSurferDude",
-    );
-    expect(res.body.usersAcceptedFriendRequest[0].relating_username).toBe(
-      "jovaScript",
-    );
-  });
+});
+test("PATCH:202 - returns an object with a single key value pair where the length of the value array is 1", async () => {
+  const res = await request(app)
+    .patch("/api/users/jovaScript/friends")
+    .send({ user_relationship_id: 6 });
+  expect(res.statusCode).toBe(202);
+  expect(Object.keys(res.body).length).toBe(1);
+});
+test("PATCH:202 - returns an object where the friend status has a value equal to 'accepted'", async () => {
+  const res = await request(app)
+    .patch("/api/users/jovaScript/friends")
+    .send({ user_relationship_id: 6 });
+  expect(res.statusCode).toBe(202);
+  expect(res.body.usersAcceptedFriendRequest[0].friend_status).toBe("accepted");
+});
+test("PATCH:202 - returns an object where the origin_username and relating_username are the expected users", async () => {
+  const res = await request(app)
+    .patch("/api/users/jovaScript/friends")
+    .send({ user_relationship_id: 6 });
+  expect(res.statusCode).toBe(202);
+  expect(res.body.usersAcceptedFriendRequest[0].origin_username).toBe(
+    "coolSurferDude",
+  );
+  expect(res.body.usersAcceptedFriendRequest[0].relating_username).toBe(
+    "jovaScript",
+  );
 });
 
 describe("/api/users/:username/wish-list", () => {
@@ -141,6 +132,17 @@ describe("/api/users/:username/my-library/:isbn", () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.usersBookByIsbn[0].isbn).toBe("9780679723394");
     expect(res.body.usersBookByIsbn[0].username).toBe("jovaScript");
+  });
+  test("GET:200 - returns an object containing the expected columns from the books table for the user's book", async () => {
+    const res = await request(app).get(
+      "/api/users/jovaScript/my-library/9780679723394",
+    );
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("title");
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("authors");
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("publisher");
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("published_date");
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("description");
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("imagelinks");
   });
 });
 

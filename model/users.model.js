@@ -41,7 +41,9 @@ exports.modelGetBooksByUsername = async (username) => {
 
 exports.modelGetUserBookByIsbn = async (username, isbn) => {
   const { rows } = await db.query(
-    `SELECT * FROM users_books WHERE isbn = $1 AND username = $2`,
+    `SELECT users_books.username, books.* FROM users_books
+     JOIN books ON users_books.isbn = books.isbn
+     WHERE users_books.isbn = $1 AND users_books.username = $2`,
     [isbn, username],
   );
   return rows;
@@ -69,8 +71,7 @@ exports.modelGetFriendsByUsername = async (username) => {
     FROM user_relationship
     JOIN users AS origin_user ON user_relationship.origin_username = origin_user.username 
     JOIN users AS friend_user ON user_relationship.relating_username = friend_user.username
-WHERE (user_relationship.origin_username = $1 OR user_relationship.relating_username = $1)
-    AND user_relationship.friend_status = 'accepted'`,
+WHERE (user_relationship.origin_username = $1 OR user_relationship.relating_username = $1)`,
     [username],
   );
   return rows;
