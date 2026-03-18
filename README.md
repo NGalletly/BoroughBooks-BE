@@ -251,7 +251,24 @@ Example endpoints:
 
 - <b>/api/users/:username/my-library/:isbn</b></br>
   Retrieve an object containing a single book available to borrow in a single user's library</br>
-  Example response (username = "jovaScript"):
+  Example response (username = "jovaScript", isbn = "9780679723394"):
+
+  ```json
+  {
+    "usersBookByIsbn": [
+      {
+        "username": "jovaScript",
+        "isbn": "9780679723394",
+        "title": "Speak, Memory",
+        "authors": "Vladimir Nabokov",
+        "publisher": "Vintage International",
+        "published_date": "1989-07-11T23:00:00.000Z",
+        "description": "A memoir of Nabokov's privileged childhood in pre-revolutionary Russia and his years of European emigration, widely considered one of the finest autobiographies of the twentieth century.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780679723394&printsec=frontcover&img=1&zoom=1"
+      }
+    ]
+  }
+  ```
 
 - <b>/api/books/:isbn</b></br>
   Retrieve an object containing an array containing an object with a single book object
