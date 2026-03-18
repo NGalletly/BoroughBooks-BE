@@ -1,5 +1,6 @@
 const {
   serviceGetBooks,
+  serviceGetBookByIsbn,
   servicePostBook,
 } = require("../service/books.service");
 
@@ -9,6 +10,16 @@ exports.controllerGetBooks = async (request, response, next) => {
     response.status(200).send({ books });
   } catch (err) {
     console.log(err);
+    next(err);
+  }
+};
+
+exports.controllerGetBookByIsbn = async (request, response, next) => {
+  try {
+    const { isbn } = request.params;
+    const book = await serviceGetBookByIsbn(isbn);
+    response.status(200).send({ book });
+  } catch (err) {
     next(err);
   }
 };

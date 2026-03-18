@@ -44,7 +44,7 @@ module.exports = [
     username: "coolSurferDude",
   },
   {
-    isbn: "9780393312836",
+    isbn: "9780316787536",
     username: "coolSurferDude",
   },
   {
@@ -65,18 +65,18 @@ module.exports = [
   },
   {
     isbn: "9780441569595",
-    username: "ESerebrianik",
+    username: "groovySkaterGirl",
   },
   {
     isbn: "9781567923384",
-    username: "ESerebrianik",
+    username: "groovySkaterGirl",
   },
   {
     isbn: "9780441627400",
-    username: "ESerebrianik",
+    username: "groovySkaterGirl",
   },
   {
     isbn: "9781911547860",
-    username: "ESerebrianik",
+    username: "groovySkaterGirl",
   },
 ];

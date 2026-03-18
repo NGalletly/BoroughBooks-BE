@@ -51,6 +51,8 @@ const seed = async function ({
     ];
   });
 
+  await db.query(`DROP TABLE IF EXISTS messages`);
+  await db.query(`DROP TABLE IF EXISTS conversations`);
   await db.query(`DROP TABLE IF EXISTS user_relationship`);
   await db.query(`DROP TABLE IF EXISTS wishlist`);
   await db.query(`DROP TABLE IF EXISTS loans`);
@@ -63,13 +65,29 @@ const seed = async function ({
     profile_pic_url VARCHAR(250)
     )`);
 
+  await db.query(`CREATE TABLE conversations(
+  conversation_id SERIAL PRIMARY KEY,
+  user1_username VARCHAR(100) REFERENCES users(username),
+  user2_username VARCHAR(100) REFERENCES users(username),
+  created_at TIMESTAMP DEFAULT NOW()
+  )`);
+
+  await db.query(`CREATE TABLE messages(
+  message_id SERIAL PRIMARY KEY,
+  conversation_id INT REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+  sender_username VARCHAR(100) REFERENCES users(username),
+  content TEXT,
+  sent_at TIMESTAMP DEFAULT NOW(),
+  read_at TIMESTAMP
+  )`);
+
   await db.query(`CREATE TABLE books(
     isbn VARCHAR(20) PRIMARY KEY,
     title VARCHAR(200),
     authors VARCHAR(100),
     publisher VARCHAR(40),
     published_date DATE,
-    description VARCHAR(1000),
+    description VARCHAR(2000),
     imagelinks VARCHAR(1000)
 
     )`);
@@ -82,9 +100,9 @@ const seed = async function ({
 
   await db.query(`CREATE TABLE loans(
     loan_id SERIAL PRIMARY KEY,
-    users_book_id INT REFERENCES users_books(users_book_id),
+    users_book_id INT REFERENCES users_books(users_book_id) ON DELETE CASCADE,
     borrower_id VARCHAR(100) REFERENCES users(username),
-    borrow_date DATE,
+    borrow_date DATE DEFAULT CURRENT_DATE,
     due_date DATE,
     return_date DATE
     
