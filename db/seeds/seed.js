@@ -87,7 +87,7 @@ const seed = async function ({
     authors VARCHAR(100),
     publisher VARCHAR(40),
     published_date DATE,
-    description VARCHAR(1000),
+    description VARCHAR(2000),
     imagelinks VARCHAR(1000)
 
     )`);
