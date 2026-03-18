@@ -390,6 +390,23 @@ Example endpoints:
   }
   ```
 
+  - <b>/api/conversations/:username</b></br>
+    Retrieve an object containing an array of conversations based on username</br>
+    Example Response:
+
+  ```json
+  {
+    "conversations": [
+      {
+        "conversation_id": 1,
+        "user1_username": "jovaScript",
+        "user2_username": "nomi",
+        "created_at": "2026-03-18T10:00:00.000Z"
+      }
+    ]
+  }
+  ```
+
 ### Post Requests:
 
 - <b>/api/books</b></br>

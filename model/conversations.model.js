@@ -5,6 +5,17 @@ exports.modelGetConversations = async () => {
   return rows;
 };
 
+exports.modelGetConversationsByUsername = async (username) => {
+  const { rows } = await db.query(
+    `SELECT * FROM conversations
+     WHERE user1_username = $1
+        OR user2_username = $1
+     ORDER BY created_at DESC`,
+    [username],
+  );
+  return rows;
+};
+
 exports.modelPostConversation = async (postConversation) => {
   const { user1_username, user2_username } = postConversation;
   const { rows } = await db.query(
