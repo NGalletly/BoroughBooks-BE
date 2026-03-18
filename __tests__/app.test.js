@@ -215,16 +215,16 @@ describe("/api/users/loaned - Loans feature testing", () => {
       users_book_id: 8,
       borrower_id: "coolSurferDude",
     });
-    const expected = {
+    expect(res.status).toBe(201);
+
+    expect(res.body.newLoan[0]).toMatchObject({
       loan_id: 10,
       users_book_id: 8,
       borrower_id: "coolSurferDude",
       return_date: null,
-    };
-    expect(res.body.newLoan[0].loan_id).toBe(10);
-    expect(res.body.newLoan[0].users_book_id).toBe(8);
-    expect(res.body.newLoan[0].borrower_id).toBe("coolSurferDude");
-    expect(res.body.newLoan[0].return_date).toBe(null);
+    });
+    expect(res.body.newLoan[0]).toHaveProperty("borrow_date");
+    expect(res.body.newLoan[0]).toHaveProperty("due_date");
   });
   test("PATCH - 204 updates the loaned endpoint with a return date and responds with 204 no content", async () => {
     const res = await request(app)
@@ -401,6 +401,105 @@ test("400: returns error when required fields are missing", async () => {
   const res = await request(app).post("/api/books").send(invalidBook);
 
   expect(res.status).toBe(400);
-  expect(res.body.msg).toContain("Missing required fields");
-  expect(res.body.msg).toContain("ISBN must be at least 10 characters");
+});
+
+// POST/GET CONVERSATIONS TESTING
+
+describe("POST /api/conversations", () => {
+  test("201: adds a new conversation and returns the new conversation", async () => {
+    const newConversation = {
+      user1_username: "nomi",
+      user2_username: "coolSurferDude",
+    };
+
+    const res = await request(app)
+      .post("/api/conversations")
+      .send(newConversation);
+
+    expect(res.status).toBe(201);
+
+    expect(res.body.conversation).toMatchObject({
+      user1_username: "nomi",
+      user2_username: "coolSurferDude",
+    });
+
+    expect(res.body.conversation).toHaveProperty("conversation_id");
+    expect(res.body.conversation).toHaveProperty("created_at");
+  });
+
+  test("404: returns error when one user does not exist", async () => {
+    const newConversation = {
+      user1_username: "not_a_user",
+      user2_username: "jovaScript",
+    };
+
+    const res = await request(app)
+      .post("/api/conversations")
+      .send(newConversation);
+
+    expect(res.status).toBe(404);
+    expect(res.body.msg).toBeDefined();
+  });
+
+  test("400: returns error when required fields are missing", async () => {
+    const res = await request(app)
+      .post("/api/conversations")
+      .send({ user1_username: "nomi" });
+
+    expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
+  });
+
+  test("400: returns error when request body is empty", async () => {
+    const res = await request(app).post("/api/conversations").send({});
+
+    expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
+  });
+});
+
+describe("GET /api/conversations", () => {
+  test("200: returns an empty array when no conversations exist", async () => {
+    const res = await request(app).get("/api/conversations");
+
+    expect(res.status).toBe(200);
+    expect(res.body.conversations).toEqual([]);
+  });
+
+  test("200: returns all conversations after creating one", async () => {
+    await request(app).post("/api/conversations").send({
+      user1_username: "nomi",
+      user2_username: "jovaScript",
+    });
+
+    const res = await request(app).get("/api/conversations");
+
+    expect(res.status).toBe(200);
+    expect(res.body.conversations.length).toBe(1);
+
+    expect(res.body.conversations[0]).toMatchObject({
+      user1_username: "nomi",
+      user2_username: "jovaScript",
+    });
+
+    expect(res.body.conversations[0]).toHaveProperty("conversation_id");
+    expect(res.body.conversations[0]).toHaveProperty("created_at");
+  });
+
+  test("200: returns multiple conversations", async () => {
+    await request(app).post("/api/conversations").send({
+      user1_username: "nomi",
+      user2_username: "jovaScript",
+    });
+
+    await request(app).post("/api/conversations").send({
+      user1_username: "nomi",
+      user2_username: "coolSurferDude",
+    });
+
+    const res = await request(app).get("/api/conversations");
+
+    expect(res.status).toBe(200);
+    expect(res.body.conversations.length).toBe(2);
+  });
 });

@@ -328,7 +328,8 @@ Example endpoints:
         "publisher": "Ace Books",
         "published_date": "2000-06-30T23:00:00.000Z",
         "description": "Case is a washed-up computer criminal hired by a mysterious employer to pull off the ultimate hack. A seminal cyberpunk novel that coined the term 'cyberspace' and shaped modern science fiction.",
-        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780441569595&printsec=frontcover&img=1&zoom=1"
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780441569595&printsec=frontcover&img=1&zoom=1",
+        "borrower_id": "nomi"
       }
     ]
   }
@@ -348,7 +349,8 @@ Example endpoints:
         "publisher": "Penguin Books",
         "published_date": "1993-01-01T00:00:00.000Z",
         "description": "Collects the first four books of Le Guin's landmark fantasy series: A Wizard of Earthsea, The Tombs of Atuan, The Farthest Shore, and Tehanu — following the wizard Ged across a vast archipelago world.",
-        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780140154511&printsec=frontcover&img=1&zoom=1"
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780140154511&printsec=frontcover&img=1&zoom=1",
+        "username": "gavinHousley"
       },
       {
         "isbn": "9781567923384",
@@ -357,7 +359,8 @@ Example endpoints:
         "publisher": "New Directions",
         "published_date": "2010-05-17T23:00:00.000Z",
         "description": "An accordion-fold facsimile of a handmade book, Nox is Anne Carson's elegy for her brother, interweaving a translation of Catullus 101 with photographs, dictionary definitions, and fragments of memory.",
-        "imagelinks": "https://books.google.com/books/content?vid=ISBN9781567923384&printsec=frontcover&img=1&zoom=1"
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9781567923384&printsec=frontcover&img=1&zoom=1",
+        "username": "groovySkaterGirl"
       }
     ]
   }
@@ -399,6 +402,29 @@ Example endpoints:
         "published_date": "1987-04-30T23:00:00.000Z",
         "description": "A sweeping retelling of the Arthurian legend, from the boyhood education of the Wart by Merlyn to the tragedy of Camelot and the fall of a great king's dream of a just civilization.",
         "imagelinks": "https://books.google.com/books/content?vid=ISBN9780441627400&printsec=frontcover&img=1&zoom=1"
+      }
+    ]
+  }
+  ```
+
+  - <b>/api/conversations</b></br>
+    Retrieve an object containing an array of conversations</br>
+    Example Response:
+
+  ```json
+  {
+    "conversations": [
+      {
+        "conversation_id": 1,
+        "user1_username": "jovaScript",
+        "user2_username": "nomi",
+        "created_at": "2026-03-18T10:00:00.000Z"
+      },
+      {
+        "conversation_id": 2,
+        "user1_username": "jovaScript",
+        "user2_username": "coolSurferDude",
+        "created_at": "2026-03-18T11:15:00.000Z"
       }
     ]
   }
@@ -481,6 +507,30 @@ Example endpoints:
         "friend_status": "pending"
       }
     ]
+  }
+  ```
+
+- <b>/api/conversations</b></br>
+  Post a conversation between two users
+  The <i>request</i> body should be sent with the following shape:
+
+  ```json
+  {
+    "user1_username": "nomi",
+    "user2_username": "jovaScript"
+  }
+  ```
+
+  Will get a 201 with response similar to the below (the date of created_at is taken from postgres)
+
+  ```json
+  {
+    "conversation": {
+      "conversation_id": 1,
+      "user1_username": "nomi",
+      "user2_username": "jovaScript",
+      "created_at": "2026-03-18T15:40:46.341Z"
+    }
   }
   ```
 
