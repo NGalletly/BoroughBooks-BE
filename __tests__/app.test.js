@@ -166,7 +166,6 @@ test("GET:200 - returns book objects which contain the correct data types", asyn
 describe("GET /api/books/:isbn", () => {
   test.only("GET:200 - returns a single key-value pair object where the value is an array of length 1", async () => {
     const res = await request(app).get("/api/books/9780140154511");
-    console.log(res.body);
     expect(Object.keys(res.body).length).toBe(1);
     expect(res.body.book.length).toBe(1);
   });
