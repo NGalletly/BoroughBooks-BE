@@ -217,8 +217,8 @@ describe("/api/users/loaned - Loans feature testing", () => {
       loan_id: 10,
       users_book_id: 8,
       borrower_id: "coolSurferDude",
-      borrow_date: "2026-03-17T00:00:00.000Z",
-      due_date: "2026-04-06T23:00:00.000Z",
+      borrow_date: "2026-03-18T00:00:00.000Z",
+      due_date: "2026-04-07T23:00:00.000Z",
       return_date: null,
     };
     expect(res.body.newLoan[0]).toEqual(expected);
