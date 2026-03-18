@@ -140,6 +140,17 @@ describe("/api/users/:username/my-library/:isbn", () => {
     expect(res.body.usersBookByIsbn[0].isbn).toBe("9780679723394");
     expect(res.body.usersBookByIsbn[0].username).toBe("jovaScript");
   });
+  test("GET:200 - returns an object containing the expected columns from the books table for the user's book", async () => {
+    const res = await request(app).get(
+      "/api/users/jovaScript/my-library/9780679723394",
+    );
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("title");
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("authors");
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("publisher");
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("published_date");
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("description");
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("imagelinks");
+  });
 });
 
 test("GET:200 - returns an array of book objects which have the correct keys", async () => {
