@@ -249,6 +249,29 @@ Example endpoints:
   }
   ```
 
+- <b>/api/users/:username/my-library/:isbn</b></br>
+  Retrieve an object containing a single book available to borrow in a single user's library</br>
+  Example response (username = "jovaScript"):
+
+- <b>/api/books/:isbn</b></br>
+  Retrieve an object containing an array containing an object with a single book object
+
+  ```json
+  {
+    "book": [
+      {
+        "isbn": "9780140154511",
+        "title": "The Earthsea Quartet",
+        "authors": "Ursula K. Le Guin",
+        "publisher": "Penguin Books",
+        "published_date": "1993-01-01T00:00:00.000Z",
+        "description": "Collects the first four books of Le Guin's landmark fantasy series: A Wizard of Earthsea, The Tombs of Atuan, The Farthest Shore, and Tehanu — following the wizard Ged across a vast archipelago world.",
+        "imagelinks": "https://books.google.com/books/content?vid=ISBN9780140154511&printsec=frontcover&img=1&zoom=1"
+      }
+    ]
+  }
+  ```
+
 - <b>/api/users/:username/friends</b></br>
   Retrieve an object containing an array of all information about thheir profile's friends</br>
   Example response (for username = "jovascript"):
@@ -457,7 +480,17 @@ Example endpoints:
   }
   ```
 
+- <b>/api/users/:username/friends</b></br>
+  Update the friend status between 2 particular users</br>
+  The request body should be sent as (as an example):
+  ```json
+  { "user_relationship_id": 6 }
+  ```
+
 ### DELETE Requests:
 
 - <b>/api/users/:username/:ISBN</b></br>
   Successful requests will remove a book by its ISBN from a specified user's library. This removes the record associated with that ISBN and the specified username from the users-books table.
+  <br></br>
+- <b>/api/users/:username/friends</b></br>
+  Delete a friend from a user's friend list or reject a friend request.

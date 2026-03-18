@@ -59,37 +59,6 @@ describe("/api/users/jovaScript/friends", () => {
       });
     expect(res.statusCode).toBe(204);
     expect(res.body).toEqual({});
-<<<<<<< HEAD
-=======
-  });
-  test("PATCH:202 - returns an object with a single key value pair where the length of the value array is 1", async () => {
-    const res = await request(app)
-      .patch("/api/users/jovaScript/friends")
-      .send({ user_relationship_id: 6 });
-    expect(res.statusCode).toBe(202);
-    expect(Object.keys(res.body).length).toBe(1);
-  });
-  test("PATCH:202 - returns an object where the friend status has a value equal to 'accepted'", async () => {
-    const res = await request(app)
-      .patch("/api/users/jovaScript/friends")
-      .send({ user_relationship_id: 6 });
-    expect(res.statusCode).toBe(202);
-    expect(res.body.usersAcceptedFriendRequest[0].friend_status).toBe(
-      "accepted",
-    );
-  });
-  test("PATCH:202 - returns an object where the origin_username and relating_username are the expected users", async () => {
-    const res = await request(app)
-      .patch("/api/users/jovaScript/friends")
-      .send({ user_relationship_id: 6 });
-    expect(res.statusCode).toBe(202);
-    expect(res.body.usersAcceptedFriendRequest[0].origin_username).toBe(
-      "coolSurferDude",
-    );
-    expect(res.body.usersAcceptedFriendRequest[0].relating_username).toBe(
-      "jovaScript",
-    );
->>>>>>> 8576adf5635089da7ab5f1c72efe5713da83ab29
   });
 });
 test("PATCH:202 - returns an object with a single key value pair where the length of the value array is 1", async () => {
