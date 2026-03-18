@@ -1,11 +1,26 @@
 const {
   serviceGetConversations,
   servicePostConversation,
+  serviceGetConversationsByUsername,
 } = require("../service/conversations.service");
 
 exports.controllerGetConversations = async (request, response, next) => {
   try {
     const conversations = await serviceGetConversations();
+    response.status(200).send({ conversations });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.controllerGetConversationsByUsername = async (
+  request,
+  response,
+  next,
+) => {
+  try {
+    const { username } = request.params;
+    const conversations = await serviceGetConversationsByUsername(username);
     response.status(200).send({ conversations });
   } catch (err) {
     next(err);

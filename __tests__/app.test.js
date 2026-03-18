@@ -227,13 +227,23 @@ describe("/api/users/loaned - Loans feature testing", () => {
     expect(res.body.newLoan[0]).toHaveProperty("due_date");
   });
   test("PATCH - 204 updates the loaned endpoint with a return date and responds with 204 no content", async () => {
-    const res = await request(app)
+    const postRes = await request(app)
+      .post("/api/users/gavinHousley/loaned")
+      .send({
+        users_book_id: 8,
+        borrower_id: "coolSurferDude",
+      });
+
+    const loanId = postRes.body.newLoan[0].loan_id;
+
+    const patchRes = await request(app)
       .patch("/api/users/gavinHousley/loaned")
       .send({
-        loan_id: 1,
+        loan_id: loanId,
         return_date: "2026-03-16T23:00:00.000Z",
       });
-    expect(res.statusCode).toBe(204);
+
+    expect(patchRes.statusCode).toBe(204);
   });
   test("PATCH - 400 - returns with an error when not enough content submitted for a loan", async () => {
     const res = await request(app)
@@ -501,5 +511,52 @@ describe("GET /api/conversations", () => {
 
     expect(res.status).toBe(200);
     expect(res.body.conversations.length).toBe(2);
+  });
+});
+
+// GET conversation by username
+
+describe("GET /api/conversations/:username", () => {
+  test("200: returns all conversations for a given user", async () => {
+    await request(app).post("/api/conversations").send({
+      user1_username: "nomi",
+      user2_username: "jovaScript",
+    });
+
+    await request(app).post("/api/conversations").send({
+      user1_username: "nomi",
+      user2_username: "coolSurferDude",
+    });
+
+    await request(app).post("/api/conversations").send({
+      user1_username: "gavinHousley",
+      user2_username: "jovaScript",
+    });
+
+    const res = await request(app).get("/api/conversations/nomi");
+
+    expect(res.status).toBe(200);
+    expect(res.body.conversations).toHaveLength(2);
+
+    res.body.conversations.forEach((conversation) => {
+      expect(
+        conversation.user1_username === "nomi" ||
+          conversation.user2_username === "nomi",
+      ).toBe(true);
+    });
+  });
+
+  test("200: returns an empty array when user has no conversations", async () => {
+    const res = await request(app).get("/api/conversations/groovySkaterGirl");
+
+    expect(res.status).toBe(200);
+    expect(res.body.conversations).toEqual([]);
+  });
+
+  test("404: returns error when username does not exist", async () => {
+    const res = await request(app).get("/api/conversations/not_a_user");
+
+    expect(res.status).toBe(404);
+    expect(res.body.msg).toBeDefined();
   });
 });
