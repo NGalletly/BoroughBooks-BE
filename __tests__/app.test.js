@@ -152,6 +152,18 @@ describe("/api/users/:username/my-library/:isbn", () => {
     expect(res.body.usersBookByIsbn[0]).toHaveProperty("description");
     expect(res.body.usersBookByIsbn[0]).toHaveProperty("imagelinks");
   });
+  test("GET:200 - returns an object containing the associated users_book_id", async () => {
+    const res = await request(app).get(
+      "/api/users/jovaScript/my-library/9780679723394",
+    );
+    expect(res.body.usersBookByIsbn[0]).toHaveProperty("users_book_id");
+  });
+  test("GET:200 - returns an object containing the associated users_book_id", async () => {
+    const res = await request(app).get(
+      "/api/users/jovaScript/my-library/9780679723394",
+    );
+    expect(res.body.usersBookByIsbn[0].users_book_id).toBe(1);
+  });
 });
 
 test("GET:200 - returns an array of book objects which have the correct keys", async () => {
