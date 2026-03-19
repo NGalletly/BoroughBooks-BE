@@ -16,6 +16,25 @@ exports.modelGetConversationsByUsername = async (username) => {
   return rows;
 };
 
+exports.modelGetConversationById = async (conversation_id) => {
+  const { rows } = await db.query(
+    `SELECT * FROM conversations
+     WHERE conversation_id = $1`,
+    [conversation_id],
+  );
+  return rows;
+};
+
+exports.modelGetMessagesByConversationId = async (conversation_id) => {
+  const { rows } = await db.query(
+    `SELECT * FROM messages
+     WHERE conversation_id = $1
+     ORDER BY sent_at ASC`,
+    [conversation_id],
+  );
+  return rows;
+};
+
 exports.modelPostConversation = async (postConversation) => {
   const { user1_username, user2_username } = postConversation;
   const { rows } = await db.query(

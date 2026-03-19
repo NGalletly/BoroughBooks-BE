@@ -1,6 +1,9 @@
 const {
   modelGetConversations,
   modelPostConversation,
+
+  modelGetConversationById,
+  modelGetMessagesByConversationId,
   modelGetConversationsByUsername,
 } = require("../model/conversations.model");
 
@@ -21,6 +24,26 @@ exports.serviceGetConversationsByUsername = async (username) => {
   }
 
   return await modelGetConversationsByUsername(username);
+};
+
+exports.serviceGetMessagesByConversationId = async (conversation_id) => {
+  if (isNaN(conversation_id)) {
+    return Promise.reject({
+      status: 400,
+      msg: "Invalid conversation id",
+    });
+  }
+
+  const conversation = await modelGetConversationById(conversation_id);
+
+  if (conversation.length === 0) {
+    return Promise.reject({
+      status: 404,
+      msg: "Conversation doesn't exist",
+    });
+  }
+
+  return await modelGetMessagesByConversationId(conversation_id);
 };
 
 exports.servicePostConversation = async (postConversation) => {

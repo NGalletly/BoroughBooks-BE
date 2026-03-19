@@ -1,6 +1,7 @@
 const {
   serviceGetConversations,
   servicePostConversation,
+  serviceGetMessagesByConversationId,
   serviceGetConversationsByUsername,
 } = require("../service/conversations.service");
 
@@ -22,6 +23,20 @@ exports.controllerGetConversationsByUsername = async (
     const { username } = request.params;
     const conversations = await serviceGetConversationsByUsername(username);
     response.status(200).send({ conversations });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.controllerGetMessagesByConversationId = async (
+  request,
+  response,
+  next,
+) => {
+  try {
+    const { conversation_id } = request.params;
+    const messages = await serviceGetMessagesByConversationId(conversation_id);
+    response.status(200).send({ messages });
   } catch (err) {
     next(err);
   }

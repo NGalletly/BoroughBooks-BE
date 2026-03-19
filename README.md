@@ -407,6 +407,33 @@ Example endpoints:
   }
   ```
 
+  - <b>/api/conversations/:conversation_id/messages</b></br>
+    Retrieve an object containing an array of messages based on the conversation id</br>
+    Example Response:
+
+  ```json
+  {
+    "messages": [
+      {
+        "message_id": 1,
+        "conversation_id": 1,
+        "sender_username": "jovaScript",
+        "content": "Hey, have you read Midnight library already?",
+        "sent_at": "2026-03-18T10:01:00.000Z",
+        "read_at": "2026-03-18T10:05:00.000Z"
+      },
+      {
+        "message_id": 2,
+        "conversation_id": 1,
+        "sender_username": "nomi",
+        "content": "Yeah, do you want to borrow it?",
+        "sent_at": "2026-03-18T10:02:00.000Z",
+        "read_at": null
+      }
+    ]
+  }
+  ```
+
 ### Post Requests:
 
 - <b>/api/books</b></br>
