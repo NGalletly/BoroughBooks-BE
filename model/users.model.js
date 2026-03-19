@@ -101,6 +101,14 @@ exports.modelGetWishListByUsername = async (username) => {
   return rows;
 };
 
+exports.modelDeleteWishListBookByUsername = async (username, isbn) => {
+  const { rows } = db.query(
+    `DELETE FROM wishlist WHERE username = $1 AND isbn = $2`,
+    [username, isbn],
+  );
+  return;
+};
+
 exports.modelPostLoanByUserBookId = async (users_book_id, borrower_id) => {
   const { rows } = await db.query(
     `INSERT INTO loans (users_book_id, borrower_id, due_date)
