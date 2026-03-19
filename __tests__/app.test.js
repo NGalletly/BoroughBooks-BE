@@ -109,6 +109,14 @@ describe("/api/users/:username/wish-list", () => {
     expect(res.body.usersWishList.length).toBe(3);
   });
 });
+describe("/api/users/:username/wish-list/:isbn", () => {
+  test("DELETE:204 - returns the expected status code", async () => {
+    const res = await request(app).delete(
+      "/api/users/:username/wish-list/:isbn",
+    );
+    expect(res.statusCode).toBe(204);
+  });
+});
 describe("/api/users/:username/my-library/:isbn", () => {
   test("GET:200 - returns an object with a single property where the length of the value array is 1", async () => {
     const res = await request(app).get(
