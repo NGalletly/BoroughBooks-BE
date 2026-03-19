@@ -560,3 +560,97 @@ describe("GET /api/conversations/:username", () => {
     expect(res.body.msg).toBeDefined();
   });
 });
+
+// GET messages by conversation ID
+
+describe("GET /api/conversations/:conversation_id/messages", () => {
+  test("200: returns an empty array when the conversation has no messages", async () => {
+    const convoRes = await request(app).post("/api/conversations").send({
+      user1_username: "nomi",
+      user2_username: "jovaScript",
+    });
+
+    const conversationId = convoRes.body.conversation.conversation_id;
+
+    const res = await request(app).get(
+      `/api/conversations/${conversationId}/messages`,
+    );
+
+    expect(res.status).toBe(200);
+    expect(res.body.messages).toEqual([]);
+  });
+
+  test("200: returns all messages for a conversation", async () => {
+    const convoRes = await request(app).post("/api/conversations").send({
+      user1_username: "nomi",
+      user2_username: "jovaScript",
+    });
+
+    const conversationId = convoRes.body.conversation.conversation_id;
+
+    await db.query(
+      `INSERT INTO messages (conversation_id, sender_username, content)
+       VALUES ($1, $2, $3), ($1, $4, $5)`,
+      [conversationId, "nomi", "hey", "jovaScript", "hi there"],
+    );
+
+    const res = await request(app).get(
+      `/api/conversations/${conversationId}/messages`,
+    );
+
+    expect(res.status).toBe(200);
+    expect(res.body.messages).toHaveLength(2);
+    expect(res.body.messages[0]).toHaveProperty("message_id");
+    expect(res.body.messages[0]).toHaveProperty("conversation_id");
+    expect(res.body.messages[0]).toHaveProperty("sender_username");
+    expect(res.body.messages[0]).toHaveProperty("content");
+    expect(res.body.messages[0]).toHaveProperty("sent_at");
+    expect(res.body.messages[0]).toHaveProperty("read_at");
+  });
+
+  test("200: only returns messages for the requested conversation", async () => {
+    const convo1 = await request(app).post("/api/conversations").send({
+      user1_username: "nomi",
+      user2_username: "jovaScript",
+    });
+
+    const convo2 = await request(app).post("/api/conversations").send({
+      user1_username: "nomi",
+      user2_username: "coolSurferDude",
+    });
+
+    const id1 = convo1.body.conversation.conversation_id;
+    const id2 = convo2.body.conversation.conversation_id;
+
+    await db.query(
+      `INSERT INTO messages (conversation_id, sender_username, content)
+       VALUES
+         ($1, 'nomi', 'message in convo 1'),
+         ($2, 'nomi', 'message in convo 2')`,
+      [id1, id2],
+    );
+
+    const res = await request(app).get(`/api/conversations/${id1}/messages`);
+
+    expect(res.status).toBe(200);
+    expect(res.body.messages).toHaveLength(1);
+    expect(res.body.messages[0].content).toBe("message in convo 1");
+    expect(res.body.messages[0].conversation_id).toBe(id1);
+  });
+
+  test("404: returns an error when conversation does not exist", async () => {
+    const res = await request(app).get("/api/conversations/9999/messages");
+
+    expect(res.status).toBe(404);
+    expect(res.body.msg).toBeDefined();
+  });
+
+  test("400: returns an error when conversation_id is invalid", async () => {
+    const res = await request(app).get(
+      "/api/conversations/not-a-number/messages",
+    );
+
+    expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
+  });
+});
