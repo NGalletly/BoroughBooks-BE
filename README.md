@@ -578,6 +578,31 @@ Example endpoints:
   }
   ```
 
+  - <b>/api/messages</b></br>
+    Send a new message in a conversation</br>
+    Example Request Body:
+
+  ```json
+  {
+    "conversation_id": 1,
+    "sender_username": "nomi",
+    "content": "Hey, are you around?"
+  }
+  ```
+
+  ```json
+  {
+    "message": {
+      "message_id": 1,
+      "conversation_id": 1,
+      "sender_username": "nomi",
+      "content": "Hey, are you around?",
+      "sent_at": "2026-03-18T10:01:00.000Z",
+      "read_at": null
+    }
+  }
+  ```
+
 ### Patch Requests:
 
 - <b>/api/users/:username/loaned</b></br>
@@ -590,6 +615,8 @@ Example endpoints:
     "return_date": "2026-03-16T23:00:00.000Z"
   }
   ```
+
+````
 
 - <b>/api/users/:username/friends</b></br>
   Update the friend status between 2 particular users</br>
@@ -605,3 +632,4 @@ Example endpoints:
   <br></br>
 - <b>/api/users/:username/friends</b></br>
   Delete a friend from a user's friend list or reject a friend request.
+````
