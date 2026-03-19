@@ -5,6 +5,7 @@ const cors = require("cors");
 const usersbooksRouter = require("./routes/usersRouter");
 const booksRouter = require("./routes/books.routes");
 const conversationsRouter = require("./routes/conversations.routes");
+const messagesRouter = require("./routes/messages.routes");
 
 app.use(express.json());
 app.use(cors());
@@ -12,6 +13,7 @@ app.use(cors());
 app.use("/api/users", usersbooksRouter);
 app.use("/api/books", booksRouter);
 app.use("/api/conversations", conversationsRouter);
+app.use("/api/messages", messagesRouter);
 
 app.use((req, res) => {
   res.status(404).send({ msg: "Path not found" });

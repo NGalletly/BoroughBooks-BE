@@ -654,3 +654,69 @@ describe("GET /api/conversations/:conversation_id/messages", () => {
     expect(res.body.msg).toBeDefined();
   });
 });
+
+// POST messages
+describe("POST /api/messages", () => {
+  test("201: adds a new message and returns the new message", async () => {
+    const convoRes = await request(app).post("/api/conversations").send({
+      user1_username: "nomi",
+      user2_username: "jovaScript",
+    });
+
+    const conversationId = convoRes.body.conversation.conversation_id;
+
+    const newMessage = {
+      conversation_id: conversationId,
+      sender_username: "nomi",
+      content: "Hey, how are you?",
+    };
+
+    const res = await request(app).post("/api/messages").send(newMessage);
+
+    expect(res.status).toBe(201);
+    expect(res.body.message).toMatchObject({
+      conversation_id: conversationId,
+      sender_username: "nomi",
+      content: "Hey, how are you?",
+      read_at: null,
+    });
+    expect(res.body.message).toHaveProperty("message_id");
+    expect(res.body.message).toHaveProperty("sent_at");
+  });
+  test("400: returns an error when required fields are missing", async () => {
+    const res = await request(app).post("/api/messages").send({
+      sender_username: "nomi",
+      content: "Hello",
+    });
+
+    expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
+  });
+  test("404: returns an error when conversation does not exist", async () => {
+    const res = await request(app).post("/api/messages").send({
+      conversation_id: 9999,
+      sender_username: "nomi",
+      content: "Hello",
+    });
+
+    expect(res.status).toBe(404);
+    expect(res.body.msg).toBeDefined();
+  });
+  test("404: returns an error when sender does not exist", async () => {
+    const convoRes = await request(app).post("/api/conversations").send({
+      user1_username: "nomi",
+      user2_username: "jovaScript",
+    });
+
+    const conversationId = convoRes.body.conversation.conversation_id;
+
+    const res = await request(app).post("/api/messages").send({
+      conversation_id: conversationId,
+      sender_username: "not_a_user",
+      content: "Hello",
+    });
+
+    expect(res.status).toBe(404);
+    expect(res.body.msg).toBeDefined();
+  });
+});
