@@ -616,8 +616,6 @@ Example endpoints:
   }
   ```
 
-````
-
 - <b>/api/users/:username/friends</b></br>
   Update the friend status between 2 particular users</br>
   The request body should be sent as (as an example):
@@ -632,4 +630,5 @@ Example endpoints:
   <br></br>
 - <b>/api/users/:username/friends</b></br>
   Delete a friend from a user's friend list or reject a friend request.
-````
+- <b>/api/users/:username/wish-list/:isbn</b></br>
+  Delete a book from a user's wish list using their username and the isbn of the book they want to delete
