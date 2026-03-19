@@ -10,6 +10,7 @@ const {
   servicePostFriendByUsername,
   servicePatchFriendByUsername,
   serviceGetWishListByUsername,
+  serviceDeleteWishListBookByUsername,
   servicePostLoanByUserBookId,
   serviceDeleteBookByisbn,
   serviceUpdateLoanedBookByLoanId,
@@ -136,6 +137,20 @@ exports.controllerGetWishListByUsername = async (request, response, next) => {
     const { username } = request.params;
     const usersWishList = await serviceGetWishListByUsername(username);
     response.status(200).send({ usersWishList });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.controllerDeleteWishListBookByUsername = async (
+  request,
+  response,
+  next,
+) => {
+  try {
+    const { username, isbn } = request.params;
+    await serviceDeleteWishListBookByUsername(username, isbn);
+    response.status(204).send();
   } catch (err) {
     next(err);
   }
