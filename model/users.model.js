@@ -7,10 +7,13 @@ exports.modelGetUsers = async () => {
 
 exports.modelGetBorrowedBooksByUsername = async (username) => {
   const { rows } = await db.query(
-    `SELECT books.*, users_books.username
+    `SELECT books.*, 
+            users_books.username,
+            users.profile_pic_url AS lender_profile_pic
      FROM books
      JOIN users_books ON books.isbn = users_books.isbn
     JOIN loans ON users_books.users_book_id = loans.users_book_id
+    JOIN users ON users_books.username = users.username
     WHERE loans.borrower_id = $1`,
     [username],
   );
@@ -19,10 +22,13 @@ exports.modelGetBorrowedBooksByUsername = async (username) => {
 
 exports.modelGetLoanedBooksByUsername = async (username) => {
   const { rows } = await db.query(
-    `SELECT books.*, loans.borrower_id
+    `SELECT books.*, 
+            loans.borrower_id,
+            users.profile_pic_url AS borrower_profile_pic
      FROM books
      JOIN users_books ON books.isbn = users_books.isbn
      JOIN loans ON users_books.users_book_id = loans.users_book_id
+     JOIN users ON loans.borrower_id = users.username
      WHERE users_books.username = $1`,
     [username],
   );
