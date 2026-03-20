@@ -47,7 +47,7 @@ exports.modelGetBooksByUsername = async (username) => {
 
 exports.modelGetUserBookByIsbn = async (username, isbn) => {
   const { rows } = await db.query(
-    `SELECT users_books.username, books.* FROM users_books
+    `SELECT users_books.users_book_id, users_books.username, books.* FROM users_books
      JOIN books ON users_books.isbn = books.isbn
      WHERE users_books.isbn = $1 AND users_books.username = $2`,
     [isbn, username],
