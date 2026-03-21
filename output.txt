@@ -2,20 +2,22 @@
  Schema |       Name        | Type  |      Owner      
 --------+-------------------+-------+-----------------
  public | books             | table | nevillegalletly
+ public | conversations     | table | nevillegalletly
  public | loans             | table | nevillegalletly
+ public | messages          | table | nevillegalletly
  public | user_relationship | table | nevillegalletly
  public | users             | table | nevillegalletly
  public | users_books       | table | nevillegalletly
  public | wishlist          | table | nevillegalletly
-(6 rows)
+(8 rows)
 
-    username    | profile_pic_url 
-----------------+-----------------
- gavinHousley   | 
- jovaScript     | 
- coolSurferDude | 
- nomi           | 
- ESerebrianik   | 
+     username     |                                               profile_pic_url                                                
+------------------+--------------------------------------------------------------------------------------------------------------
+ gavinHousley     | https://jfjnfjbjajmdnkbcwrbi.supabase.co/storage/v1/object/public/profile-pics/gavin_profile_pic.jpg
+ jovaScript       | https://jfjnfjbjajmdnkbcwrbi.supabase.co/storage/v1/object/public/profile-pics/joe_profile._picjpg.jpg
+ coolSurferDude   | https://jfjnfjbjajmdnkbcwrbi.supabase.co/storage/v1/object/public/profile-pics/neville_profile_pic.jpg
+ nomi             | https://jfjnfjbjajmdnkbcwrbi.supabase.co/storage/v1/object/public/profile-pics/nomi_profile_pic.jpg
+ groovySkaterGirl | https://jfjnfjbjajmdnkbcwrbi.supabase.co/storage/v1/object/public/profile-pics/groovy_skater_profile_pic.jpg
 (5 rows)
 
      isbn      |                                         title                                          |        authors         |         publisher         | published_date |                                                                                                                  description                                                                                                                  |                                          imagelinks                                           
@@ -42,8 +44,8 @@
  9781585421466 | The Artist's Way: A Spiritual Path to Higher Creativity                                | Julia Cameron          | TarcherPerigee            | 2002-03-04     | A twelve-week programme for recovering and discovering creativity, built around the practices of morning pages and the artist date, now considered a foundational self-help text for creative unblocking.                                     | https://books.google.com/books/content?vid=ISBN9781585421466&printsec=frontcover&img=1&zoom=1
 (20 rows)
 
- users_book_id |     isbn      |    username    
----------------+---------------+----------------
+ users_book_id |     isbn      |     username     
+---------------+---------------+------------------
              1 | 9780679723394 | jovaScript
              2 | 9781608464456 | jovaScript
              3 | 9781784870911 | jovaScript
@@ -55,58 +57,66 @@
              9 | 9780393312836 | coolSurferDude
             10 | 9780307887443 | coolSurferDude
             11 | 9780618640157 | coolSurferDude
-            12 | 9780393312836 | coolSurferDude
+            12 | 9780316787536 | coolSurferDude
             13 | 9780441569595 | nomi
             14 | 9780140154511 | nomi
             15 | 9780441627400 | nomi
             16 | 9780618640157 | nomi
-            17 | 9780441569595 | ESerebrianik
-            18 | 9781567923384 | ESerebrianik
-            19 | 9780441627400 | ESerebrianik
-            20 | 9781911547860 | ESerebrianik
+            17 | 9780441569595 | groovySkaterGirl
+            18 | 9781567923384 | groovySkaterGirl
+            19 | 9780441627400 | groovySkaterGirl
+            20 | 9781911547860 | groovySkaterGirl
 (20 rows)
 
- loan_id | users_book_id |  borrower_id   | borrow_date |  due_date  | return_date 
----------+---------------+----------------+-------------+------------+-------------
-       1 |             4 | nomi           | 2025-01-15  | 2025-02-15 | 
-       2 |             5 | coolSurferDude | 2024-11-01  | 2024-12-01 | 2024-11-28
-       3 |             6 | ESerebrianik   | 2025-02-01  | 2025-03-01 | 
-       4 |             8 | jovaScript     | 2024-10-10  | 2024-11-10 | 2024-11-05
-       5 |            10 | gavinHousley   | 2024-12-01  | 2025-01-01 | 2024-12-20
-       6 |            11 | jovaScript     | 2024-12-15  | 2025-01-15 | 
-       7 |            13 | gavinHousley   | 2024-09-01  | 2024-10-01 | 2024-09-25
-       8 |            18 | coolSurferDude | 2025-02-10  | 2025-03-10 | 
-       9 |            20 | nomi           | 2024-08-01  | 2024-09-01 | 2024-08-29
+ loan_id | users_book_id |   borrower_id    | borrow_date |  due_date  | return_date 
+---------+---------------+------------------+-------------+------------+-------------
+       1 |             4 | nomi             | 2025-01-15  | 2025-02-15 | 
+       2 |             5 | coolSurferDude   | 2024-11-01  | 2024-12-01 | 2024-11-28
+       3 |             6 | groovySkaterGirl | 2025-02-01  | 2025-03-01 | 
+       4 |             8 | jovaScript       | 2024-10-10  | 2024-11-10 | 2024-11-05
+       5 |            10 | gavinHousley     | 2024-12-01  | 2025-01-01 | 2024-12-20
+       6 |            11 | jovaScript       | 2024-12-15  | 2025-01-15 | 
+       7 |            13 | gavinHousley     | 2024-09-01  | 2024-10-01 | 2024-09-25
+       8 |            18 | coolSurferDude   | 2025-02-10  | 2025-03-10 | 
+       9 |            20 | nomi             | 2024-08-01  | 2024-09-01 | 2024-08-29
 (9 rows)
 
- wish_list_id |    username    |     isbn      
---------------+----------------+---------------
-            1 | jovaScript     | 9780374529529
-            2 | jovaScript     | 9780143039945
-            3 | jovaScript     | 9780441627400
-            4 | gavinHousley   | 9780679723394
-            5 | gavinHousley   | 9781608464456
-            6 | gavinHousley   | 9780807014295
-            7 | coolSurferDude | 9780441569595
-            8 | coolSurferDude | 9780143039945
-            9 | coolSurferDude | 9781567923384
-           10 | nomi           | 9780374529529
-           11 | nomi           | 9780316787536
-           12 | nomi           | 9780143039945
-           13 | ESerebrianik   | 9780679723394
-           14 | ESerebrianik   | 9781784870911
-           15 | ESerebrianik   | 9780374530068
+ wish_list_id |     username     |     isbn      
+--------------+------------------+---------------
+            1 | jovaScript       | 9780374529529
+            2 | jovaScript       | 9780143039945
+            3 | jovaScript       | 9780441627400
+            4 | gavinHousley     | 9780679723394
+            5 | gavinHousley     | 9781608464456
+            6 | gavinHousley     | 9780807014295
+            7 | coolSurferDude   | 9780441569595
+            8 | coolSurferDude   | 9780143039945
+            9 | coolSurferDude   | 9781567923384
+           10 | nomi             | 9780374529529
+           11 | nomi             | 9780316787536
+           12 | nomi             | 9780143039945
+           13 | groovySkaterGirl | 9780679723394
+           14 | groovySkaterGirl | 9781784870911
+           15 | groovySkaterGirl | 9780374530068
 (15 rows)
 
- user_relationship_id | origin_username | relating_username | friend_status 
-----------------------+-----------------+-------------------+---------------
-                    1 | jovaScript      | gavinHousley      | accepted
-                    2 | jovaScript      | nomi              | accepted
-                    3 | gavinHousley    | ESerebrianik      | accepted
-                    4 | coolSurferDude  | nomi              | accepted
-                    5 | ESerebrianik    | nomi              | accepted
-                    6 | coolSurferDude  | jovaScript        | pending
-                    7 | gavinHousley    | coolSurferDude    | pending
-                    8 | jovaScript      | ESerebrianik      | blocked
+ user_relationship_id | origin_username  | relating_username | friend_status 
+----------------------+------------------+-------------------+---------------
+                    1 | jovaScript       | gavinHousley      | accepted
+                    2 | jovaScript       | nomi              | accepted
+                    3 | gavinHousley     | groovySkaterGirl  | accepted
+                    4 | coolSurferDude   | nomi              | accepted
+                    5 | groovySkaterGirl | nomi              | accepted
+                    6 | coolSurferDude   | jovaScript        | pending
+                    7 | gavinHousley     | coolSurferDude    | pending
+                    8 | jovaScript       | groovySkaterGirl  | blocked
 (8 rows)
+
+ conversation_id | user1_username | user2_username | created_at 
+-----------------+----------------+----------------+------------
+(0 rows)
+
+ message_id | conversation_id | sender_username | content | sent_at | read_at 
+------------+-----------------+-----------------+---------+---------+---------
+(0 rows)
 

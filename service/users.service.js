@@ -15,6 +15,7 @@ const {
   modelDeleteBookByisbn,
   modelUpdateLoanedBookByLoanId,
   modelDeleteFriendByUserRelatId,
+  modelDeleteLoanByUsersBookId,
 } = require("../model/users.model");
 
 exports.serviceGetUsers = async () => {
@@ -87,5 +88,10 @@ exports.serviceUpdateLoanedBookByLoanId = async (loan_id, return_date) => {
 
 exports.serviceDeleteFriendByUserRelatId = async (user_relationship_id) => {
   const result = await modelDeleteFriendByUserRelatId(user_relationship_id);
+  return result;
+};
+
+exports.serviceDeleteLoanByUsersBookId = async (users_book_id) => {
+  const result = await modelDeleteLoanByUsersBookId(users_book_id);
   return result;
 };

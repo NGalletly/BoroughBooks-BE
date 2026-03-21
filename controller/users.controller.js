@@ -15,6 +15,7 @@ const {
   serviceDeleteBookByisbn,
   serviceUpdateLoanedBookByLoanId,
   serviceDeleteFriendByUserRelatId,
+  serviceDeleteLoanByUsersBookId,
 } = require("../service/users.service");
 
 exports.controllerGetUsers = async (request, response, next) => {
@@ -208,6 +209,16 @@ exports.controllerDeleteFriendByUserRelatId = async (
     response.status(204).send();
   } catch (err) {
     response.status(404).send({ msg: "Friend relationship not found" });
+    next(err);
+  }
+};
+exports.controllerDeleteLoanByUsersBookId = async (request, response, next) => {
+  try {
+    const { users_book_id } = request.params;
+    await serviceDeleteLoanByUsersBookId(users_book_id);
+    response.status(204).send();
+  } catch (err) {
+    response.status(404).send({ msg: "Loan no found, yikes!" });
     next(err);
   }
 };

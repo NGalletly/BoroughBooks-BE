@@ -150,3 +150,11 @@ exports.modelDeleteFriendByUserRelatId = async (user_relationship_id) => {
   );
   return;
 };
+
+exports.modelDeleteLoanByUsersBookId = async (users_book_id) => {
+  const { rows } = await db.query(
+    `DELETE FROM loans WHERE users_book_id = $1`,
+    [users_book_id],
+  );
+  return;
+};
