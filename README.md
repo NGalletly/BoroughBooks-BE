@@ -632,3 +632,5 @@ Example endpoints:
   Delete a friend from a user's friend list or reject a friend request.
 - <b>/api/users/:username/wish-list/:isbn</b></br>
   Delete a book from a user's wish list using their username and the isbn of the book they want to delete
+- <b>/api/users/:username/loaned/:users_book_id</b></br>
+  Deletes a loan record, marking a book as returned. This removes the loan entry from the loans table for the specified users_book_id.
