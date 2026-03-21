@@ -218,7 +218,9 @@ exports.controllerDeleteLoanByUsersBookId = async (request, response, next) => {
     await serviceDeleteLoanByUsersBookId(users_book_id);
     response.status(204).send();
   } catch (err) {
-    response.status(404).send({ msg: "Loan no found, yikes!" });
-    next(err);
+    if (err.status === 404) {
+      response.status(404).send({ msg: "Loan no found, yikes!" });
+      next(err);
+    }
   }
 };

@@ -152,9 +152,16 @@ exports.modelDeleteFriendByUserRelatId = async (user_relationship_id) => {
 };
 
 exports.modelDeleteLoanByUsersBookId = async (users_book_id) => {
-  const { rows } = await db.query(
+  const { rowCount } = await db.query(
     `DELETE FROM loans WHERE users_book_id = $1`,
     [users_book_id],
   );
+
+  if (rowCount === 0) {
+    const error = new Error("Loan not found");
+    error.status = 404;
+    throw error;
+  }
+
   return;
 };

@@ -740,3 +740,43 @@ describe("POST /api/messages", () => {
     expect(res.body.msg).toBeDefined();
   });
 });
+
+describe("DELETE /api/users/:username/loaned/:users_book_id", () => {
+  test("DELETE:204 - deletes a loan and returns no content", async () => {
+    const res = await request(app)
+      .delete("/api/users/groovySkaterGirl/loaned/18")
+      .expect(204);
+
+    expect(res.body).toEqual({});
+  });
+
+  test("DELETE:204 - verifies the loan was actually deleted by checking the loaned books list", async () => {
+    // First delete the loan
+    await request(app)
+      .delete("/api/users/groovySkaterGirl/loaned/18")
+      .expect(204);
+
+    // Then verify it's gone by fetching loaned books
+    const checkRes = await request(app).get(
+      "/api/users/groovySkaterGirl/loaned",
+    );
+
+    expect(checkRes.status).toBe(200);
+
+    // Should not find a book with users_book_id of 18
+    const deletedLoan = checkRes.body.books.find(
+      (book) => book.users_book_id === 18,
+    );
+
+    expect(deletedLoan).toBeUndefined();
+  });
+
+  test("DELETE:404 - returns error when users_book_id does not exist", async () => {
+    const res = await request(app).delete(
+      "/api/users/groovySkaterGirl/loaned/99999",
+    );
+
+    expect(res.status).toBe(404);
+    expect(res.body.msg).toBe("Loan no found, yikes!");
+  });
+});
