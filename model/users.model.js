@@ -14,7 +14,8 @@ exports.modelGetBorrowedBooksByUsername = async (username) => {
      JOIN users_books ON books.isbn = users_books.isbn
     JOIN loans ON users_books.users_book_id = loans.users_book_id
     JOIN users ON users_books.username = users.username
-    WHERE loans.borrower_id = $1`,
+    WHERE loans.borrower_id = $1
+    AND loans.return_date IS NULL`,
     [username],
   );
   return rows;
@@ -29,7 +30,8 @@ exports.modelGetLoanedBooksByUsername = async (username) => {
      JOIN users_books ON books.isbn = users_books.isbn
      JOIN loans ON users_books.users_book_id = loans.users_book_id
      JOIN users ON loans.borrower_id = users.username
-     WHERE users_books.username = $1`,
+     WHERE users_books.username = $1
+     AND loans.return_date IS NULL`,
     [username],
   );
   return rows;
