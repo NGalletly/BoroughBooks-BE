@@ -17,6 +17,7 @@ const {
   modelDeleteFriendByUserRelatId,
   modelDeleteLoanByUsersBookId,
 } = require("../model/users.model");
+const { checkActiveLoanExists } = require("../util/checkActiveLoanExists");
 
 exports.serviceGetUsers = async () => {
   return await modelGetUsers();
@@ -68,7 +69,14 @@ exports.serviceDeleteWishListBookByUsername = async (username, isbn) => {
 };
 
 exports.servicePostLoanByUserBookId = async (users_book_id, borrower_id) => {
-  return await modelPostLoanByUserBookId(users_book_id, borrower_id);
+  const isLoanActive = await checkActiveLoanExists(users_book_id);
+  if (!isLoanActive) {
+    return await modelPostLoanByUserBookId(users_book_id, borrower_id);
+  } else {
+    const err = new Error("Loan active");
+    err.status = 400;
+    throw err;
+  }
 };
 exports.serviceDeleteBookByisbn = async (username, isbn) => {
   const result = await modelDeleteBookByisbn(username, isbn);
